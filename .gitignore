@@ -5,14 +5,14 @@
 
 ### VisualStudioCode ###
 .vscode/
-obj
-bin
+obj/
+bin/
 
-ConsoleUI/Bin
-ConsoleUI/obj
+ConsoleUI/Bin/
+ConsoleUI/obj/
 
-SurveyLib/bin
-SurveyLib/obj
+SurveyLib/bin/
+SurveyLib/obj/
 
 
 
