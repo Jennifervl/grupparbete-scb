@@ -24,6 +24,8 @@ Ett program för att administrera/skapa samt besvara undersökningar.
 **User**
 - [x] Enum för vilken roll användaren har, admin eller user.
 - [x] String för personnummer
+* User constructor måste ha en Enum och ett personnummer in!
+
 - [ ] Spara i user vilka undersökningar som gjorts som en lista.
 
 **User-Survey**
