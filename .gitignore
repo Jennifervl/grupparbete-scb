@@ -8,6 +8,12 @@
 obj
 bin
 
+ConsoleUI/Bin
+ConsoleUI/obj
+
+SurveyLib/bin
+SurveyLib/obj
+
 
 
 
