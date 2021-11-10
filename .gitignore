@@ -5,8 +5,8 @@
 
 ### VisualStudioCode ###
 .vscode/
-obj/
-bin/
+obj
+bin
 
 
 
