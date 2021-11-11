@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 namespace SurveyLib
 {
-
-
     public class UserList
     {
         private List<User> userList;

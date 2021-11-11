@@ -2,7 +2,6 @@ namespace SurveyLib
 {
     public class User
     {
-        
         UserRoles userRoles;
         private string ssn;
         public string Ssn
@@ -16,7 +15,6 @@ namespace SurveyLib
         {
             this.ssn = assn;
             this.userRoles = auserRoles;
-
         }
     }
 }
