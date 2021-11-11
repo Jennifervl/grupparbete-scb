@@ -6,11 +6,9 @@ namespace SurveyLib
     {
         string title;
 
-        string id;
+        int id;
 
         List<Question> questions;
-
-        IDataManager datamanager;
 
         public string Title
         {
@@ -25,7 +23,7 @@ namespace SurveyLib
             }
         }
 
-        public string Id
+        public int Id
         {
             get
             {
@@ -38,20 +36,16 @@ namespace SurveyLib
             }
         }
 
-        public IList<Question> Questions
-        {
-            get
-            {
-                return questions.AsReadOnly();
-            }
-        }
-
-        public Survey(string title, string id, IDataManager datamanager)
+        public Survey(string title, int id)
         {
             this.title = title;
             this.id = id;
-            this.datamanager = datamanager;
             questions = new List<Question>();
+        }
+
+        public List<Question> GetQuestions()
+        {
+            return questions;
         }
 
         public void AddQuestion(Question question)

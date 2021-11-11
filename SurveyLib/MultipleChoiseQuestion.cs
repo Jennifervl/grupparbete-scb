@@ -18,6 +18,7 @@ namespace SurveyLib
             {
                 if (Int32.TryParse(i.ToString(), out int iInt) == true)
                 {
+                    iInt--;
                     if (iInt < options.Count() && iInt >= 0)
                     {
                         if (!(this.answer.Contains(iInt)))
@@ -32,7 +33,7 @@ namespace SurveyLib
             return success;
         }
 
-        public bool AddAnswerAlternative(string answer)
+        public bool AddOption(string answer)
         {
             if (!this.options.Contains(answer))
             {
@@ -40,7 +41,16 @@ namespace SurveyLib
                 return true;
             }
             else return false;
+        }
 
+        public IList<string> GetOptions()
+        {
+            return options.AsReadOnly();
+        }
+
+        public IList<int> GetAnswer()
+        {
+            return answer.AsReadOnly();
         }
     }
 }

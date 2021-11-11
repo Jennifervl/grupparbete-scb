@@ -12,7 +12,7 @@ namespace SurveyLib
             get => value1;
             set => value1 = value;
         }
-        string Value10
+        public string Value10
         {
             get => value10;
             set => value10 = value;
@@ -30,6 +30,10 @@ namespace SurveyLib
             }
             else return false;
 
+        }
+        public int GetAnswer()
+        {
+            return answer;
         }
     }
 }
