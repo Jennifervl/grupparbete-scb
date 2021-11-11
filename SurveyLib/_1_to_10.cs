@@ -2,7 +2,7 @@ using System;
 
 namespace SurveyLib
 {
-    class _1_to_10 : Question, iQuestion
+    public class _1_to_10 : Question, iQuestion
     {
         string value1;
         string value10;
