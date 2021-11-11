@@ -7,9 +7,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            
-            Login login = new();
-            login.LoginRun();
+           
+            // Login login = new();
+            // login.LoginRun();
+            Menu menu = new();
+            menu.MyMenu();
         }
     }
 }

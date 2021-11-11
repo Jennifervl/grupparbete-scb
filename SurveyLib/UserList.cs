@@ -21,5 +21,13 @@ namespace SurveyLib
                 u.UserInfo();
             }
         }
+        public List<User> GetUsers(List<User> inList)
+        {
+            foreach (User u in userList)
+            {
+                inList.Add(u);
+            }
+            return inList;
+        }
     }
 }
