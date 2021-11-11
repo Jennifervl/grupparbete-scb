@@ -7,9 +7,9 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            User testAdminUser = new User("199001014444", UserRoles.Admin);
-            User testUserUser = new User("198002025555", UserRoles.User);
+            
+            Login login = new();
+            login.LoginRun();
         }
     }
 }
