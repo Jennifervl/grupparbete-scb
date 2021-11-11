@@ -2,7 +2,7 @@ namespace SurveyLib
 {
     public class User
     {
-        UserRoles userRoles;
+        public UserRoles userRoles;
         private string ssn;
         public string Ssn
         {

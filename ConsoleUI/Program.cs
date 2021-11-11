@@ -13,10 +13,10 @@ namespace ConsoleUI
             UserList userList = new UserList();
             userList.AddNewUser(testAdminUser);
             userList.AddNewUser(testUserUser);
-            System.Console.WriteLine(testUserUser.ToString());
+            
             foreach (var item in userList.ListUsers())
             {
-                System.Console.WriteLine("Personnummer: " + item.Ssn + " usertype: " + item.GetType());
+                System.Console.WriteLine("Personnummer: " + item.Ssn + " usertype: " + item.userRoles.ToString());
             }
             userList.ListUsers();
         }
