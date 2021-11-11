@@ -1,19 +1,21 @@
+using System;
+
 namespace SurveyLib
 {
-    class _1_to_10 : Question
+    class _1_to_10 : Question, iQuestion
     {
-        string Value1
+        string value1;
+        string value10;
+        public string Value1
         {
-            get { return value1; }
-            set { value1 = value; }
+            get => value1;
+            set => value1 = value;
         }
         string Value10
         {
-            get { return value10; }
-            set { value10 = value; }
+            get => value1;
+            set => value1 = value;
         }
-
-
         public bool SetAnswer(string answer)
         {
             if (Int32.TryParse(answer, out int answerInt) == true)
@@ -23,9 +25,10 @@ namespace SurveyLib
                     this.answer = answer;
                     return true;
                 }
+                else return false;
             }
+            else return false;
 
         }
-
     }
 }

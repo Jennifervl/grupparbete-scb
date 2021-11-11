@@ -1,11 +1,9 @@
 namespace SurveyLib
 {
 
-    interface iQuestion
+    public interface iQuestion
     {
-        string Question { get; set; }
-        string Answer { get; set; }
-
+        bool SetAnswer(string answer);
 
 
     }

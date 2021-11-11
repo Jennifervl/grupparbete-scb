@@ -1,17 +1,13 @@
 namespace SurveyLib
 {
-    abstract class Question : iQuestion
+    abstract class Question
     {
-        string Question
+        string title;
+        protected string answer;
+        public string Title
         {
-            get { return question; }
-            set { question = value; }
+            get => title;
+            set => title = value;
         }
-        string Answer
-        {
-            get { return answer; }
-            set { answer = value; }
-        }
-
     }
 }
