@@ -1,6 +1,6 @@
 namespace SurveyLib
 {
-    abstract class Question
+    public abstract class Question
     {
         string title;
         protected string answer;
