@@ -11,8 +11,11 @@ namespace ConsoleUI
             // Login login = new();
             // login.LoginRun();
             surveyTest();
+
+            Menu menu = new();
+            menu.MyMenu();
         }
-        static void surveyTest()
+        public static void surveyTest()
         {
             Survey survey = new("Testsurvey", 1);
 

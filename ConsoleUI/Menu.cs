@@ -7,7 +7,8 @@ namespace ConsoleUI
     {
         public void MyMenu()
         {
-              List<string> mymenu = new();
+            List<string> mymenu = new();
+            bool isAdmin;
             mymenu.Add(@"
  ██████╗ ██╗   ██╗███████╗███████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 ██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
@@ -22,7 +23,7 @@ namespace ConsoleUI
 
             while (true)
             {
-            
+
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 for (int i = 0; i < mymenu.Count; i++)
@@ -31,21 +32,22 @@ namespace ConsoleUI
                 }
 
                 string choice = Console.ReadKey().Key.ToString().ToLower();
+                Login login = new();
 
                 if (choice == "a")
                 {
-                    
+                    login.LoginRun(isAdmin = true);
                 }
 
                 else if (choice == "b")
                 {
-                    
+                    login.LoginRun(isAdmin = false);
                 }
                 else if (choice == "x")
                 {
                     Environment.Exit(0);
                 }
-                 else
+                else
                 {
                     Console.WriteLine("\nMake a new menu choice please.\nPress any key to continue.");
                     Console.ReadLine();
