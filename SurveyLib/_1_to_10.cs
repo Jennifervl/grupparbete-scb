@@ -2,10 +2,11 @@ using System;
 
 namespace SurveyLib
 {
-    public class _1_to_10 : Question, iQuestion
+    public class _1_to_10 : Question
     {
         string value1;
         string value10;
+        int answer;
         public string Value1
         {
             get => value1;
@@ -13,16 +14,16 @@ namespace SurveyLib
         }
         string Value10
         {
-            get => value1;
-            set => value1 = value;
+            get => value10;
+            set => value10 = value;
         }
-        public bool SetAnswer(string answer)
+        public override bool SetAnswer(string answer)
         {
             if (Int32.TryParse(answer, out int answerInt) == true)
             {
                 if (answerInt < 11 && answerInt > 0)
                 {
-                    this.answer = answer;
+                    this.answer = answerInt;
                     return true;
                 }
                 else return false;
