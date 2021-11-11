@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 namespace SurveyLib
 {
@@ -20,6 +21,11 @@ namespace SurveyLib
             {
                 u.UserInfo();
             }
+        }
+
+        public void GetUsers(List<User> testList)
+        {
+            throw new NotImplementedException();
         }
     }
 }
