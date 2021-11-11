@@ -14,14 +14,12 @@ namespace SurveyLib
             userList.Add(user);
             userCount = userList.Count;
         }
-        public List<User> ListUsers()
+        public void ListUsers()
         {
-            List<User> userList = new();
             foreach (User u in userList)
             {
-                userList.Add(u);
+                u.UserInfo();
             }
-            return userList;
         }
     }
 }
