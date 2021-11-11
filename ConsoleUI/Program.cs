@@ -8,8 +8,9 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            Login login = new();
-            login.LoginRun();
+            // Login login = new();
+            // login.LoginRun();
+            surveyTest();
         }
         static void surveyTest()
         {

@@ -17,20 +17,17 @@ namespace SurveyLib
             get => value10;
             set => value10 = value;
         }
-        public override bool SetAnswer(string answer)
+        public override void SetAnswer(string answer)
         {
             if (Int32.TryParse(answer, out int answerInt) == true)
             {
                 if (answerInt < 11 && answerInt > 0)
                 {
                     this.answer = answerInt;
-                    return true;
                 }
-                else return false;
             }
-            else return false;
-
         }
+
         public int GetAnswer()
         {
             return answer;

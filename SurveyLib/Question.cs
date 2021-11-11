@@ -9,6 +9,6 @@ namespace SurveyLib
             set => title = value;
         }
 
-        public abstract bool SetAnswer(string answer);
+        public abstract void SetAnswer(string answer);
     }
 }

@@ -11,9 +11,8 @@ namespace SurveyLib
 
 
 
-        public override bool SetAnswer(string answer)
+        public override void SetAnswer(string answer)
         {
-            bool success = false;
             foreach (char i in answer)
             {
                 if (Int32.TryParse(i.ToString(), out int iInt) == true)
@@ -24,23 +23,22 @@ namespace SurveyLib
                         if (!(this.answer.Contains(iInt)))
                         {
                             this.answer.Add(iInt);
-                            success = true;
-
                         }
                     }
                 }
             }
-            return success;
         }
 
-        public bool AddOption(string answer)
+        public void AddOption(string answer)
         {
             if (!this.options.Contains(answer))
             {
                 options.Add(answer);
-                return true;
             }
-            else return false;
+        }
+        public void AddOptions(List<string> options)
+        {
+            this.options.AddRange(options);
         }
 
         public IList<string> GetOptions()
