@@ -57,22 +57,24 @@ namespace ConsoleUI
                         }
                     case false:
                         {
-                            System.Console.WriteLine("Enter the questionaire code: ");
+                            // System.Console.WriteLine("Enter the questionaire code: ");
+                            Program.surveyTest();
                             break;
                         }
                 }
-                string input = Console.ReadLine();
-                if (input.Length == 12)
-                {
-                    // Console.WriteLine("Successfully logged in.");
-                    // userList.ListUsers();
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine($"Incorrect length of personal number, you entered {input.Length} digits, try again please.");
-                    Console.ReadLine();
-                }
+                // string input = Console.ReadLine();
+                // if (input.Length == 12)
+                // {
+                //     // Console.WriteLine("Successfully logged in.");
+                //     // userList.ListUsers();
+                //     Console.ReadLine();
+                // }
+                // else
+                // {
+                //     Console.WriteLine($"Incorrect length of personal number, you entered {input.Length} digits, try again please.");
+                //     Console.ReadLine();
+                // }
+                return;
             }
         }
     }
