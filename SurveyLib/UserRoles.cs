@@ -2,7 +2,7 @@ namespace SurveyLib
 {
     public enum UserRoles
     {
-        Admin,
-        User
+        Admin = 1,
+        Participant = 2
     }
 }

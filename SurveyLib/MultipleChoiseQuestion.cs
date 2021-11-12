@@ -9,9 +9,21 @@ namespace SurveyLib
         List<int> answer = new();
         List<string> options = new();
 
+        Dictionary<string, bool> test = new();
+
+        public MultipleChoiseQuestion(string title) : base(title)
+        {
+        }
+
+        public void add()
+        {
+            test.Add("test", false);
+            test["test"] = true;
+
+        }
 
 
-        public override void SetAnswer(string answer)
+        public void SetAnswer(string answer)
         {
             foreach (char i in answer)
             {
@@ -31,7 +43,7 @@ namespace SurveyLib
 
         public void AddOption(string answer)
         {
-            if (!this.options.Contains(answer))
+            if (!(this.options.Contains(answer)))
             {
                 options.Add(answer);
             }

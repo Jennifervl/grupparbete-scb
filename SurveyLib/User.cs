@@ -18,7 +18,7 @@ namespace SurveyLib
         }
         public void UserInfo()
         {
-            System.Console.WriteLine($"Personnummer: {ssn} Användartyp: {userRoles.ToString()}");
+            System.Console.WriteLine($"Personnummer: {ssn} \nAnvändartyp: {userRoles.ToString()}\n");
         }
     }
 }

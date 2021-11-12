@@ -6,9 +6,13 @@ namespace SurveyLib
         public string Title
         {
             get => title;
-            set => title = value;
         }
 
-        public abstract void SetAnswer(string answer);
+        public Question(string title)
+        {
+            this.title = title;
+        }
+
+        // public abstract void SetAnswer(string answer);
     }
 }

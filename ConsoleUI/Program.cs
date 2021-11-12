@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SurveyLib;
 
 namespace ConsoleUI
@@ -10,8 +11,6 @@ namespace ConsoleUI
 
             // Login login = new();
             // login.LoginRun();
-            surveyTest();
-
             Menu menu = new();
             menu.MyMenu();
         }
@@ -20,17 +19,12 @@ namespace ConsoleUI
             Survey survey = new("Testsurvey", 1);
 
 
-            _1_to_10 test1to10question = new _1_to_10();
-            test1to10question.Title = "How much do you like this survey?";
-            test1to10question.Value1 = "Hate it";
-            test1to10question.Value10 = "Love it";
+            _1_to_10 test1to10question = new _1_to_10("How much do you like this survey?", "Hate it", "Love it");
             survey.AddQuestion(test1to10question);
 
-            MultipleChoiseQuestion mcqtest = new();
-            mcqtest.Title = "What is your favorite color?";
-            mcqtest.AddOption("Red");
-            mcqtest.AddOption("Blue");
-            mcqtest.AddOption("Green");
+            MultipleChoiseQuestion mcqtest = new("What is your favorite color?");
+            List<string> options = new() { "Red", "Blue", "Green" };
+            mcqtest.AddOptions(options);
 
             survey.AddQuestion(mcqtest);
 
@@ -40,20 +34,25 @@ namespace ConsoleUI
             foreach (Question q in survey.GetQuestions())
             {
                 Console.WriteLine(q.Title);
-                if (q is _1_to_10 test110)
+
+                _1_to_10 _1_to_10_question = q as _1_to_10;
+                MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
+
+                if (_1_to_10_question != null)
                 {
-                    Console.WriteLine("1 means: " + test110.Value1 + " 10 means: " + test110.Value10);
-                    q.SetAnswer(Console.ReadLine());
+                    Console.WriteLine("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
+                    _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
                 }
-                else if (q is MultipleChoiseQuestion mpc)
+
+                else if (mcq != null)
                 {
                     Console.WriteLine("Options: ");
-                    foreach (string option in mpc.GetOptions())
+                    foreach (string option in mcq.GetOptions())
                     {
                         Console.WriteLine(option);
                     }
                     Console.WriteLine("Enter answer:");
-                    q.SetAnswer(Console.ReadLine());
+                    mcq.SetAnswer(Console.ReadLine());
                 }
             }
 
@@ -66,18 +65,24 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Question " + qcounter);
                 qcounter++;
-                if (q is _1_to_10 test110)
+                _1_to_10 _1_to_10_question = q as _1_to_10;
+                MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
+
+                if (_1_to_10_question != null)
                 {
-                    Console.WriteLine(test110.GetAnswer());
+                    Console.WriteLine(_1_to_10_question.Answer);
                 }
-                else if (q is MultipleChoiseQuestion mpc)
+
+                else if (mcq != null)
                 {
-                    foreach (int a in mpc.GetAnswer())
+                    foreach (int a in mcq.GetAnswer())
                     {
                         Console.WriteLine(a + 1);
                     }
+
                 }
             }
+            Console.ReadLine();
         }
     }
 }

@@ -7,30 +7,32 @@ namespace SurveyLib
         string value1;
         string value10;
         int answer;
+
+        public _1_to_10(string title, string value1, string value10) : base(title)
+        {
+            this.value1 = value1;
+            this.value10 = value10;
+        }
+
         public string Value1
         {
             get => value1;
-            set => value1 = value;
         }
         public string Value10
         {
             get => value10;
-            set => value10 = value;
-        }
-        public override void SetAnswer(string answer)
-        {
-            if (Int32.TryParse(answer, out int answerInt) == true)
-            {
-                if (answerInt < 11 && answerInt > 0)
-                {
-                    this.answer = answerInt;
-                }
-            }
         }
 
-        public int GetAnswer()
+        public int Answer
         {
-            return answer;
+            get => answer;
+        }
+        public void SetAnswer(int answer)
+        {
+            if (answer < 11 && answer > 0)
+            {
+                this.answer = answer;
+            }
         }
     }
 }
