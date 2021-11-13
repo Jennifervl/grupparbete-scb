@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +12,6 @@ namespace SurveyLib
         {
             this.options = options;
         }
-
 
         public void SetAnswer(List<int> answers)
         {

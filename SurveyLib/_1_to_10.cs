@@ -1,5 +1,3 @@
-using System;
-
 namespace SurveyLib
 {
     public class _1_to_10 : Question
