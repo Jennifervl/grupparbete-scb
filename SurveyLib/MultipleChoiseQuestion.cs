@@ -6,59 +6,49 @@ namespace SurveyLib
 {
     public class MultipleChoiseQuestion : Question
     {
-        List<int> answer = new();
+        List<bool> answer = new();
         List<string> options = new();
 
-        Dictionary<string, bool> test = new();
-
-        public MultipleChoiseQuestion(string title) : base(title)
+        public MultipleChoiseQuestion(string title, List<string> options) : base(title)
         {
-        }
-
-        public void add()
-        {
-            test.Add("test", false);
-            test["test"] = true;
-
+            this.options = options;
         }
 
 
-        public void SetAnswer(string answer)
+        public void SetAnswer(List<int> answers)
         {
-            foreach (char i in answer)
+            for (int i = 1; i < options.Count + 1; i++)
             {
-                if (Int32.TryParse(i.ToString(), out int iInt) == true)
-                {
-                    iInt--;
-                    if (iInt < options.Count() && iInt >= 0)
-                    {
-                        if (!(this.answer.Contains(iInt)))
-                        {
-                            this.answer.Add(iInt);
-                        }
-                    }
-                }
+                if (answers.Contains(i)) this.answer.Add(true);
+                else this.answer.Add(false);
             }
-        }
 
-        public void AddOption(string answer)
-        {
-            if (!(this.options.Contains(answer)))
-            {
-                options.Add(answer);
-            }
+
         }
-        public void AddOptions(List<string> options)
-        {
-            this.options.AddRange(options);
-        }
+        // public void SetAnswer(string answer)
+        // {
+        //     foreach (char i in answer)
+        //     {
+        //         if (Int32.TryParse(i.ToString(), out int iInt) == true)
+        //         {
+        //             iInt--;
+        //             if (iInt < options.Count() && iInt >= 0)
+        //             {
+        //                 if (!(this.answer.Contains(iInt)))
+        //                 {
+        //                     this.answer.Add(iInt);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         public IList<string> GetOptions()
         {
             return options.AsReadOnly();
         }
 
-        public IList<int> GetAnswer()
+        public IList<bool> GetAnswer()
         {
             return answer.AsReadOnly();
         }

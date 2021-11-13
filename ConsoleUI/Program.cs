@@ -22,9 +22,8 @@ namespace ConsoleUI
             _1_to_10 test1to10question = new _1_to_10("How much do you like this survey?", "Hate it", "Love it");
             survey.AddQuestion(test1to10question);
 
-            MultipleChoiseQuestion mcqtest = new("What is your favorite color?");
             List<string> options = new() { "Red", "Blue", "Green" };
-            mcqtest.AddOptions(options);
+            MultipleChoiseQuestion mcqtest = new("What is your favorite color?", options);
 
             survey.AddQuestion(mcqtest);
 
@@ -51,8 +50,20 @@ namespace ConsoleUI
                     {
                         Console.WriteLine(option);
                     }
-                    Console.WriteLine("Enter answer:");
-                    mcq.SetAnswer(Console.ReadLine());
+                    List<int> answers = new();
+                    while (true)
+                    {
+                        Console.WriteLine("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
+                        string input = Console.ReadLine();
+                        if (input == "") break;
+
+                        if (Int32.TryParse(input, out int answerInt) == true)
+                        {
+                            answers.Add(answerInt);
+                        }
+                        else Console.WriteLine("You must enter a digit");
+                    }
+                    mcq.SetAnswer(answers);
                 }
             }
 
@@ -75,9 +86,9 @@ namespace ConsoleUI
 
                 else if (mcq != null)
                 {
-                    foreach (int a in mcq.GetAnswer())
+                    foreach (bool a in mcq.GetAnswer())
                     {
-                        Console.WriteLine(a + 1);
+                        Console.WriteLine(a);
                     }
 
                 }
