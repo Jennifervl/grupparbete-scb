@@ -13,7 +13,7 @@ namespace SurveyLib
         {
             using (SqlConnection connection = new(sqlConnection))
             {
-                connection.Execute("INSERT INTO Question(Survey_ID, Type, Title) VALUES (@Survey_ID, @Type, @Title);", new { Survey_ID = primaryKey, Type = type, Title = title });
+                connection.Execute("INSERT INTO Question(Survey_ID, Type, QuestionText) VALUES (@Survey_ID, @Type, @QuestionText);", new { Survey_ID = primaryKey, Type = type, QuestionText = title });
                 List<int> qList = connection.Query<int>("SELECT IDENT_CURRENT('Question');").ToList();
                 return qList[0];
             }
