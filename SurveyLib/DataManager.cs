@@ -21,7 +21,7 @@ namespace SurveyLib
 
         public void SaveSurvey(Survey survey)
         {
-            List<Question> questionList = survey.GetQuestions();
+            IList<Question> questionList = survey.GetQuestions();
             int primaryKey;
             int questionPrimaryKey;
             //int multiChoiceID;
