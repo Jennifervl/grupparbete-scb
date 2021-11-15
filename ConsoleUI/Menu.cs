@@ -70,13 +70,14 @@ namespace ConsoleUI
                 System.Console.WriteLine("Welcome to the super secret admin menu");
                 System.Console.WriteLine("[A] Create a survey");
                 System.Console.WriteLine("[L] List all surveys");
+                System.Console.WriteLine("[T] Test a survey");
                 System.Console.WriteLine("[X] Return to main menu");
                 string adminChoice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch (adminChoice)
                 {
                     case "a":
                         {
-                            surveyLibrary.AddSurvey(Admin.BuildSurvey());
+                            surveyLibrary.AddSurvey(Admin.BuildSurvey());       // Populerar survey biblioteket med en survey vi skapar i buildsurvey metoden
                             break;
                         }
                     case "l":

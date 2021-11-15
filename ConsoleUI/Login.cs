@@ -13,8 +13,6 @@ namespace ConsoleUI
             UserList userList = new UserList();
             userList.AddNewUser(testAdminUser);
             userList.AddNewUser(testUserUser);
-
-            
             bool confirmedAdmin = false;
             while (true)
             {
@@ -37,12 +35,16 @@ namespace ConsoleUI
                             {
                                 int passAttempt = 0;
                                 string passwordInput = "";
-                                while (passwordInput != "" && passwordInput.Length < 5 && passAttempt <= 2)
+                                string password = "admin";
+                                while (passwordInput != password && passwordInput.Length < 5 && passAttempt <= 2)
                                 {
                                     System.Console.WriteLine("Enter password (5 characters): ");
                                     passwordInput = Console.ReadLine();
-                                    System.Console.WriteLine("Wrong password, try again");
                                     passAttempt++;
+                                    if (passwordInput != password && passAttempt <=2) 
+                                    {
+                                        System.Console.WriteLine("Wrong password, try again");
+                                    }
                                 }
                                 if (passAttempt >= 3)
                                 {
@@ -50,8 +52,6 @@ namespace ConsoleUI
                                     Console.ReadLine();
                                     return;
                                 }
-                                System.Console.WriteLine("You pass the test");
-                                Console.ReadLine();
                                 Menu.AdminMenu();
                             }
                             break;
