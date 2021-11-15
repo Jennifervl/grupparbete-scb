@@ -82,11 +82,15 @@ namespace ConsoleUI
                         }
                     case "l":
                         {
-                            Admin.AdminListAllSurveys(surveyLibrary);
+                            Admin.ListAllSurveys(surveyLibrary);
                             Console.ReadLine();
                             break;
                         }
-
+                    case "t":
+                        {
+                            Console.ReadLine();
+                            break;
+                        }
                     case "x":
                         {
                             adminRun = false;
