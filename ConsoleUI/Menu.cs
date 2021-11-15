@@ -67,6 +67,15 @@ namespace ConsoleUI
             while (adminRun == true)
             {
                 Console.Clear();
+                 System.Console.WriteLine(@"
+    ███████ ███████  ██████ ██████  ███████ ████████      █████  ██████  ███    ███ ██ ███    ██     ███    ███ ███████ ███    ██ ██    ██ 
+    ██      ██      ██      ██   ██ ██         ██        ██   ██ ██   ██ ████  ████ ██ ████   ██     ████  ████ ██      ████   ██ ██    ██ 
+    ███████ █████   ██      ██████  █████      ██        ███████ ██   ██ ██ ████ ██ ██ ██ ██  ██     ██ ████ ██ █████   ██ ██  ██ ██    ██ 
+         ██ ██      ██      ██   ██ ██         ██        ██   ██ ██   ██ ██  ██  ██ ██ ██  ██ ██     ██  ██  ██ ██      ██  ██ ██ ██    ██ 
+    ███████ ███████  ██████ ██   ██ ███████    ██        ██   ██ ██████  ██      ██ ██ ██   ████     ██      ██ ███████ ██   ████  ██████  
+                                                                                                                                           
+                                                                                                                                           
+");
                 System.Console.WriteLine("Welcome to the super secret admin menu");
                 System.Console.WriteLine("[A] Create a survey");
                 System.Console.WriteLine("[L] List all surveys");
@@ -82,11 +91,15 @@ namespace ConsoleUI
                         }
                     case "l":
                         {
-                            Admin.AdminListAllSurveys(surveyLibrary);
+                            Admin.ListAllSurveys(surveyLibrary);
                             Console.ReadLine();
                             break;
                         }
-
+                    case "t":
+                        {
+                            Console.ReadLine();
+                            break;
+                        }
                     case "x":
                         {
                             adminRun = false;

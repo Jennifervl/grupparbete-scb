@@ -9,9 +9,6 @@ namespace ConsoleUI
         static Menu menu = new();
         static void Main(string[] args)
         {
-
-            // Login login = new();
-            // login.LoginRun();
             menu.MyMenu();
             // Survey survey = Admin.BuildSurvey();
             // AnswerSurvey(survey);
