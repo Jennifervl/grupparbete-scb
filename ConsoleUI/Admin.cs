@@ -58,13 +58,13 @@ namespace ConsoleUI
 
                     else if (input == "2")
                     {
-                        FreetextQuestion freetextQuestion = new(title);
+                        FreetextQuestion freetextQuestion = new(qtitle);
                         survey1.AddQuestion(freetextQuestion);
                     }
 
                     else if (input == "3")
                     {
-                        YesOrNoQuestion yesOrNo = new(title);
+                        YesOrNoQuestion yesOrNo = new(qtitle);
                         survey1.AddQuestion(yesOrNo);
                     }
                     else if (input == "4")
@@ -81,7 +81,7 @@ namespace ConsoleUI
                                 break;
                             }
                         }
-                        MultipleChoiseQuestion mcq = new(title, options);
+                        MultipleChoiseQuestion mcq = new(qtitle, options);
                         survey1.AddQuestion(mcq);
                     }
                 }

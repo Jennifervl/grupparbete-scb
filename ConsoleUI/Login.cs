@@ -6,13 +6,8 @@ namespace ConsoleUI
 {
     class Login
     {
-        public void LoginRun(bool isAdmin)
+        public void LoginRun(bool isAdmin, UserList userList)
         {
-            User testAdminUser = new User("199001014444", UserRoles.Admin);
-            User testUserUser = new User("198002025555", UserRoles.Participant);
-            UserList userList = new UserList();
-            userList.AddNewUser(testAdminUser);
-            userList.AddNewUser(testUserUser);
             bool confirmedAdmin = false;
             while (true)
             {
@@ -41,7 +36,7 @@ namespace ConsoleUI
                                     System.Console.WriteLine("Enter password (5 characters): ");
                                     passwordInput = Console.ReadLine();
                                     passAttempt++;
-                                    if (passwordInput != password && passAttempt <=2) 
+                                    if (passwordInput != password && passAttempt <= 2)
                                     {
                                         System.Console.WriteLine("Wrong password, try again");
                                     }
@@ -52,14 +47,25 @@ namespace ConsoleUI
                                     Console.ReadLine();
                                     return;
                                 }
-                                Menu.AdminMenu();
+                                // Menu.AdminMenu(userList, surveyLibrary);
                             }
                             break;
                         }
                     case false:
                         {
-                            // System.Console.WriteLine("Enter the questionaire code: ");
-                            ServeyTest.surveyTest();
+                            System.Console.WriteLine("Enter the questionaire code: ");
+                            string code = Console.ReadLine();
+
+                            foreach (User user in userList.GetUsers())
+                            {
+                                foreach (User_Survey US in user.GetUserSurveys())
+                                {
+                                    if (US.FindMatch(code) != null)
+                                    {
+
+                                    }
+                                }
+                            }
                             break;
                         }
                 }

@@ -20,6 +20,7 @@ namespace SurveyLib
         {
             this.ssn = assn;
             this.userRoles = auserRoles;
+            this.userSurveys = new List<User_Survey>();
         }
         public void UserInfo()
         {
@@ -29,6 +30,11 @@ namespace SurveyLib
         public void AddUserSurvey(User_Survey userSurvey)
         {
             userSurveys.Add(userSurvey);
+        }
+
+        public List<User_Survey> GetUserSurveys()
+        {
+            return userSurveys;
         }
     }
 }

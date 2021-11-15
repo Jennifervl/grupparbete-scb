@@ -27,6 +27,7 @@ namespace SurveyLib
         {
             this.title = title;
             questions = new List<Question>();
+            userSurveys = new List<User_Survey>();
         }
 
         public List<Question> GetQuestions()
