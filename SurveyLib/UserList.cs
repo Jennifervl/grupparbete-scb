@@ -31,9 +31,9 @@ namespace SurveyLib
                 u.UserInfo();
             }
         }
-        public List<User> GetUsers()
+        public IList<User> GetUsers()
         {
-            return userList;
+            return userList.AsReadOnly();
         }
     }
 }

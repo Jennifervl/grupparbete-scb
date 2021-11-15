@@ -7,12 +7,14 @@ namespace SurveyLib
         string code;
         bool isSubmitted;
 
+        public bool IsSubmitted { set => isSubmitted = value; }
+
         public User_Survey(User user, Survey survey)
         {
             this.user = user;
             this.survey = survey;
             this.code = GenerateCode();
-            this.isSubmitted = false;
+            this.IsSubmitted = false;
         }
 
         private string GenerateCode()

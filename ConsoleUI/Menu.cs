@@ -69,6 +69,7 @@ namespace ConsoleUI
                     if (US.FindMatch(code) != null)
                     {
                         AnswerSurvey(US.FindMatch(code));
+                        US.IsSubmitted = true;
                         Console.WriteLine("Thanks for taking the survey!");
 
                     }
@@ -114,6 +115,8 @@ namespace ConsoleUI
                         }
                     case "t":
                         {   // Testkör en survey
+                            Console.WriteLine("Choose a survey to test");
+                            Admin.ListAllSurveys(surveyLibrary);
                             Console.ReadLine();
                             break;
                         }
