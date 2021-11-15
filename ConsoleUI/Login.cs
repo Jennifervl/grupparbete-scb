@@ -37,9 +37,9 @@ namespace ConsoleUI
                             {
                                 int passAttempt = 0;
                                 string passwordInput = "";
-                                while (passwordInput != "" && passAttempt <= 2)
+                                while (passwordInput != "" && passwordInput.Length <5 && passAttempt <= 2)
                                 {
-                                    System.Console.WriteLine("Enter password: ");
+                                    System.Console.WriteLine("Enter password (5 characters): ");
                                     passwordInput = Console.ReadLine();
                                     System.Console.WriteLine("Wrong password, try again");
                                     passAttempt++;
