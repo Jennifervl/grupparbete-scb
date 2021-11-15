@@ -14,7 +14,7 @@ namespace ConsoleUI
             userList.AddNewUser(testAdminUser);
             userList.AddNewUser(testUserUser);
             List<User> testList = new();
-            userList.GetUsers(testList);
+            userList.GetUsers();
             bool confirmedAdmin = false;
             while (true)
             {
@@ -32,7 +32,7 @@ namespace ConsoleUI
                                 {
                                     confirmedAdmin = true;
                                 }
-                           }
+                            }
                             if (confirmedAdmin == true)
                             {
                                 int passAttempt = 0;
@@ -51,7 +51,7 @@ namespace ConsoleUI
                                     return;
                                 }
                                 System.Console.WriteLine("You pass the test");
-                               
+
                             }
                             break;
                         }
@@ -76,45 +76,45 @@ namespace ConsoleUI
                 // }
                 return;
             }
-        
-        
-        //  void RollLoginRun2()
 
-        // {
-        //     User testAdminUser = new User("199001014444", UserRoles.Admin);
-        //     User testParticipant = new User("198002025555", UserRoles.Participant);
-        //     UserList userList = new UserList();
-        //     userList.AddNewUser(testAdminUser);
-        //     userList.AddNewUser(testUserUser);
-        //     List<User> testList = new();
-        //     userList.GetUsers(testList);
-           
-        //     Console.Clear();
-        //     while(true)
-        //     {
-        //       string choice = Console.ReadKey().Key.ToString().ToLower();
-        //       System.Console.WriteLine("Submit SSN: ");
-        //       string input = Console.ReadLine();
-        //        if (input.Length == 12)
-        //         {
-                    
-        //             Console.WriteLine("Successfully logged in.");
-        //             userList.ListUsers();
-        //             Console.ReadLine();
-        //         }
-        //         else
-        //         {
-        //             Console.WriteLine($"Incorrect length of personal number, you entered {input.Length} digits, try again please.");
-        //             Console.ReadLine();
-        //         }
-               
-        //     }
-      
-       
-              
-               
-        // }
-        
+
+            //  void RollLoginRun2()
+
+            // {
+            //     User testAdminUser = new User("199001014444", UserRoles.Admin);
+            //     User testParticipant = new User("198002025555", UserRoles.Participant);
+            //     UserList userList = new UserList();
+            //     userList.AddNewUser(testAdminUser);
+            //     userList.AddNewUser(testUserUser);
+            //     List<User> testList = new();
+            //     userList.GetUsers(testList);
+
+            //     Console.Clear();
+            //     while(true)
+            //     {
+            //       string choice = Console.ReadKey().Key.ToString().ToLower();
+            //       System.Console.WriteLine("Submit SSN: ");
+            //       string input = Console.ReadLine();
+            //        if (input.Length == 12)
+            //         {
+
+            //             Console.WriteLine("Successfully logged in.");
+            //             userList.ListUsers();
+            //             Console.ReadLine();
+            //         }
+            //         else
+            //         {
+            //             Console.WriteLine($"Incorrect length of personal number, you entered {input.Length} digits, try again please.");
+            //             Console.ReadLine();
+            //         }
+
+            //     }
+
+
+
+
+            // }
+
         }
     }
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace SurveyLib
 {
     public class _1_to_10 : Question
@@ -27,10 +29,11 @@ namespace SurveyLib
         }
         public void SetAnswer(int answer)
         {
-            if (answer < 11 && answer > 0)
+            if (answer > 0 && answer < 11)
             {
                 this.answer = answer;
             }
+            else throw new ArgumentOutOfRangeException();
         }
     }
 }

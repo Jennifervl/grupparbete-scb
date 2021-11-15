@@ -6,9 +6,9 @@ namespace ConsoleUI
 {
     class ServeyTest
     {
-         public static void surveyTest()
+        public static void surveyTest()
         {
-            Survey survey = new("Testsurvey", 1);
+            Survey survey = new("Testsurvey");
 
 
             _1_to_10 test1to10question = new _1_to_10("How much do you like this survey?", "Hate it", "Love it");

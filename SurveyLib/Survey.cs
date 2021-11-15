@@ -6,8 +6,6 @@ namespace SurveyLib
     {
         string title;
 
-        int id;
-
         List<Question> questions;
 
         List<User_Survey> userSurveys;
@@ -25,23 +23,9 @@ namespace SurveyLib
             }
         }
 
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
-
-        public Survey(string title, int id)
+        public Survey(string title)
         {
             this.title = title;
-            this.id = id;
             questions = new List<Question>();
         }
 
