@@ -19,5 +19,19 @@ namespace SurveyLib
         {
             return System.Guid.NewGuid().ToString();
         }
+
+        public Survey FindMatch(string code)
+        {
+            if (code == this.code)
+            {
+                return survey;
+            }
+            else return null;
+        }
+
+        public string GetUserCodeInfo()
+        {
+            return this.code + "  |  " + this.user.Ssn;
+        }
     }
 }

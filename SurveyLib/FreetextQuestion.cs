@@ -3,6 +3,7 @@ namespace SurveyLib
     public class FreetextQuestion : Question
     {
         string answer;
+
         public FreetextQuestion(string title) : base(title)
         {
         }
@@ -16,7 +17,5 @@ namespace SurveyLib
         {
             return answer;
         }
-
-
     }
 }

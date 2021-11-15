@@ -13,6 +13,7 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
+                    Console.WriteLine(user_survey.GetUserCodeInfo());
                 }
             }
         }
@@ -27,7 +28,19 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
+                    Console.WriteLine(user_survey.GetUserCodeInfo());
                 }
+            }
+        }
+
+        public static void DistributeToAll(Survey survey, UserList userList)
+        {
+            foreach (User user in userList.GetUsers())
+            {
+                User_Survey user_survey = new User_Survey(user, survey);
+                survey.AddUserSurvey(user_survey);
+                user.AddUserSurvey(user_survey);
+                Console.WriteLine(user_survey.GetUserCodeInfo());
             }
         }
 
@@ -37,5 +50,6 @@ namespace SurveyLib
             int age = DateTime.Now.Year - yearBorn;
             return age;
         }
+
     }
 }

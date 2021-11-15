@@ -21,5 +21,21 @@ namespace SurveyLib
         {
             return surveys;
         }
+
+        public Survey GetSurveyAtIndex(int index)
+        {
+            index -= 1;
+            return surveys[index];
+        }
+
+        public void LoadSurveys()
+        {
+            Survey testsurvey = new("TestSurvey");
+            Question YoNQ = new YesOrNoQuestion("Is this working?");
+            Question freeTxtQ = new FreetextQuestion("Say something nice!");
+            testsurvey.AddQuestion(YoNQ);
+            testsurvey.AddQuestion(freeTxtQ);
+            AddSurvey(testsurvey);
+        }
     }
 }
