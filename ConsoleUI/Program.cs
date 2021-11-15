@@ -6,14 +6,14 @@ namespace ConsoleUI
 {
     class Program
     {
+        static Menu menu = new();
         static void Main(string[] args)
         {
 
             // Login login = new();
             // login.LoginRun();
-            Menu menu = new();
             menu.MyMenu();
         }
-       
+
     }
 }

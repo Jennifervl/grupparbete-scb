@@ -36,12 +36,14 @@ namespace ConsoleUI
 
                 if (choice == "a")
                 {
-                    login.LoginRun(isAdmin = true);
+                    isAdmin = true;
+                    login.LoginRun(isAdmin);
                 }
 
                 else if (choice == "b")
                 {
-                    login.LoginRun(isAdmin = false);
+                    isAdmin = false;
+                    login.LoginRun(isAdmin);
                 }
                 else if (choice == "x")
                 {
@@ -55,6 +57,35 @@ namespace ConsoleUI
                 Console.ResetColor();
             }
 
+        }
+        public static void AdminMenu()
+        {
+            bool adminRun = true;
+            Menu men = new();
+            while (adminRun == true)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Welcome to the super secret admin menu");
+                System.Console.WriteLine("[A] Create a questionaire");
+                System.Console.WriteLine("[X] Return to main menu");
+                string adminChoice = Console.ReadKey().Key.ToString().ToLower();
+                switch (adminChoice)
+                {
+                    case "a":
+                        {
+                            Admin.CreateSurvey();
+                            System.Console.WriteLine("Returned from creating questionaire");
+                            break;
+                        }
+                    case "x":
+                        {
+                            adminRun = false;
+                            break;
+                        }
+                }
+
+            }
+            men.MyMenu();
         }
     }
 }
