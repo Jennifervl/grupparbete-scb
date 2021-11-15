@@ -102,57 +102,59 @@ namespace ConsoleUI
                 switch (adminChoice)
                 {
                     case "a":
-                        {
-                            surveyLibrary.AddSurvey(Admin.BuildSurvey());       // Populerar survey biblioteket med en survey vi skapar i buildsurvey metoden
+                        {   // Skapa survey
+                            surveyLibrary.AddSurvey(Admin.BuildSurvey());
                             break;
                         }
                     case "l":
-                        {
+                        {   // Lista alla surveys
                             Admin.ListAllSurveys(surveyLibrary);
                             Console.ReadLine();
                             break;
                         }
                     case "t":
-                        {
+                        {   // Testkör en survey
                             Console.ReadLine();
                             break;
                         }
                     case "d":
-                        Console.WriteLine("Which survey do you want to distribute?");
-                        int counter = 1;
-                        foreach (Survey survey in surveyLibrary.GetAllSurveys())
                         {
-                            Console.Write(counter);
-                            Console.WriteLine(survey.Title);
-                            counter++;
-                        }
-                        int index = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("How would you like to distribute it?");
-                        Console.WriteLine("1. By age");
-                        Console.WriteLine("2. CoilFlip");
-                        Console.WriteLine("3. To everyone");
+                            Console.WriteLine("Which survey do you want to distribute?");
+                            int counter = 1;
+                            foreach (Survey survey in surveyLibrary.GetAllSurveys())
+                            {
+                                Console.Write(counter);
+                                Console.WriteLine(survey.Title);
+                                counter++;
+                            }
+                            int index = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("How would you like to distribute it?");
+                            Console.WriteLine("1. By age");
+                            Console.WriteLine("2. CoinFlip");
+                            Console.WriteLine("3. To everyone");
 
-                        string distributeChoice = Console.ReadLine();
-                        if (distributeChoice == "1")
-                        {
-                            Console.WriteLine("Minumum age: ");
-                            int minAge = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Maximum age: ");
-                            int maxAge = Convert.ToInt32(Console.ReadLine());
-                            Distributor.DistributeByAge(surveyLibrary.GetSurveyAtIndex(index), userList);
-                        }
-                        else if (distributeChoice == "2")
-                        {
-                            Distributor.CoinFlipDistribution(surveyLibrary.GetSurveyAtIndex(index), userList);
-                        }
-                        else if (distributeChoice == "3")
-                        {
-                            Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList);
-                        }
-                        Console.ReadLine();
+                            string distributeChoice = Console.ReadLine();
+                            if (distributeChoice == "1")
+                            {
+                                Console.WriteLine("Minumum age: ");
+                                int minAge = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Maximum age: ");
+                                int maxAge = Convert.ToInt32(Console.ReadLine());
+                                Distributor.DistributeByAge(surveyLibrary.GetSurveyAtIndex(index), userList);
+                            }
+                            else if (distributeChoice == "2")
+                            {
+                                Distributor.CoinFlipDistribution(surveyLibrary.GetSurveyAtIndex(index), userList);
+                            }
+                            else if (distributeChoice == "3")
+                            {
+                                Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList);
+                            }
+                            Console.ReadLine();
 
 
-                        break;
+                            break;
+                        }
                     case "x":
                         {
                             return true;
@@ -263,6 +265,7 @@ namespace ConsoleUI
                     ftq.SetAnswer(answer);
                 }
             }
+            txtfileDataManager.SaveResult(survey);
         }
     }
 }
