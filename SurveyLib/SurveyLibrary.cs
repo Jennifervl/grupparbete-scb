@@ -21,17 +21,5 @@ namespace SurveyLib
         {
             return surveys;
         }
-
-        public Survey GetSurvey(int id)
-        {
-            foreach (Survey survey in surveys)
-            {
-                if (survey.Id == id)
-                {
-                    return survey;
-                }
-            }
-            throw new KeyNotFoundException();
-        }
     }
 }
