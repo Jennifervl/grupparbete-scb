@@ -6,65 +6,79 @@ namespace ConsoleUI
 {
     class Admin
     {
-        public static void CreateSurvey()
+        public static void AdminListAllSurveys(SurveyLibrary surveyLibrary)
         {
-            string surveyTitle;
-            List<string> questionList = new();
-            string question;
-            bool questionRun = true;
-            System.Console.WriteLine("- Create survey -");
-            System.Console.WriteLine("Enter title of questionaire: ");
-            surveyTitle = Console.ReadLine();
-            System.Console.WriteLine("To stop adding questions, leave the field empty");
-            while (questionRun == true)
+
+            foreach (Survey s in surveyLibrary.GetAllSurveys())
             {
-                question = "";
-                System.Console.WriteLine("Enter a question : ");
-                question = Console.ReadLine();
-                if (String.IsNullOrWhiteSpace(question))
-                {
-                    System.Console.WriteLine("Questionaire finished");
-                    questionRun = false;
-                }
-                else 
-                {
-                    questionList.Add(question);
-                }
+                System.Console.WriteLine(s.Title);
             }
-            return;
         }
 
+        public static Survey BuildSurvey()
+        {
+            Console.WriteLine("Enter the title of the survey");
+            string title = Console.ReadLine();
+            Survey survey1 = new(title);
+            while (true)
+            {
+                Console.WriteLine("What type of question do you want to add?");
+                Console.WriteLine("1. 1-to-10-question");
+                Console.WriteLine("2. Freetext question");
+                Console.WriteLine("3. Yes or no question");
+                Console.WriteLine("4. Multiple choise question");
+                Console.WriteLine("5. No more questions");
+                string input = Console.ReadLine();
+                if (input == "5") break;
+
+                else
+                {
+                    Console.WriteLine("Enter the title of the question");
+                    string qtitle = Console.ReadLine();
+
+                    if (input == "1")
+                    {
+                        Console.WriteLine("Enter the label of number 1");
+                        string label1 = Console.ReadLine();
+                        Console.WriteLine("Enter the label of value 10");
+                        string label10 = Console.ReadLine();
+                        _1_to_10 _1_To_10question = new(qtitle, label1, label10);
+                        survey1.AddQuestion(_1_To_10question);
+                    }
+
+                    else if (input == "2")
+                    {
+                        FreetextQuestion freetextQuestion = new(title);
+                        survey1.AddQuestion(freetextQuestion);
+                    }
+
+                    else if (input == "3")
+                    {
+                        YesOrNoQuestion yesOrNo = new(title);
+                        survey1.AddQuestion(yesOrNo);
+                    }
+                    else if (input == "4")
+                    {
+                        List<string> options = new();
+                        while (true)
+                        {
+                            Console.WriteLine("Enter an option");
+                            options.Add(Console.ReadLine());
+                            Console.WriteLine("Add another option? (y/n)");
+                            string choise = Console.ReadLine();
+                            if (choise.ToLower() == "n")
+                            {
+                                break;
+                            }
+                        }
+                        MultipleChoiseQuestion mcq = new(title, options);
+                        survey1.AddQuestion(mcq);
+                    }
+                }
+            }
+            return survey1;
+
+
+        }
     }
 }
-
-//     private UserList _userlist;
-//     public Admin(UserList userlist)
-//     {
-//         this._userlist=userlist;
-//     }
-
-
-//      private void NewAdmin()
-//      {
-//          while(true)
-//         {
-
-//           System.Console.WriteLine("Submit SSN: ");
-//             string input = Console.ReadLine();
-
-//            if (input.Length == 12)
-//             {
-//                 User user = new( input, UserRoles.Admin);
-//                 Console.WriteLine("Successfully logged in.");
-//                 Console.ReadLine();
-//             }
-//             else
-//             {
-//                 Console.WriteLine($"Incorrect length of personal number, you entered {input.Length} digits, try again please.");
-//                 Console.ReadLine();
-//             }
-
-
-//         }
-
-//  }
