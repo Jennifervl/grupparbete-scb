@@ -9,10 +9,74 @@ namespace ConsoleUI
         static Menu menu = new();
         static void Main(string[] args)
         {
-
-            // Login login = new();
-            // login.LoginRun();
             menu.MyMenu();
+            // Survey survey = Admin.BuildSurvey();
+            // AnswerSurvey(survey);
+
+        }
+        public static void AnswerSurvey(Survey survey)
+        {
+            Console.Clear();
+            Console.WriteLine(survey.Title);
+            Console.WriteLine("");
+
+            int questionCounter = 0;
+
+            foreach (Question q in survey.GetQuestions())
+            {
+                questionCounter++;
+                Console.WriteLine("Question " + questionCounter);
+                Console.WriteLine(q.Title);
+
+                _1_to_10 _1_to_10_question = q as _1_to_10;
+                MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
+                YesOrNoQuestion ynq = q as YesOrNoQuestion;
+                FreetextQuestion ftq = q as FreetextQuestion;
+
+                if (_1_to_10_question != null)
+                {
+                    Console.WriteLine("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
+                    _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
+                }
+
+                else if (mcq != null)
+                {
+                    Console.WriteLine("Options: ");
+                    foreach (string option in mcq.GetOptions())
+                    {
+                        Console.WriteLine(option);
+                    }
+                    List<int> answers = new();
+                    while (true)
+                    {
+                        Console.WriteLine("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
+                        string input = Console.ReadLine();
+                        if (input == "") break;
+
+                        if (Int32.TryParse(input, out int answerInt) == true)
+                        {
+                            answers.Add(answerInt);
+                        }
+                        else Console.WriteLine("You must enter a digit");
+                    }
+                    mcq.SetAnswer(answers);
+                }
+                else if (ynq != null)
+                {
+                    Console.WriteLine("Y/N ?");
+                    string answer = Console.ReadLine();
+                    if (answer.ToLower() == "y")
+                    {
+                        ynq.SetAnswer(true);
+                    }
+                    else ynq.SetAnswer(false);
+                }
+                else if (ftq != null)
+                {
+                    string answer = Console.ReadLine();
+                    ftq.SetAnswer(answer);
+                }
+            }
         }
         public static Survey BuildSurvey()
         {
@@ -47,13 +111,13 @@ namespace ConsoleUI
 
                     else if (input == "2")
                     {
-                        FreetextQuestion freetextQuestion = new(title);
+                        FreetextQuestion freetextQuestion = new(qtitle);
                         survey1.AddQuestion(freetextQuestion);
                     }
 
                     else if (input == "3")
                     {
-                        YesOrNoQuestion yesOrNo = new(title);
+                        YesOrNoQuestion yesOrNo = new(qtitle);
                         survey1.AddQuestion(yesOrNo);
                     }
                     else if (input == "4")
@@ -70,7 +134,7 @@ namespace ConsoleUI
                                 break;
                             }
                         }
-                        MultipleChoiseQuestion mcq = new(title, options);
+                        MultipleChoiseQuestion mcq = new(qtitle, options);
                         survey1.AddQuestion(mcq);
                     }
                 }

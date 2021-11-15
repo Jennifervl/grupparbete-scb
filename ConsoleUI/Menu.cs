@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SurveyLib;
 
 namespace ConsoleUI
 {
@@ -31,7 +32,7 @@ namespace ConsoleUI
                     Console.WriteLine(mymenu[i]);
                 }
 
-                string choice = Console.ReadKey().Key.ToString().ToLower();
+                string choice = Console.ReadKey(true).Key.ToString().ToLower();
                 Login login = new();
 
                 if (choice == "a")
@@ -60,21 +61,43 @@ namespace ConsoleUI
         }
         public static void AdminMenu()
         {
+            SurveyLibrary surveyLibrary = new();
             bool adminRun = true;
             Menu men = new();
             while (adminRun == true)
             {
                 Console.Clear();
+                 System.Console.WriteLine(@"
+    ███████ ███████  ██████ ██████  ███████ ████████      █████  ██████  ███    ███ ██ ███    ██     ███    ███ ███████ ███    ██ ██    ██ 
+    ██      ██      ██      ██   ██ ██         ██        ██   ██ ██   ██ ████  ████ ██ ████   ██     ████  ████ ██      ████   ██ ██    ██ 
+    ███████ █████   ██      ██████  █████      ██        ███████ ██   ██ ██ ████ ██ ██ ██ ██  ██     ██ ████ ██ █████   ██ ██  ██ ██    ██ 
+         ██ ██      ██      ██   ██ ██         ██        ██   ██ ██   ██ ██  ██  ██ ██ ██  ██ ██     ██  ██  ██ ██      ██  ██ ██ ██    ██ 
+    ███████ ███████  ██████ ██   ██ ███████    ██        ██   ██ ██████  ██      ██ ██ ██   ████     ██      ██ ███████ ██   ████  ██████  
+                                                                                                                                           
+                                                                                                                                           
+");
                 System.Console.WriteLine("Welcome to the super secret admin menu");
-                System.Console.WriteLine("[A] Create a questionaire");
+                System.Console.WriteLine("[A] Create a survey");
+                System.Console.WriteLine("[L] List all surveys");
+                System.Console.WriteLine("[T] Test a survey");
                 System.Console.WriteLine("[X] Return to main menu");
-                string adminChoice = Console.ReadKey().Key.ToString().ToLower();
+                string adminChoice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch (adminChoice)
                 {
                     case "a":
                         {
-                            Admin.CreateSurvey();
-                            System.Console.WriteLine("Returned from creating questionaire");
+                            surveyLibrary.AddSurvey(Admin.BuildSurvey());       // Populerar survey biblioteket med en survey vi skapar i buildsurvey metoden
+                            break;
+                        }
+                    case "l":
+                        {
+                            Admin.ListAllSurveys(surveyLibrary);
+                            Console.ReadLine();
+                            break;
+                        }
+                    case "t":
+                        {
+                            Console.ReadLine();
                             break;
                         }
                     case "x":
