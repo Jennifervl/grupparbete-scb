@@ -10,6 +10,8 @@ namespace SurveyLib
 
         List<Question> questions;
 
+        List<User_Survey> userSurveys;
+
         public string Title
         {
             get
@@ -51,6 +53,11 @@ namespace SurveyLib
         public void AddQuestion(Question question)
         {
             questions.Add(question);
+        }
+
+        public void AddUserSurvey(User_Survey userSurvey)
+        {
+            userSurveys.Add(userSurvey);
         }
     }
 }

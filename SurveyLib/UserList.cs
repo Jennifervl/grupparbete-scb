@@ -22,13 +22,9 @@ namespace SurveyLib
                 u.UserInfo();
             }
         }
-        public List<User> GetUsers(List<User> inList)
+        public List<User> GetUsers()
         {
-            foreach (User u in userList)
-            {
-                inList.Add(u);
-            }
-            return inList;
+            return userList;
         }
     }
 }
