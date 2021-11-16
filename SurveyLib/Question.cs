@@ -12,7 +12,5 @@ namespace SurveyLib
         {
             this.title = title;
         }
-
-        // public abstract void SetAnswer(string answer);
     }
 }
