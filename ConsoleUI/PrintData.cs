@@ -64,7 +64,7 @@ namespace ConsoleUI
                     {
                         Console.WriteLine((i + 1) + " Got " + intResults[i] + " Votes");
                     }
-                    questionCounter++;
+
                 }
                 else if (q is FreetextQuestion ftq)
                 {
@@ -82,7 +82,7 @@ namespace ConsoleUI
                         Console.WriteLine(result);
                     }
 
-                    questionCounter++;
+
                 }
                 else if (q is MultipleChoiseQuestion mcq)
                 {
@@ -119,8 +119,30 @@ namespace ConsoleUI
                 }
                 else if (q is YesOrNoQuestion)
                 {
-                    questionCounter++;
+                    string ftqData = "";
+                    float fTrue = 0;
+                    float fFalse = 0;
+                    int percentTrue = 0;
+                    int startIndex = txtfileDataManager.GetNthIndex(data, '[', questionCounter);
+                    int endIndex = txtfileDataManager.GetNthIndex(data, ']', questionCounter);
+                    int length = endIndex - startIndex;
+
+                    ftqData = data.Substring(startIndex + 1, length - 2);
+
+                    String[] results = ftqData.Split(',');
+
+                    foreach (string result in results)
+                    {
+                        if (result == "True") fTrue++;
+                        else if (result == "False") fFalse++;
+                        Console.WriteLine(result);
+                    }
+                    percentTrue = Convert.ToInt32((fTrue / (fTrue + fFalse)) * 100);
+                    Console.WriteLine(percentTrue + "% answered yes");
+
+
                 }
+                questionCounter++;
             }
         }
     }
