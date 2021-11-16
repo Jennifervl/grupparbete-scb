@@ -6,7 +6,6 @@ namespace SurveyLib
     {
         public UserRoles userRoles;
         private string ssn;
-
         private List<User_Survey> userSurveys;
 
         public string Ssn
@@ -22,9 +21,15 @@ namespace SurveyLib
             this.userRoles = auserRoles;
             this.userSurveys = new List<User_Survey>();
         }
-        public void UserInfo()
+
+        public string GetUserSsn()
         {
-            System.Console.WriteLine($"Personnummer: {ssn} \nAnvändartyp: {userRoles.ToString()}\n");
+            return ssn;
+        }
+
+        public UserRoles GetUserRole()
+        {
+            return userRoles;
         }
 
         public void AddUserSurvey(User_Survey userSurvey)
@@ -35,6 +40,13 @@ namespace SurveyLib
         public List<User_Survey> GetUserSurveys()
         {
             return userSurveys;
+        }
+
+        public int getAge()
+        {
+            int yearBorn = System.Convert.ToInt32(Ssn.Substring(0, 4));
+            int age = System.DateTime.Now.Year - yearBorn;
+            return age;
         }
     }
 }

@@ -69,6 +69,7 @@ namespace ConsoleUI
                     if (US.FindMatch(code) != null)
                     {
                         AnswerSurvey(US.FindMatch(code));
+                        US.IsSubmitted = true;
                         Console.WriteLine("Thanks for taking the survey!");
 
                     }
@@ -97,6 +98,8 @@ namespace ConsoleUI
                 System.Console.WriteLine("[L] List all surveys");
                 System.Console.WriteLine("[T] Test a survey");
                 Console.WriteLine("[D] Distribute survey");
+                Console.WriteLine("[S] Show all distributions");
+                Console.WriteLine("[U] List all users");
                 System.Console.WriteLine("[X] Return to main menu");
                 string adminChoice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch (adminChoice)
@@ -114,6 +117,8 @@ namespace ConsoleUI
                         }
                     case "t":
                         {   // Testkör en survey
+                            Console.WriteLine("Choose a survey to test");
+                            Admin.ListAllSurveys(surveyLibrary);
                             Console.ReadLine();
                             break;
                         }
@@ -153,6 +158,29 @@ namespace ConsoleUI
                             Console.ReadLine();
 
 
+                            break;
+                        }
+
+                    case "s":
+                        {
+                            Dictionary<string, string> distributions = Distributor.GetAllDistributions(userList);
+                            foreach (KeyValuePair<string, string> entry in distributions)
+                            {
+                                Console.WriteLine(entry.Key + " " + entry.Value);
+
+                            }
+                            Console.ReadLine();
+                            break;
+                        }
+
+                    case "u":
+                        {
+                            Dictionary<string, UserRoles> users = userList.ListUsers();
+                            foreach (KeyValuePair<string, UserRoles> u in users)
+                            {
+                                Console.WriteLine(u.Key + " " + u.Value.ToString());
+                            }
+                            Console.ReadLine();
                             break;
                         }
                     case "x":

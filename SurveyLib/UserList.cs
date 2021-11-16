@@ -24,16 +24,18 @@ namespace SurveyLib
             this.AddNewUser(testUserUser);
         }
 
-        public void ListUsers()
+        public Dictionary<string, UserRoles> ListUsers()
         {
+            Dictionary<string, UserRoles> users = new();
             foreach (User u in userList)
             {
-                u.UserInfo();
+                users.Add(u.GetUserSsn(), u.GetUserRole());
             }
+            return users;
         }
-        public List<User> GetUsers()
+        public IList<User> GetUsers()
         {
-            return userList;
+            return userList.AsReadOnly();
         }
     }
 }

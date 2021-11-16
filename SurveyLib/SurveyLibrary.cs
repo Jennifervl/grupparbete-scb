@@ -17,9 +17,9 @@ namespace SurveyLib
             surveys.Add(survey);
         }
 
-        public List<Survey> GetAllSurveys()
+        public IList<Survey> GetAllSurveys()
         {
-            return surveys;
+            return surveys.AsReadOnly();
         }
 
         public Survey GetSurveyAtIndex(int index)

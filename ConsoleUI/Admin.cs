@@ -17,8 +17,7 @@ namespace ConsoleUI
         public static void TestSurvey(Survey testSurvey)
         {
             System.Console.WriteLine(testSurvey.Title);
-            List<Question> questions = new();
-            questions = testSurvey.GetQuestions();
+            IList<Question> questions = testSurvey.GetQuestions();
             foreach (Question q in questions)
             {
                 System.Console.WriteLine(q.Title);

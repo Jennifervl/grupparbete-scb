@@ -16,7 +16,5 @@ namespace SurveyLib
         {
             return answer;
         }
-
-
     }
 }

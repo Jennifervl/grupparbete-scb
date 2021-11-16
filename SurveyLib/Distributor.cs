@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SurveyLib
 {
@@ -8,12 +9,11 @@ namespace SurveyLib
         {
             foreach (User user in userList.GetUsers())
             {
-                if (getAge(user) >= minAge && getAge(user) <= maxAge)
+                if (user.getAge() >= minAge && user.getAge() <= maxAge)
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCodeInfo());
                 }
             }
         }
@@ -28,7 +28,6 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCodeInfo());
                 }
             }
         }
@@ -40,15 +39,21 @@ namespace SurveyLib
                 User_Survey user_survey = new User_Survey(user, survey);
                 survey.AddUserSurvey(user_survey);
                 user.AddUserSurvey(user_survey);
-                Console.WriteLine(user_survey.GetUserCodeInfo());
             }
         }
 
-        private static int getAge(User user)
+        public static Dictionary<string, string> GetAllDistributions(UserList userlist)
         {
-            int yearBorn = Convert.ToInt32(user.Ssn.Substring(4, 2));
-            int age = DateTime.Now.Year - yearBorn;
-            return age;
+            Dictionary<string, string> distributions = new();
+            foreach (User user in userlist.GetUsers())
+            {
+                foreach (User_Survey userservey in user.GetUserSurveys())
+                {
+                    if (userservey.GetUserSsn() == user.Ssn) distributions.Add(userservey.GetUserCode(), userservey.GetUserSsn());
+                }
+
+            }
+            return distributions;
         }
 
     }

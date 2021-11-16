@@ -16,11 +16,6 @@ namespace SurveyLib
             {
                 return title;
             }
-
-            set
-            {
-                title = value;
-            }
         }
 
         public Survey(string title)
@@ -30,9 +25,9 @@ namespace SurveyLib
             userSurveys = new List<User_Survey>();
         }
 
-        public List<Question> GetQuestions()
+        public IList<Question> GetQuestions()
         {
-            return questions;
+            return questions.AsReadOnly();
         }
 
         public void AddQuestion(Question question)

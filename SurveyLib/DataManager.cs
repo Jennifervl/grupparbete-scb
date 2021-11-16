@@ -21,7 +21,7 @@ namespace SurveyLib
 
         public void SaveSurvey(Survey survey)
         {
-            List<Question> questionList = survey.GetQuestions();
+            IList<Question> questionList = survey.GetQuestions();
             int primaryKey;
             int questionPrimaryKey;
             //int multiChoiceID;
@@ -52,7 +52,6 @@ namespace SurveyLib
                             connection.Execute("INSERT INTO Multiple_Choice_Question(Question_ID, Alternative) VALUES (@Question_ID, @Alternative)", new { Question_ID = questionPrimaryKey, Alternative = alternative });
                         }
                     }
-
                 }
 
                 else if (question is FreetextQuestion)
@@ -84,7 +83,6 @@ namespace SurveyLib
                     }
                 }
             }
-
         }
 
         public Survey UserLoadSurvey(int pKey) //string userCode ska vara här
