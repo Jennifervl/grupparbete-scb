@@ -94,7 +94,8 @@ namespace ConsoleUI
                                                                                                                                            
 ");
                 System.Console.WriteLine("Welcome to the super secret admin menu");
-                System.Console.WriteLine("[A] Create a survey");
+                System.Console.WriteLine("[A] Add a user");
+                System.Console.WriteLine("[C] Create a survey");
                 System.Console.WriteLine("[L] List all surveys");
                 System.Console.WriteLine("[T] Test a survey");
                 Console.WriteLine("[D] Distribute survey");
@@ -104,6 +105,40 @@ namespace ConsoleUI
                 switch (adminChoice)
                 {
                     case "a":
+                        {   // Lägg till ny användare
+                            string roleAdd = "";
+                            string ssnAdd = "";
+                            System.Console.WriteLine("What role of user do you wish to add?");
+                            System.Console.WriteLine("1. Participant");
+                            System.Console.WriteLine("2. Admin");
+                            roleAdd = Console.ReadLine();
+                            while (roleAdd != "1" || roleAdd != "2")
+                            {
+                                System.Console.WriteLine("Enter a valid role");
+                                roleAdd = Console.ReadLine();
+                            }
+                            System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
+                            ssnAdd = Console.ReadLine();
+                            while (ssnAdd.Length != 12 && IsDigitsOnly(ssnAdd) == false)
+                            {
+                                System.Console.WriteLine("Invalid SSN, 12 digits.");
+                                ssnAdd = Console.ReadLine();
+                            }
+                            if (roleAdd == "1")
+                            {
+                                User addUser = new User(ssnAdd, UserRoles.Admin);
+                                userList.AddNewUser(addUser);
+                                System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);                                
+                            }
+                            else if (roleAdd == "2")
+                            {
+                                User addUser = new User(ssnAdd, UserRoles.Participant);
+                                userList.AddNewUser(addUser);
+                                System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);                                
+                            }
+                            break;
+                        }
+                    case "c":
                         {   // Skapa survey
                             surveyLibrary.AddSurvey(Admin.BuildSurvey());
                             break;
@@ -282,6 +317,16 @@ namespace ConsoleUI
                 }
             }
             txtfileDataManager.SaveResult(survey);
+        }
+        static bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
     }
 }
