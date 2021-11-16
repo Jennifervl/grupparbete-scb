@@ -162,5 +162,13 @@ namespace SurveyLib
             }
             return loadedSurvey;
         }
+
+        public void SaveUser(User user)
+        {
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                connection.Execute("INSERT INTO [User](SSN, Role) VALUES (@SSN, @Role)", new { SSN = user.GetUserSsn(), Role = user.GetUserRole() });
+            }
+        }
     }
 }
