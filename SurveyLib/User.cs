@@ -21,9 +21,15 @@ namespace SurveyLib
             this.userRoles = auserRoles;
             this.userSurveys = new List<User_Survey>();
         }
-        public void UserInfo()
+
+        public string GetUserSsn()
         {
-            System.Console.WriteLine($"Personnummer: {ssn} \nAnvändartyp: {userRoles.ToString()}\n");
+            return ssn;
+        }
+
+        public UserRoles GetUserRole()
+        {
+            return userRoles;
         }
 
         public void AddUserSurvey(User_Survey userSurvey)

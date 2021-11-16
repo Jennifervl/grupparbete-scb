@@ -14,7 +14,6 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
                 }
             }
         }
@@ -29,7 +28,6 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
                 }
             }
         }
@@ -41,7 +39,6 @@ namespace SurveyLib
                 User_Survey user_survey = new User_Survey(user, survey);
                 survey.AddUserSurvey(user_survey);
                 user.AddUserSurvey(user_survey);
-                Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
             }
         }
 
