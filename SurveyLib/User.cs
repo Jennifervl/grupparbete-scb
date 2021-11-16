@@ -36,5 +36,12 @@ namespace SurveyLib
         {
             return userSurveys;
         }
+
+        public int getAge()
+        {
+            int yearBorn = System.Convert.ToInt32(Ssn.Substring(0, 4));
+            int age = System.DateTime.Now.Year - yearBorn;
+            return age;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace SurveyLib
         {
             foreach (User user in userList.GetUsers())
             {
-                if (getAge(user) >= minAge && getAge(user) <= maxAge)
+                if (user.getAge() >= minAge && user.getAge() <= maxAge)
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
@@ -42,13 +42,6 @@ namespace SurveyLib
                 user.AddUserSurvey(user_survey);
                 Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
             }
-        }
-
-        private static int getAge(User user)
-        {
-            int yearBorn = Convert.ToInt32(user.Ssn.Substring(0, 4));
-            int age = DateTime.Now.Year - yearBorn;
-            return age;
         }
 
     }
