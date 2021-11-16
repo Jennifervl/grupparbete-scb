@@ -1,5 +1,6 @@
 using SurveyLib;
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -67,6 +68,20 @@ namespace ConsoleUI
                 }
                 if (q is FreetextQuestion ftq)
                 {
+                    string ftqData = "";
+                    int startIndex = txtfileDataManager.GetNthIndex(data, '[', questionCounter);
+                    int endIndex = txtfileDataManager.GetNthIndex(data, ']', questionCounter);
+                    int length = endIndex - startIndex;
+
+                    ftqData = data.Substring(startIndex + 1, length - 2);
+
+                    String[] results = ftqData.Split('£');
+
+                    foreach (string result in results)
+                    {
+                        Console.WriteLine(result);
+                    }
+
                     questionCounter++;
                 }
                 if (q is MultipleChoiseQuestion mcq)
