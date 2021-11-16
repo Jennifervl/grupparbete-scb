@@ -34,9 +34,15 @@ namespace SurveyLib
             Question YoNQ = new YesOrNoQuestion("Is this working?");
             Question freeTxtQ = new FreetextQuestion("Say something nice!");
             Question OTT = new _1_to_10("OneToTen test", "Test1", "test10");
+            List<String> colours = new();
+            colours.Add("Blue");
+            colours.Add("Green");
+            colours.Add("Pink");
+            Question MCQ = new MultipleChoiseQuestion("Favorite colour: ", colours);
             testsurvey.AddQuestion(YoNQ);
             testsurvey.AddQuestion(freeTxtQ);
             testsurvey.AddQuestion(OTT);
+            testsurvey.AddQuestion(MCQ);
             AddSurvey(testsurvey);
         }
     }

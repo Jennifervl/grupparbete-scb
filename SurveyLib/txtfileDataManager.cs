@@ -29,10 +29,13 @@ namespace SurveyLib
                     }
                     else if (q is MultipleChoiseQuestion mcq)
                     {
+                        int lastindex = 0;
                         foreach (bool answer in mcq.GetAnswer())
                         {
                             data = data.Insert(data.IndexOf("[", GetNthIndex(data, '[', i)) + 1, answer + ",");
+                            lastindex = GetNthIndex(data, '[', i) + answer.ToString().Length;
                         }
+                        data = data.Insert(lastindex, ";");
                     }
                     else if (q is YesOrNoQuestion yesOrNo)
                     {
