@@ -105,40 +105,7 @@ namespace ConsoleUI
                 {
                     case "a":
                         {   // Lägg till ny användare
-                            string roleAdd = "";
-                            string ssnAdd = "";
-                            System.Console.WriteLine("What role of user do you wish to add?");
-                            System.Console.WriteLine("1. Admin");
-                            System.Console.WriteLine("2. Participant");
-                            roleAdd = Console.ReadLine();
-                            while (roleAdd != "1" && roleAdd != "2")
-                            {
-                                System.Console.WriteLine("Enter a valid role");
-                                roleAdd = Console.ReadLine();
-                            }
-                            System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
-                            ssnAdd = Console.ReadLine();
-                            while (ssnAdd.Length != 12)
-                            {
-                                System.Console.WriteLine("Invalid SSN, 12 digits.");
-                                ssnAdd = Console.ReadLine();
-                                if (IsDigitsOnly(ssnAdd)== false)
-                                {
-                                    ssnAdd="";
-                                }
-                            }
-                            if (roleAdd == "1")
-                            {
-                                User addUser = new User(ssnAdd, UserRoles.Admin);
-                                userList.AddNewUser(addUser);
-                                System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);                                
-                            }
-                            else if (roleAdd == "2")
-                            {
-                                User addUser = new User(ssnAdd, UserRoles.Participant);
-                                userList.AddNewUser(addUser);
-                                System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);                                
-                            }
+                            AddUser(userList);
                             System.Console.WriteLine("Press ENTER to return to menu...");
                             Console.ReadLine();
                             break;
@@ -227,6 +194,45 @@ namespace ConsoleUI
             }
             return false;
         }
+
+        private static void AddUser(UserList userList)
+        {
+            string roleAdd = "";
+            string ssnAdd = "";
+            System.Console.WriteLine("What role of user do you wish to add?");
+            System.Console.WriteLine("1. Admin");
+            System.Console.WriteLine("2. Participant");
+            roleAdd = Console.ReadLine();
+            while (roleAdd != "1" && roleAdd != "2")
+            {
+                System.Console.WriteLine("Enter a valid role");
+                roleAdd = Console.ReadLine();
+            }
+            System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
+            ssnAdd = Console.ReadLine();
+            while (ssnAdd.Length != 12)
+            {
+                System.Console.WriteLine("Invalid SSN, 12 digits.");
+                ssnAdd = Console.ReadLine();
+                if (IsDigitsOnly(ssnAdd) == false)
+                {
+                    ssnAdd = "";
+                }
+            }
+            if (roleAdd == "1")
+            {
+                User addUser = new User(ssnAdd, UserRoles.Admin);
+                userList.AddNewUser(addUser);
+                System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
+            }
+            else if (roleAdd == "2")
+            {
+                User addUser = new User(ssnAdd, UserRoles.Participant);
+                userList.AddNewUser(addUser);
+                System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
+            }
+        }
+
         public void AdminLogin(UserList userList, SurveyLibrary surveyLibrary)
         {
             while (true)
