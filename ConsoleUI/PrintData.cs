@@ -86,6 +86,35 @@ namespace ConsoleUI
                 }
                 else if (q is MultipleChoiseQuestion mcq)
                 {
+                    string mcqData = "";
+                    int startIndex = txtfileDataManager.GetNthIndex(data, '[', questionCounter);
+                    int endIndex = txtfileDataManager.GetNthIndex(data, ']', questionCounter);
+                    int length = endIndex - startIndex;
+
+                    mcqData = data.Substring(startIndex + 1, length - 2);
+
+                    String[] results = mcqData.Split(';');
+
+                    int[] intResult = new int[mcq.GetOptions().Count];
+
+                    foreach (string result in results)
+                    {
+                        string[] sResults = result.Split(',');
+
+                        for (int i = 0; i < sResults.Length; i++)
+                        {
+                            if (sResults[i] == "True")
+                            {
+                                intResult[i]++;
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < intResult.Length; i++)
+                    {
+                        Console.WriteLine(mcq.GetOptions()[i] + " Got " + intResult[i] + " Votes");
+                    }
+
                     questionCounter++;
                 }
                 else if (q is YesOrNoQuestion)
