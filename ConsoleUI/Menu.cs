@@ -98,6 +98,7 @@ namespace ConsoleUI
                 System.Console.WriteLine("[L] List all surveys");
                 System.Console.WriteLine("[T] Test a survey");
                 Console.WriteLine("[D] Distribute survey");
+                Console.WriteLine("[S] Show all distributions");
                 System.Console.WriteLine("[X] Return to main menu");
                 string adminChoice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch (adminChoice)
@@ -156,6 +157,18 @@ namespace ConsoleUI
                             Console.ReadLine();
 
 
+                            break;
+                        }
+
+                    case "s":
+                        {
+                            Dictionary<string, string> distributions = Distributor.GetAllDistributions(userList);
+                            foreach (KeyValuePair<string, string> entry in distributions)
+                            {
+                                Console.WriteLine(entry.Key + " " + entry.Value);
+
+                            }
+                            Console.ReadLine();
                             break;
                         }
                     case "x":

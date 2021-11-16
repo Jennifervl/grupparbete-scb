@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SurveyLib
 {
@@ -42,6 +43,20 @@ namespace SurveyLib
                 user.AddUserSurvey(user_survey);
                 Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
             }
+        }
+
+        public static Dictionary<string, string> GetAllDistributions(UserList userlist)
+        {
+            Dictionary<string, string> distributions = new();
+            foreach (User user in userlist.GetUsers())
+            {
+                foreach (User_Survey userservey in user.GetUserSurveys())
+                {
+                    if (userservey.GetUserSsn() == user.Ssn) distributions.Add(userservey.GetUserCode(), userservey.GetUserSsn());
+                }
+
+            }
+            return distributions;
         }
 
     }

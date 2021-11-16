@@ -6,7 +6,6 @@ namespace SurveyLib
     {
         public UserRoles userRoles;
         private string ssn;
-
         private List<User_Survey> userSurveys;
 
         public string Ssn
