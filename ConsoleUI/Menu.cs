@@ -100,6 +100,7 @@ namespace ConsoleUI
                 System.Console.WriteLine("[T] Test a survey");
                 Console.WriteLine("[D] Distribute survey");
                 Console.WriteLine("[S] Show all distributions");
+                Console.WriteLine("[U] List all users");
                 System.Console.WriteLine("[X] Return to main menu");
                 string adminChoice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch (adminChoice)
@@ -202,6 +203,17 @@ namespace ConsoleUI
                             {
                                 Console.WriteLine(entry.Key + " " + entry.Value);
 
+                            }
+                            Console.ReadLine();
+                            break;
+                        }
+
+                    case "u":
+                        {
+                            Dictionary<string, UserRoles> users = userList.ListUsers();
+                            foreach (KeyValuePair<string, UserRoles> u in users)
+                            {
+                                Console.WriteLine(u.Key + " " + u.Value.ToString());
                             }
                             Console.ReadLine();
                             break;
