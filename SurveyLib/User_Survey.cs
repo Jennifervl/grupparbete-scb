@@ -30,10 +30,14 @@ namespace SurveyLib
             }
             else return null;
         }
-
-        public string GetUserCodeInfo()
+        public string GetUserCode()
         {
-            return this.code + "  |  " + this.user.Ssn;
+            return this.code;
+        }
+
+        public string GetUserSsn()
+        {
+            return this.user.Ssn;
         }
     }
 }

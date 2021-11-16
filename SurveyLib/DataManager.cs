@@ -53,7 +53,6 @@ namespace SurveyLib
                             connection.Execute("INSERT INTO Multiple_Choice_Question(Question_ID, Alternative) VALUES (@Question_ID, @Alternative)", new { Question_ID = questionPrimaryKey, Alternative = alternative });
                         }
                     }
-
                 }
 
                 else if (question is FreetextQuestion)
@@ -80,8 +79,6 @@ namespace SurveyLib
                     questionPrimaryKey = SaveQuestion(primaryKey, type, scale.Title);
                 }
             }
-
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCodeInfo());
+                    Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
                 }
             }
         }
@@ -28,7 +28,7 @@ namespace SurveyLib
                     User_Survey user_survey = new User_Survey(user, survey);
                     survey.AddUserSurvey(user_survey);
                     user.AddUserSurvey(user_survey);
-                    Console.WriteLine(user_survey.GetUserCodeInfo());
+                    Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
                 }
             }
         }
@@ -40,13 +40,13 @@ namespace SurveyLib
                 User_Survey user_survey = new User_Survey(user, survey);
                 survey.AddUserSurvey(user_survey);
                 user.AddUserSurvey(user_survey);
-                Console.WriteLine(user_survey.GetUserCodeInfo());
+                Console.WriteLine(user_survey.GetUserCode() + " | " + user_survey.GetUserSsn());
             }
         }
 
         private static int getAge(User user)
         {
-            int yearBorn = Convert.ToInt32(user.Ssn.Substring(4, 2));
+            int yearBorn = Convert.ToInt32(user.Ssn.Substring(0, 4));
             int age = DateTime.Now.Year - yearBorn;
             return age;
         }
