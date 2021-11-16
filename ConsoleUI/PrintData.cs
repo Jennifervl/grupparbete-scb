@@ -66,7 +66,7 @@ namespace ConsoleUI
                     }
                     questionCounter++;
                 }
-                if (q is FreetextQuestion ftq)
+                else if (q is FreetextQuestion ftq)
                 {
                     string ftqData = "";
                     int startIndex = txtfileDataManager.GetNthIndex(data, '[', questionCounter);
@@ -84,11 +84,11 @@ namespace ConsoleUI
 
                     questionCounter++;
                 }
-                if (q is MultipleChoiseQuestion mcq)
+                else if (q is MultipleChoiseQuestion mcq)
                 {
                     questionCounter++;
                 }
-                if (q is YesOrNoQuestion)
+                else if (q is YesOrNoQuestion)
                 {
                     questionCounter++;
                 }
