@@ -110,20 +110,24 @@ namespace ConsoleUI
                             string roleAdd = "";
                             string ssnAdd = "";
                             System.Console.WriteLine("What role of user do you wish to add?");
-                            System.Console.WriteLine("1. Participant");
-                            System.Console.WriteLine("2. Admin");
+                            System.Console.WriteLine("1. Admin");
+                            System.Console.WriteLine("2. Participant");
                             roleAdd = Console.ReadLine();
-                            while (roleAdd != "1" || roleAdd != "2")
+                            while (roleAdd != "1" && roleAdd != "2")
                             {
                                 System.Console.WriteLine("Enter a valid role");
                                 roleAdd = Console.ReadLine();
                             }
                             System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
                             ssnAdd = Console.ReadLine();
-                            while (ssnAdd.Length != 12 && IsDigitsOnly(ssnAdd) == false)
+                            while (ssnAdd.Length != 12)
                             {
                                 System.Console.WriteLine("Invalid SSN, 12 digits.");
                                 ssnAdd = Console.ReadLine();
+                                if (IsDigitsOnly(ssnAdd)== false)
+                                {
+                                    ssnAdd="";
+                                }
                             }
                             if (roleAdd == "1")
                             {
@@ -137,6 +141,8 @@ namespace ConsoleUI
                                 userList.AddNewUser(addUser);
                                 System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);                                
                             }
+                            System.Console.WriteLine("Press ENTER to return to menu...");
+                            Console.ReadLine();
                             break;
                         }
                     case "c":
