@@ -21,7 +21,7 @@ namespace SurveyLib
                 {
                     if (q is _1_to_10 oneToTen)
                     {
-                        data = data.Insert(data.IndexOf("[", GetNthIndex(data, '[', i)) + 1, oneToTen.Answer.ToString());
+                        data = data.Insert(data.IndexOf("[", GetNthIndex(data, '[', i)) + 1, oneToTen.Answer.ToString() + ",");
                     }
                     else if (q is FreetextQuestion ftq)
                     {
@@ -53,7 +53,14 @@ namespace SurveyLib
             }
             return txtfile;
         }
-        private static int GetNthIndex(string s, char t, int n)
+
+        public static string GetSurveyData(string title)
+        {
+            string path = $"..\\SurveyLib\\surveyData\\" + $"{title}";
+            return File.ReadAllText(path);
+        }
+
+        public static int GetNthIndex(string s, char t, int n)
         {
             int count = 0;
             for (int i = 0; i < s.Length; i++)

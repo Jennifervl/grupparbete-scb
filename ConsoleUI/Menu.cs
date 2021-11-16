@@ -70,6 +70,8 @@ namespace ConsoleUI
                         AnswerSurvey(US.FindMatch(code));
                         US.IsSubmitted = true;
                         Console.WriteLine("Thanks for taking the survey!");
+                        PrintData.Print(US.FindMatch(code));
+                        Console.ReadLine();
                     }
                 }
             }

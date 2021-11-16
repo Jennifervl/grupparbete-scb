@@ -33,8 +33,10 @@ namespace SurveyLib
             Survey testsurvey = new("TestSurvey");
             Question YoNQ = new YesOrNoQuestion("Is this working?");
             Question freeTxtQ = new FreetextQuestion("Say something nice!");
+            Question OTT = new _1_to_10("OneToTen test", "Test1", "test10");
             testsurvey.AddQuestion(YoNQ);
             testsurvey.AddQuestion(freeTxtQ);
+            testsurvey.AddQuestion(OTT);
             AddSurvey(testsurvey);
         }
     }

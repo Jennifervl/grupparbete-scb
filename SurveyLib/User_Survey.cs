@@ -7,7 +7,17 @@ namespace SurveyLib
         string code;
         bool isSubmitted;
 
-        public bool IsSubmitted { set => isSubmitted = value; }
+        public bool IsSubmitted
+        {
+            get
+            {
+                return isSubmitted;
+            }
+            set
+            {
+                isSubmitted = value;
+            }
+        }
 
         public User_Survey(User user, Survey survey)
         {

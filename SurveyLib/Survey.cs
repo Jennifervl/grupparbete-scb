@@ -39,5 +39,10 @@ namespace SurveyLib
         {
             userSurveys.Add(userSurvey);
         }
+
+        public List<User_Survey> GetUser_Surveys()
+        {
+            return userSurveys;
+        }
     }
 }
