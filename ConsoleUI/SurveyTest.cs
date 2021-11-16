@@ -10,7 +10,6 @@ namespace ConsoleUI
         {
             Survey survey = new("Testsurvey");
 
-
             _1_to_10 test1to10question = new _1_to_10("How much do you like this survey?", "Hate it", "Love it");
             survey.AddQuestion(test1to10question);
 
@@ -58,9 +57,6 @@ namespace ConsoleUI
                     mcq.SetAnswer(answers);
                 }
             }
-
-
-
 
             Console.WriteLine("ANSWERS:");
             int qcounter = 1;

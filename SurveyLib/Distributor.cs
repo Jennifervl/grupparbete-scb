@@ -51,10 +51,8 @@ namespace SurveyLib
                 {
                     if (userservey.GetUserSsn() == user.Ssn) distributions.Add(userservey.GetUserCode(), userservey.GetUserSsn());
                 }
-
             }
             return distributions;
         }
-
     }
 }

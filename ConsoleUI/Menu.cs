@@ -54,7 +54,6 @@ namespace ConsoleUI
                 }
                 Console.ResetColor();
             }
-
         }
 
         public static void UserMenu(UserList userList, SurveyLibrary surveyLibrary)
@@ -71,7 +70,6 @@ namespace ConsoleUI
                         AnswerSurvey(US.FindMatch(code));
                         US.IsSubmitted = true;
                         Console.WriteLine("Thanks for taking the survey!");
-
                     }
                 }
             }
@@ -156,8 +154,6 @@ namespace ConsoleUI
                                 Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList);
                             }
                             Console.ReadLine();
-
-
                             break;
                         }
 
@@ -167,7 +163,6 @@ namespace ConsoleUI
                             foreach (KeyValuePair<string, string> entry in distributions)
                             {
                                 Console.WriteLine(entry.Key + " " + entry.Value);
-
                             }
                             Console.ReadLine();
                             break;
