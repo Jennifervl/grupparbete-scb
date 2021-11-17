@@ -40,6 +40,7 @@ namespace SurveyLib
             }
             else return null;
         }
+
         public string GetUserCode()
         {
             return this.code;

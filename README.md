@@ -38,3 +38,5 @@ Ett program för att administrera/skapa samt besvara undersökningar.
 Datamanager - Dela i två delar, Load/Save Data
 Question - Kanske byta titel till något annat?
 User - Städa upp properties/metoder, var med konsekvent.
+Titta igenom klasser för properties som kan vara private.
+Ta en titt på Interfaces, använd till datamangers 
