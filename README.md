@@ -32,3 +32,9 @@ Ett program för att administrera/skapa samt besvara undersökningar.
 - [ ] String för kod till undersökning - 
 - [ ] Bool för isFInished
 - [ ] Metod för att Generera en unik kod för varje user till en undersökning.
+
+
+**Att Ändra**
+Datamanager - Dela i två delar, Load/Save Data
+Question - Kanske byta titel till något annat?
+User - Städa upp properties/metoder, var med konsekvent.
