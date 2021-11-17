@@ -4,7 +4,7 @@ namespace SurveyLib
 {
     public class User
     {
-        public UserRoles userRoles;
+        private UserRoles userRoles;
         private string ssn;
         private List<User_Survey> userSurveys;
 
@@ -22,6 +22,7 @@ namespace SurveyLib
             this.userSurveys = new List<User_Survey>();
         }
 
+        //Will be removed
         public string GetUserSsn()
         {
             return ssn;

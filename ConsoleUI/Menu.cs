@@ -253,7 +253,7 @@ namespace ConsoleUI
                 string ssnInput = Console.ReadLine();
                 foreach (User u in userList.GetUsers())
                 {
-                    if (ssnInput == u.Ssn && u.userRoles == UserRoles.Admin)
+                    if (ssnInput == u.Ssn && u.GetUserRole() == UserRoles.Admin)
                     {
                         int passAttempt = 0;
                         string passwordInput = "";

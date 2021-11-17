@@ -29,7 +29,7 @@ namespace SurveyLib
             Dictionary<string, UserRoles> users = new();
             foreach (User u in userList)
             {
-                users.Add(u.GetUserSsn(), u.GetUserRole());
+                users.Add(u.Ssn, u.GetUserRole());
             }
             return users;
         }
