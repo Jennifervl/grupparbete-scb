@@ -58,18 +58,18 @@ namespace ConsoleUI
 
                             foreach (User user in userList.GetUsers())
                             {
-                                foreach (User_Survey US in user.GetUserSurveys())
-                                {
-                                    if (US.FindMatch(code) != null)
-                                    {
+                                // foreach (User_Survey US in user.GetUserSurveys())
+                                // {
+                                //     if (US.FindMatch(code) != null)
+                                //     {
 
-                                    }
-                                }
+                                //     }
+                                // }
                             }
                             break;
                         }
                 }
-               
+
                 return;
             }
 

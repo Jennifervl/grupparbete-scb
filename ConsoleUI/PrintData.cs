@@ -6,19 +6,23 @@ namespace ConsoleUI
 {
     public static class PrintData
     {
-        public static void Print(Survey survey)
+        public static void Print(Survey survey, User_Survey_Repository usr)
         {
             string data = txtfileDataManager.GetSurveyData(survey.Title);
 
             int participants = 0;
 
-            foreach (User_Survey US in survey.GetUser_Surveys())
+            foreach (User_Survey US in usr.GetUser_Surveys())
             {
-                if (US.IsSubmitted == true)
+                if (US.GetSurvey() == survey)
                 {
-                    participants++;
+                    if (US.IsSubmitted == true)
+                    {
+                        participants++;
+                    }
                 }
             }
+
 
             Console.WriteLine("Survey: " + survey.Title);
             Console.WriteLine("Amount of participants: " + participants);

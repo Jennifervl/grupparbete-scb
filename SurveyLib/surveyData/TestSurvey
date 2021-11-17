@@ -1,5 +1,5 @@
 :TestSurvey:
-[True,False,False,True,True,True,True,False,]
-[Help me£Wow nice survey£Hello world£Hello World!£Wow this works!£Hello World£ho£he£]
-[7,2,3,8,2,2,2,2,]
-[True,False,True,;True,True,False,;True,False,True,;False,False,True,;True,False,True,;False,True,True,;False,True,True,;False,True,True,;False,False,True,;]
+[True,True,False,False,True,True,True,True,False,]
+[Hello£Help me£Wow nice survey£Hello world£Hello World!£Wow this works!£Hello World£ho£he£]
+[10,7,2,3,8,2,2,2,2,]
+[True,True,False,;True,False,True,;True,True,False,;True,False,True,;False,False,True,;True,False,True,;False,True,True,;False,True,True,;False,True,True,;False,False,True,;]

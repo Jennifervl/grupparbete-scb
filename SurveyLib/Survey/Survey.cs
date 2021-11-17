@@ -8,8 +8,6 @@ namespace SurveyLib
 
         List<Question> questions;
 
-        List<User_Survey> userSurveys;
-
         public string Title
         {
             get
@@ -22,7 +20,6 @@ namespace SurveyLib
         {
             this.title = title;
             questions = new List<Question>();
-            userSurveys = new List<User_Survey>();
         }
 
         public IList<Question> GetQuestions()
@@ -35,14 +32,5 @@ namespace SurveyLib
             questions.Add(question);
         }
 
-        public void AddUserSurvey(User_Survey userSurvey)
-        {
-            userSurveys.Add(userSurvey);
-        }
-
-        public List<User_Survey> GetUser_Surveys()
-        {
-            return userSurveys;
-        }
     }
 }

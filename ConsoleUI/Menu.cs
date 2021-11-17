@@ -6,7 +6,7 @@ namespace ConsoleUI
 {
     class Menu
     {
-        public void MyMenu(UserList userList, SurveyLibrary surveyLibrary)
+        public void MyMenu(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
         {
             List<string> mymenu = new();
             mymenu.Add(@"
@@ -37,12 +37,12 @@ namespace ConsoleUI
 
                 if (choice == "a")
                 {
-                    AdminLogin(userList, surveyLibrary);
+                    AdminLogin(userList, surveyLibrary, usr);
                 }
 
                 else if (choice == "b")
                 {
-                    UserMenu(userList, surveyLibrary);
+                    UserMenu(userList, surveyLibrary, usr);
                 }
                 else if (choice == "x")
                 {
@@ -57,28 +57,25 @@ namespace ConsoleUI
             }
         }
 
-        public static void UserMenu(UserList userList, SurveyLibrary surveyLibrary)
+        public static void UserMenu(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
         {
             System.Console.WriteLine("Enter the questionaire code: ");
             string code = Console.ReadLine();
 
-            foreach (User user in userList.GetUsers())
+            foreach (User_Survey US in usr.GetUser_Surveys())
             {
-                foreach (User_Survey US in user.GetUserSurveys())
+                if (US.FindMatch(code) != null)
                 {
-                    if (US.FindMatch(code) != null)
-                    {
-                        AnswerSurvey(US.FindMatch(code));
-                        US.IsSubmitted = true;
-                        Console.WriteLine("Thanks for taking the survey!");
-                        PrintData.Print(US.FindMatch(code));
-                        Console.ReadLine();
-                    }
+                    AnswerSurvey(US.FindMatch(code));
+                    US.IsSubmitted = true;
+                    Console.WriteLine("Thanks for taking the survey!");
+                    PrintData.Print(US.FindMatch(code), usr);
+                    Console.ReadLine();
                 }
             }
         }
 
-        public static bool AdminMenu(SurveyLibrary surveyLibrary, UserList userList)
+        public static bool AdminMenu(SurveyLibrary surveyLibrary, UserList userList, User_Survey_Repository usr)
         {
             bool adminRun = true;
             Menu men = new();
@@ -154,15 +151,15 @@ namespace ConsoleUI
                                 int minAge = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Maximum age: ");
                                 int maxAge = Convert.ToInt32(Console.ReadLine());
-                                Distributor.DistributeByAge(surveyLibrary.GetSurveyAtIndex(index), userList);
+                                Distributor.DistributeByAge(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
                             }
                             else if (distributeChoice == "2")
                             {
-                                Distributor.CoinFlipDistribution(surveyLibrary.GetSurveyAtIndex(index), userList);
+                                Distributor.CoinFlipDistribution(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
                             }
                             else if (distributeChoice == "3")
                             {
-                                Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList);
+                                Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
                             }
                             Console.ReadLine();
                             break;
@@ -170,7 +167,7 @@ namespace ConsoleUI
 
                     case "s":
                         {
-                            Dictionary<string, string> distributions = Distributor.GetAllDistributions(userList);
+                            Dictionary<string, string> distributions = Distributor.GetAllDistributions(usr);
                             foreach (KeyValuePair<string, string> entry in distributions)
                             {
                                 Console.WriteLine(entry.Key + " " + entry.Value);
@@ -244,7 +241,7 @@ namespace ConsoleUI
             }
         }
 
-        public void AdminLogin(UserList userList, SurveyLibrary surveyLibrary)
+        public void AdminLogin(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
         {
             while (true)
             {
@@ -275,7 +272,7 @@ namespace ConsoleUI
                             Console.ReadLine();
                             return;
                         }
-                        bool goBack = AdminMenu(surveyLibrary, userList);
+                        bool goBack = AdminMenu(surveyLibrary, userList, usr);
                         if (goBack == true) return;
                     }
                 }

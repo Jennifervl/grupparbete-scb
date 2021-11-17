@@ -27,6 +27,11 @@ namespace SurveyLib
             this.IsSubmitted = false;
         }
 
+        public Survey GetSurvey()
+        {
+            return this.survey;
+        }
+
         private string GenerateCode()
         {
             return System.Guid.NewGuid().ToString();

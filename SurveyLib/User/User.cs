@@ -6,7 +6,6 @@ namespace SurveyLib
     {
         private UserRoles userRoles;
         private string ssn;
-        private List<User_Survey> userSurveys;
 
         public string Ssn
         {
@@ -19,7 +18,6 @@ namespace SurveyLib
         {
             this.ssn = assn;
             this.userRoles = auserRoles;
-            this.userSurveys = new List<User_Survey>();
         }
 
         //TODO: Remove this method
@@ -33,15 +31,6 @@ namespace SurveyLib
             return userRoles;
         }
 
-        public void AddUserSurvey(User_Survey userSurvey)
-        {
-            userSurveys.Add(userSurvey);
-        }
-
-        public List<User_Survey> GetUserSurveys()
-        {
-            return userSurveys;
-        }
 
         public int getAge()
         {
