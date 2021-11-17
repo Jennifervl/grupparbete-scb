@@ -142,6 +142,7 @@ namespace ConsoleUI
 
 
                 }
+                Console.WriteLine();
                 questionCounter++;
             }
         }

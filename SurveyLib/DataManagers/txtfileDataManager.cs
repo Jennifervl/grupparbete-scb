@@ -8,11 +8,13 @@ namespace SurveyLib
     {
         public static void SaveResult(Survey survey)
         {
+            // Check if file exists for the survey, if not create it
             if (!(File.Exists($"..\\SurveyLib\\surveyData\\" + $"{survey.Title}")))
             {
                 File.WriteAllText($"..\\SurveyLib\\surveyData\\" + $"{survey.Title}", BuildSurveyTxtFileString(survey));
             }
 
+            // if file is created, input data from survey
             if (File.Exists($"..\\SurveyLib\\surveyData\\" + $"{survey.Title}"))
             {
                 string data = File.ReadAllText($"..\\SurveyLib\\surveyData\\" + $"{survey.Title}");
