@@ -22,7 +22,7 @@ namespace SurveyLib
             this.userSurveys = new List<User_Survey>();
         }
 
-        //Will be removed
+        //TODO: Remove this method
         public string GetUserSsn()
         {
             return ssn;
