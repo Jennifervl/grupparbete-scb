@@ -170,5 +170,45 @@ namespace SurveyLib
                 connection.Execute("INSERT INTO [User](SSN, Role) VALUES (@SSN, @Role)", new { SSN = user.GetUserSsn(), Role = user.GetUserRole() });
             }
         }
+
+        public List<User> LoadUser()
+        {
+            List<User> userList = new();
+            List<int> userKeyList = new();
+
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                userKeyList = connection.Query<int>("SELECT ID FROM USER;").ToList();
+            }
+
+            foreach (int key in userKeyList)
+            {
+                string ssn;
+                int role;
+                List<User_Survey> userSurveyList = new();
+
+                using (SqlConnection connection = new(sqlConnection))
+                {
+                    ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
+                    role = connection.QueryFirstOrDefault<int>("SELECT Role FROM [User] WHERE ID = @ID;", new { ID = key });
+                }
+
+                User user = new(ssn, (UserRoles)role);
+
+                using (SqlConnection connection = new(sqlConnection))
+                {
+                    List<int> UserSurveyKeyList = connection.Query<int>("SELECT ID FROM User_Survey WHERE User_ID = @User_ID;", new { key }).ToList();
+
+                    foreach (int USKey in UserSurveyKeyList)
+                    {
+
+                    }
+                }
+
+                userList.Add(user);
+            }
+
+            return userList;
+        }
     }
 }
