@@ -221,6 +221,14 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
+            foreach (User u in userList.GetUsers())
+            {
+                if (ssnAdd == u.Ssn)
+                {
+                    System.Console.WriteLine("A user with this SSN already exists, aborting...");
+                    roleAdd = "0";
+                }
+            }
             if (roleAdd == "1")
             {
                 User addUser = new User(ssnAdd, UserRoles.Admin);
