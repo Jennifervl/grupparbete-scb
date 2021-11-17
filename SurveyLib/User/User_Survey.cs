@@ -27,16 +27,17 @@ namespace SurveyLib
             this.IsSubmitted = false;
         }
 
-        public Survey GetSurvey()
-        {
-            return this.survey;
-        }
         public User_Survey(User user, Survey survey, string code, bool isSubmitted)
         {
             this.user = user;
             this.survey = survey;
             this.code = code;
             this.IsSubmitted = isSubmitted;
+        }
+
+        public Survey GetSurvey()
+        {
+            return this.survey;
         }
 
         private string GenerateCode()
