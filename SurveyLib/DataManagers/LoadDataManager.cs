@@ -127,20 +127,38 @@ namespace SurveyLib
 
                 User user = new(ssn, (UserRoles)role);
 
-                using (SqlConnection connection = new(sqlConnection))
-                {
-                    List<int> UserSurveyKeyList = connection.Query<int>("SELECT ID FROM User_Survey WHERE User_ID = @User_ID;", new { key }).ToList();
-
-                    foreach (int USKey in UserSurveyKeyList)
-                    {
-
-                    }
-                }
-
                 userList.Add(user);
             }
 
             return userList;
+        }
+
+        public List<User_Survey> LoadAllUser_Surveys()
+        {
+            List<User_Survey> loadedUser_SurveyList = new();
+            List<int> User_SurveyKeys = new();
+
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                User_SurveyKeys = connection.Query<int>("SELECT ID FROM User_Survey;").ToList();
+            }
+
+            foreach (int key in User_SurveyKeys)
+            {
+                using (SqlConnection connection = new(sqlConnection))
+                {
+                    User user = connection.QuerySingleOrDefault<User>("SELECT Ssn, Role FROM [User] INNER JOIN User_Survey ON User.ID = User_Survey.User_ID WHERE User_Survey.ID = @ID;", new { ID = key });
+                    int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
+                    Survey survey = LoadSurvey(surveyKey);
+                    bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
+                    string code = connection.QuerySingleOrDefault<string>("SELECT User_Specific_Code FROM User_Survey WHERE ID = @ID", new { ID = key });
+
+                    User_Survey user_Survey = new(user, survey, code, isSubmitted);
+                    loadedUser_SurveyList.Add(user_Survey);
+                }
+            }
+
+            return loadedUser_SurveyList;
         }
     }
 }
