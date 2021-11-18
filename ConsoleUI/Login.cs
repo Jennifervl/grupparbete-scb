@@ -17,7 +17,7 @@ namespace ConsoleUI
                 {
                     case true:
                         {
-                            System.Console.WriteLine("Submit SSN: ");
+                            Menu.WriteCentered("Submit SSN: ");
                             string ssnInput = Console.ReadLine();
                             foreach (User u in userRepository.GetUsers())
                             {
@@ -33,17 +33,17 @@ namespace ConsoleUI
                                 string password = "admin";
                                 while (passwordInput != password && passwordInput.Length < 5 && passAttempt <= 2)
                                 {
-                                    System.Console.WriteLine("Enter password (5 characters): ");
+                                    Menu.WriteCentered("Enter password (5 characters): ");
                                     passwordInput = Console.ReadLine();
                                     passAttempt++;
                                     if (passwordInput != password && passAttempt <= 2)
                                     {
-                                        System.Console.WriteLine("Wrong password, try again");
+                                        Menu.WriteCentered("Wrong password, try again");
                                     }
                                 }
                                 if (passAttempt >= 3)
                                 {
-                                    System.Console.WriteLine("Too many attempts, you're a big fat phony");
+                                    Menu.WriteCentered("Too many attempts, you're a big fat phony");
                                     Console.ReadLine();
                                     return;
                                 }
@@ -53,7 +53,7 @@ namespace ConsoleUI
                         }
                     case false:
                         {
-                            System.Console.WriteLine("Enter the questionaire code: ");
+                            Menu.WriteCentered("Enter the questionaire code: ");
                             string code = Console.ReadLine();
 
                             foreach (User user in userRepository.GetUsers())
