@@ -20,7 +20,7 @@ namespace SurveyLib
         {
             get
             {
-                return ssn;
+                return password;
             }
         }
 
