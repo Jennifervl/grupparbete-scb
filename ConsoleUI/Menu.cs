@@ -6,7 +6,7 @@ namespace ConsoleUI
 {
     class Menu
     {
-        public void MyMenu(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
+        public void MyMenu(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
             List<string> mymenu = new();
             mymenu.Add(@"
@@ -36,12 +36,12 @@ namespace ConsoleUI
 
                 if (choice == "a")
                 {
-                    AdminLogin(userList, surveyLibrary, usr);
+                    AdminLogin(userRepository, surveyRepository, usr);
                 }
 
                 else if (choice == "b")
                 {
-                    UserMenu(userList, surveyLibrary, usr);
+                    UserMenu(userRepository, surveyRepository, usr);
                 }
                 else if (choice == "x")
                 {
@@ -56,7 +56,7 @@ namespace ConsoleUI
             }
         }
 
-        public static void UserMenu(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
+        public static void UserMenu(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
             System.Console.WriteLine("Enter the questionaire code: ");
             string code = Console.ReadLine();
@@ -74,7 +74,7 @@ namespace ConsoleUI
             }
         }
 
-        public static bool AdminMenu(SurveyLibrary surveyLibrary, UserList userList, User_Survey_Repository usr)
+        public static bool AdminMenu(SurveyRepository surveyRepository, UserRepository userRepository, User_Survey_Repository usr)
         {
             bool adminRun = true;
             Menu men = new();
@@ -104,26 +104,26 @@ namespace ConsoleUI
                 {
                     case "a":
                         {   // Lägg till ny användare
-                            AddUser(userList);
+                            AddUser(userRepository);
                             System.Console.WriteLine("Press ENTER to return to menu...");
                             Console.ReadLine();
                             break;
                         }
                     case "c":
                         {   // Skapa survey
-                            surveyLibrary.AddSurvey(Admin.BuildSurvey());
+                            surveyRepository.AddSurvey(Admin.BuildSurvey());
                             break;
                         }
                     case "l":
                         {   // Lista alla surveys
-                            Admin.ListAllSurveys(surveyLibrary);
+                            Admin.ListAllSurveys(surveyRepository);
                             Console.ReadLine();
                             break;
                         }
                     case "t":
                         {   // Testkör en survey
                             Console.WriteLine("Choose a survey to test");
-                            Admin.ListAllSurveys(surveyLibrary);
+                            Admin.ListAllSurveys(surveyRepository);
                             Console.ReadLine();
                             break;
                         }
@@ -131,7 +131,7 @@ namespace ConsoleUI
                         {
                             Console.WriteLine("Which survey do you want to distribute?");
                             int counter = 1;
-                            foreach (Survey survey in surveyLibrary.GetAllSurveys())
+                            foreach (Survey survey in surveyRepository.GetAllSurveys())
                             {
                                 Console.Write(counter);
                                 Console.WriteLine(survey.Title);
@@ -150,15 +150,15 @@ namespace ConsoleUI
                                 int minAge = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Maximum age: ");
                                 int maxAge = Convert.ToInt32(Console.ReadLine());
-                                Distributor.DistributeByAge(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
+                                Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                             }
                             else if (distributeChoice == "2")
                             {
-                                Distributor.CoinFlipDistribution(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
+                                Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                             }
                             else if (distributeChoice == "3")
                             {
-                                Distributor.DistributeToAll(surveyLibrary.GetSurveyAtIndex(index), userList, usr);
+                                Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                             }
                             Console.ReadLine();
                             break;
@@ -177,7 +177,7 @@ namespace ConsoleUI
 
                     case "u":
                         {
-                            Dictionary<string, UserRoles> users = userList.ListUsers();
+                            Dictionary<string, UserRoles> users = userRepository.ListUsers();
                             foreach (KeyValuePair<string, UserRoles> u in users)
                             {
                                 Console.WriteLine(u.Key + " " + u.Value.ToString());
@@ -194,7 +194,7 @@ namespace ConsoleUI
             return false;
         }
 
-        private static void AddUser(UserList userList)
+        private static void AddUser(UserRepository userRepository)
         {
             string roleAdd = "";
             string ssnAdd = "";
@@ -218,7 +218,7 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
-            foreach (User u in userList.GetUsers())
+            foreach (User u in userRepository.GetUsers())
             {
                 if (ssnAdd == u.Ssn)
                 {
@@ -229,18 +229,18 @@ namespace ConsoleUI
             if (roleAdd == "1")
             {
                 User addUser = new User(ssnAdd, UserRoles.Admin);
-                userList.AddNewUser(addUser);
+                userRepository.AddNewUser(addUser);
                 System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
                 User addUser = new User(ssnAdd, UserRoles.Participant);
-                userList.AddNewUser(addUser);
+                userRepository.AddNewUser(addUser);
                 System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
             }
         }
 
-        public void AdminLogin(UserList userList, SurveyLibrary surveyLibrary, User_Survey_Repository usr)
+        public void AdminLogin(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
             while (true)
             {
@@ -248,7 +248,7 @@ namespace ConsoleUI
 
                 System.Console.WriteLine("Submit SSN: ");
                 string ssnInput = Console.ReadLine();
-                foreach (User u in userList.GetUsers())
+                foreach (User u in userRepository.GetUsers())
                 {
                     if (ssnInput == u.Ssn && u.GetUserRole() == UserRoles.Admin)
                     {
@@ -271,7 +271,7 @@ namespace ConsoleUI
                             Console.ReadLine();
                             return;
                         }
-                        bool goBack = AdminMenu(surveyLibrary, userList, usr);
+                        bool goBack = AdminMenu(surveyRepository, userRepository, usr);
                         if (goBack == true) return;
                     }
                 }

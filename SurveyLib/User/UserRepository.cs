@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 namespace SurveyLib
 {
-    public class UserList
+    public class UserRepository
     {
-        private List<User> userList;
+        private List<User> userRepository;
         public int userCount;
-        public UserList()
+        public UserRepository()
         {
-            userList = new();
+            userRepository = new();
         }
         public void AddNewUser(User user)
         {
-            userList.Add(user);
-            userCount = userList.Count;
+            userRepository.Add(user);
+            userCount = userRepository.Count;
         }
 
         public void LoadUsers()
@@ -27,7 +27,7 @@ namespace SurveyLib
         public Dictionary<string, UserRoles> ListUsers()
         {
             Dictionary<string, UserRoles> users = new();
-            foreach (User u in userList)
+            foreach (User u in userRepository)
             {
                 users.Add(u.Ssn, u.GetUserRole());
             }
@@ -35,7 +35,7 @@ namespace SurveyLib
         }
         public IList<User> GetUsers()
         {
-            return userList.AsReadOnly();
+            return userRepository.AsReadOnly();
         }
     }
 }

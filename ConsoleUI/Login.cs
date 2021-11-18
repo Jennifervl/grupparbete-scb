@@ -6,7 +6,7 @@ namespace ConsoleUI
 {
     class Login
     {
-        public void LoginRun(bool isAdmin, UserList userList)
+        public void LoginRun(bool isAdmin, UserRepository userRepository)
         {
             bool confirmedAdmin = false;
             while (true)
@@ -19,7 +19,7 @@ namespace ConsoleUI
                         {
                             System.Console.WriteLine("Submit SSN: ");
                             string ssnInput = Console.ReadLine();
-                            foreach (User u in userList.GetUsers())
+                            foreach (User u in userRepository.GetUsers())
                             {
                                 if (ssnInput == u.Ssn)
                                 {
@@ -56,7 +56,7 @@ namespace ConsoleUI
                             System.Console.WriteLine("Enter the questionaire code: ");
                             string code = Console.ReadLine();
 
-                            foreach (User user in userList.GetUsers())
+                            foreach (User user in userRepository.GetUsers())
                             {
                                 // foreach (User_Survey US in user.GetUserSurveys())
                                 // {

@@ -3,11 +3,11 @@ using System;
 
 namespace SurveyLib
 {
-    public class SurveyLibrary
+    public class SurveyRepository
     {
         List<Survey> surveys;
 
-        public SurveyLibrary()
+        public SurveyRepository()
         {
             surveys = new List<Survey>();
         }

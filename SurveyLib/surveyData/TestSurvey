@@ -1,9 +1,9 @@
 :TestSurvey:
-[True,True,False,False,True,True,True,True,False,]
+[True,True,True,False,False,True,True,True,True,False,]
 <<<<<<< HEAD
-[Hello£Help me£Wow nice survey£Hello world£Hello World!£Wow this works!£Hello World£ho£he£]
-[10,7,2,3,8,2,2,2,2,]
-[True,True,False,;True,False,True,;True,True,False,;True,False,True,;False,False,True,;True,False,True,;False,True,True,;False,True,True,;False,True,True,;False,False,True,;]
+[Hello£Hello£Help me£Wow nice survey£Hello world£Hello World!£Wow this works!£Hello World£ho£he£]
+[2,10,7,2,3,8,2,2,2,2,]
+[True,True,False,;True,True,False,;True,False,True,;True,True,False,;True,False,True,;False,False,True,;True,False,True,;False,True,True,;False,True,True,;False,True,True,;False,False,True,;]
 =======
 [Hello Gustav£Help me£Wow nice survey£Hello world£Hello World!£Wow this works!£Hello World£ho£he£]
 [3,7,2,3,8,2,2,2,2,]

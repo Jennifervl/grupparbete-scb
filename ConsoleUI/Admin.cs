@@ -6,10 +6,10 @@ namespace ConsoleUI
 {
     class Admin
     {
-        public static void ListAllSurveys(SurveyLibrary surveyLibrary)
+        public static void ListAllSurveys(SurveyRepository surveyRepository)
         {
 
-            foreach (Survey s in surveyLibrary.GetAllSurveys())
+            foreach (Survey s in surveyRepository.GetAllSurveys())
             {
                 System.Console.WriteLine(s.Title);
             }
