@@ -6,50 +6,50 @@ namespace ConsoleUI
 {
     class Admin
     {
-        public static void ListAllSurveys(SurveyLibrary surveyLibrary)
+        public static void ListAllSurveys(SurveyRepository surveyRepository)
         {
 
-            foreach (Survey s in surveyLibrary.GetAllSurveys())
+            foreach (Survey s in surveyRepository.GetAllSurveys())
             {
-                System.Console.WriteLine(s.Title);
+                Menu.WriteCentered(s.Title);
             }
         }
         public static void TestSurvey(Survey testSurvey)
         {
-            System.Console.WriteLine(testSurvey.Title);
+            Menu.WriteCentered(testSurvey.Title);
             IList<Question> questions = testSurvey.GetQuestions();
             foreach (Question q in questions)
             {
-                System.Console.WriteLine(q.Title);
+                Menu.WriteCentered(q.Title);
             }
         }
 
         public static Survey BuildSurvey()
         {
-            Console.WriteLine("Enter the title of the survey");
+            Menu.WriteCentered("Enter the title of the survey");
             string title = Console.ReadLine();
             Survey survey1 = new(title);
             while (true)
             {
-                Console.WriteLine("What type of question do you want to add?");
-                Console.WriteLine("1. 1-to-10-question");
-                Console.WriteLine("2. Freetext question");
-                Console.WriteLine("3. Yes or no question");
-                Console.WriteLine("4. Multiple choise question");
-                Console.WriteLine("5. No more questions");
+                Menu.WriteCentered("What type of question do you want to add?");
+                Menu.WriteCentered("1. 1-to-10-question");
+                Menu.WriteCentered("2. Freetext question");
+                Menu.WriteCentered("3. Yes or no question");
+                Menu.WriteCentered("4. Multiple choise question");
+                Menu.WriteCentered("5. No more questions");
                 string input = Console.ReadLine();
                 if (input == "5") break;
 
                 else
                 {
-                    Console.WriteLine("Enter the title of the question");
+                    Menu.WriteCentered("Enter the title of the question");
                     string qtitle = Console.ReadLine();
 
                     if (input == "1")
                     {
-                        Console.WriteLine("Enter the label of number 1");
+                        Menu.WriteCentered("Enter the label of number 1");
                         string label1 = Console.ReadLine();
-                        Console.WriteLine("Enter the label of value 10");
+                        Menu.WriteCentered("Enter the label of value 10");
                         string label10 = Console.ReadLine();
                         _1_to_10 _1_To_10question = new(qtitle, label1, label10);
                         survey1.AddQuestion(_1_To_10question);
@@ -71,9 +71,9 @@ namespace ConsoleUI
                         List<string> options = new();
                         while (true)
                         {
-                            Console.WriteLine("Enter an option");
+                            Menu.WriteCentered("Enter an option");
                             options.Add(Console.ReadLine());
-                            Console.WriteLine("Add another option? (y/n)");
+                            Menu.WriteCentered("Add another option? (y/n)");
                             string choise = Console.ReadLine();
                             if (choise.ToLower() == "n")
                             {
