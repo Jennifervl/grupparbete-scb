@@ -87,15 +87,26 @@ namespace SurveyLib
 
         public void SaveUser(User user)
         {
-            using (SqlConnection connection = new(sqlConnection))
+            if (user is Admin)
             {
-                connection.Execute("INSERT INTO [User](SSN, Role) VALUES (@SSN, @Role)", new { SSN = user.GetUserSsn(), Role = user.GetUserRole() });
-                if (user.GetUserRole() == (UserRoles)1)
+                Admin admin = user as Admin;
+
+                using (SqlConnection connection = new(sqlConnection))
                 {
-                    int primaryKey = connection.QueryFirstOrDefault<int>("SELECT IDENT_CURRENT('[User]');");
-                    connection.Execute("UPDATE [User] SET PW = @PW WHERE ID = @ID;", new { PW = user.Password, ID = primaryKey });
+                    connection.Execute("INSERT INTO [User](SSN, PW) VALUES (@SSN, @PW)", new { SSN = admin.Ssn, PW = admin.Password });
                 }
             }
+
+            else if (user is Participant)
+            {
+                Participant part = user as Participant;
+
+                using (SqlConnection connection = new(sqlConnection))
+                {
+                    connection.Execute("INSERT INTO [User](SSN) VALUES (@SSN);", new { SSN = part.Ssn });
+                }
+            }
+
         }
     }
 }
