@@ -70,7 +70,9 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Create Survey
-                            surveyRepository.AddSurvey(Admin.BuildSurvey());
+                            Survey newSurvey = Admin.BuildSurvey();
+                            surveyRepository.AddSurvey(newSurvey);
+                            surveyRepository.SaveSurvey(newSurvey);
 
                             ReturnToAdminMenu();
                             break;
@@ -79,7 +81,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List all surveys
-                            Admin.ListAllSurveys(surveyRepository);                            
+                            Admin.ListAllSurveys(surveyRepository);
                             ReturnToAdminMenu();
                             break;
                         }
@@ -248,16 +250,18 @@ namespace ConsoleUI
             {
                 User addUser = new User(ssnAdd, UserRoles.Admin);
                 userRepository.AddNewUser(addUser);
+                userRepository.SaveUsers(addUser);
                 System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
                 User addUser = new User(ssnAdd, UserRoles.Participant);
                 userRepository.AddNewUser(addUser);
+                userRepository.SaveUsers(addUser);
                 System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
             }
         }
-                static bool IsDigitsOnly(string str)
+        static bool IsDigitsOnly(string str)
         {
             foreach (char c in str)
             {
