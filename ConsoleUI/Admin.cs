@@ -153,6 +153,7 @@ namespace ConsoleUI
         {
             string roleAdd = "";
             string ssnAdd = "";
+            string passwordAdd ="";
             Menu.WriteCentered("What role of user do you wish to add?");
             Menu.WriteCentered("1. Admin");
             Menu.WriteCentered("2. Participant");
@@ -177,6 +178,12 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
+            if (roleAdd =="1")
+            {
+                Menu.WriteCentered("Enter password you wish to use:");
+                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                passwordAdd = Console.ReadLine();
+            }
             foreach (User u in userRepository.GetUsers())
             {
                 if (ssnAdd == u.Ssn)
@@ -187,16 +194,16 @@ namespace ConsoleUI
             }
             if (roleAdd == "1")
             {
-                User addUser = new User(ssnAdd, UserRoles.Admin);
-                userRepository.AddNewUser(addUser);
-                userRepository.SaveUser(addUser);
+                Admin addAdmin = new Admin(ssnAdd, passwordAdd);                
+                userRepository.AddNewUser(addAdmin);
+                userRepository.SaveUser(addAdmin);
                 Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
-                User addUser = new User(ssnAdd, UserRoles.Participant);
-                userRepository.AddNewUser(addUser);
-                userRepository.SaveUser(addUser);
+                Participant addParticipant = new Participant(ssnAdd);
+                userRepository.AddNewUser(addParticipant);
+                userRepository.SaveUser(addParticipant);
                 Menu.WriteCentered("Added a Participant with the SSN: " + ssnAdd);
             }
         }
