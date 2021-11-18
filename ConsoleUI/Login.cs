@@ -18,6 +18,7 @@ namespace ConsoleUI
                     case true:
                         {
                             Menu.WriteCentered("Submit SSN: ");
+                            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                             string ssnInput = Console.ReadLine();
                             foreach (User u in userRepository.GetUsers())
                             {
@@ -33,7 +34,8 @@ namespace ConsoleUI
                                 string password = "admin";
                                 while (passwordInput != password && passwordInput.Length < 5 && passAttempt <= 2)
                                 {
-                                    Menu.WriteCentered("Enter password (5 characters): ");
+                                    Menu.WriteCentered("Enter password: ");
+                                    Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                                     passwordInput = Console.ReadLine();
                                     passAttempt++;
                                     if (passwordInput != password && passAttempt <= 2)
@@ -54,6 +56,7 @@ namespace ConsoleUI
                     case false:
                         {
                             Menu.WriteCentered("Enter the questionaire code: ");
+                                        Console.CursorLeft=(Console.WindowWidth/2)-;
                             string code = Console.ReadLine();
 
                             foreach (User user in userRepository.GetUsers())
