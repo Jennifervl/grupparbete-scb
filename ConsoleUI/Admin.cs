@@ -91,26 +91,26 @@ namespace ConsoleUI
         }
         public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
-            Console.WriteLine("Which survey do you want to distribute?");
+            Menu.WriteCentered("Which survey do you want to distribute?");
             int counter = 1;
             foreach (Survey survey in surveyRepository.GetAllSurveys())
             {
                 Console.Write(counter);
-                Console.WriteLine(survey.Title);
+                Menu.WriteCentered(survey.Title);
                 counter++;
             }
             int index = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("How would you like to distribute it?");
-            Console.WriteLine("1. By age");
-            Console.WriteLine("2. CoinFlip");
-            Console.WriteLine("3. To everyone");
+            Menu.WriteCentered("How would you like to distribute it?");
+            Menu.WriteCentered("1. By age");
+            Menu.WriteCentered("2. CoinFlip");
+            Menu.WriteCentered("3. To everyone");
 
             string distributeChoice = Console.ReadLine();
             if (distributeChoice == "1")
             {
-                Console.WriteLine("Minumum age: ");
+                Menu.WriteCentered("Minumum age: ");
                 int minAge = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Maximum age: ");
+                Menu.WriteCentered("Maximum age: ");
                 int maxAge = Convert.ToInt32(Console.ReadLine());
                 Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
             }
@@ -127,7 +127,7 @@ namespace ConsoleUI
         {
             foreach (User_Survey us in usr.GetUser_Surveys())
             {
-                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
+                Menu.WriteCentered(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
             }
         }
 
@@ -136,27 +136,27 @@ namespace ConsoleUI
             Dictionary<string, UserRoles> users = userRepository.ListUsers();
             foreach (KeyValuePair<string, UserRoles> u in users)
             {
-                Console.WriteLine(u.Key + " " + u.Value.ToString());
+                Menu.WriteCentered(u.Key + " " + u.Value.ToString());
             }
         }
         public static void AddUser(UserRepository userRepository)
         {
             string roleAdd = "";
             string ssnAdd = "";
-            System.Console.WriteLine("What role of user do you wish to add?");
-            System.Console.WriteLine("1. Admin");
-            System.Console.WriteLine("2. Participant");
+            Menu.WriteCentered("What role of user do you wish to add?");
+            Menu.WriteCentered("1. Admin");
+            Menu.WriteCentered("2. Participant");
             roleAdd = Console.ReadLine();
             while (roleAdd != "1" && roleAdd != "2")
             {
-                System.Console.WriteLine("Enter a valid role");
+                Menu.WriteCentered("Enter a valid role");
                 roleAdd = Console.ReadLine();
             }
-            System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
+            Menu.WriteCentered("Enter the SSN of the user (example : 199001015555");
             ssnAdd = Console.ReadLine();
             while (ssnAdd.Length != 12)
             {
-                System.Console.WriteLine("Invalid SSN, 12 digits.");
+                Menu.WriteCentered("Invalid SSN, 12 digits.");
                 ssnAdd = Console.ReadLine();
                 if (IsDigitsOnly(ssnAdd) == false)
                 {
@@ -167,7 +167,7 @@ namespace ConsoleUI
             {
                 if (ssnAdd == u.Ssn)
                 {
-                    System.Console.WriteLine("A user with this SSN already exists, aborting...");
+                    Menu.WriteCentered("A user with this SSN already exists, aborting...");
                     roleAdd = "0";
                 }
             }
@@ -175,13 +175,13 @@ namespace ConsoleUI
             {
                 User addUser = new User(ssnAdd, UserRoles.Admin);
                 userRepository.AddNewUser(addUser);
-                System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
+                Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
                 User addUser = new User(ssnAdd, UserRoles.Participant);
                 userRepository.AddNewUser(addUser);
-                System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
+                Menu.WriteCentered("Added a Participant with the SSN: " + ssnAdd);
             }
         }
         static bool IsDigitsOnly(string str)
