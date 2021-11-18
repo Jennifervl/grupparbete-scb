@@ -116,21 +116,25 @@ namespace SurveyLib
             foreach (int key in userKeyList)
             {
                 string ssn;
-                int role;
 
                 using (SqlConnection connection = new(sqlConnection))
                 {
                     ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
-                    role = connection.QueryFirstOrDefault<int>("SELECT Role FROM [User] WHERE ID = @ID;", new { ID = key });
                     string pw = "";
+                    pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] WHERE ID = @ID;", new { ID = key });
 
-                    if (role == 1)
+                    if (pw is null)
                     {
-                        pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] WHERE ID = @ID;", new { ID = key });
+                        Participant p = new(ssn);
+                        userList.Add(p);
                     }
 
-                    User user = new(ssn, (UserRoles)role, pw);
-                    userList.Add(user);
+                    else if (pw is not null)
+                    {
+                        Admin a = new(ssn, pw);
+                        userList.Add(a);
+                    }
+
                 }
 
 
@@ -154,22 +158,32 @@ namespace SurveyLib
                 using (SqlConnection connection = new(sqlConnection))
                 {
                     string ssn = connection.QueryFirstOrDefault<string>("SELECT [User].Ssn FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
-                    int role = connection.QueryFirstOrDefault<int>("SELECT [User].Role FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
-                    string pw = "";
+                    string pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
 
-                    if (role == 1)
+                    if (pw is null)
                     {
-                        pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
+                        Participant p = new(ssn);
+                        int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
+                        Survey survey = LoadSurvey(surveyKey);
+                        bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
+                        string code = connection.QuerySingleOrDefault<string>("SELECT User_Specific_Code FROM User_Survey WHERE ID = @ID", new { ID = key });
+
+                        User_Survey user_Survey = new(p, survey, code, isSubmitted);
+                        loadedUser_SurveyList.Add(user_Survey);
                     }
 
-                    User user = new(ssn, (UserRoles)role, pw);
-                    int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
-                    Survey survey = LoadSurvey(surveyKey);
-                    bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
-                    string code = connection.QuerySingleOrDefault<string>("SELECT User_Specific_Code FROM User_Survey WHERE ID = @ID", new { ID = key });
+                    else if (pw is not null)
+                    {
+                        Admin admin = new(ssn, pw);
+                        int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
+                        Survey survey = LoadSurvey(surveyKey);
+                        bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
+                        string code = connection.QuerySingleOrDefault<string>("SELECT User_Specific_Code FROM User_Survey WHERE ID = @ID", new { ID = key });
 
-                    User_Survey user_Survey = new(user, survey, code, isSubmitted);
-                    loadedUser_SurveyList.Add(user_Survey);
+                        User_Survey user_Survey = new(admin, survey, code, isSubmitted);
+                        loadedUser_SurveyList.Add(user_Survey);
+                    }
+
                 }
             }
 
