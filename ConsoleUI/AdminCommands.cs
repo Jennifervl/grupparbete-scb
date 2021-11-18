@@ -143,17 +143,17 @@ namespace ConsoleUI
 
         public static void ListAllUsers(UserRepository userRepository)
         {
-            Dictionary<string, Type> users = userRepository.ListUsers();
-            foreach (KeyValuePair<string, Type> u in users)
+            Dictionary<string, string> users = userRepository.ListUsers();
+            foreach (KeyValuePair<string, string> u in users)
             {
-                Menu.WriteCentered(u.Key + " " + u.Value.ToString());
+                Menu.WriteCentered(u.Key + " " + u.Value);
             }
         }
         public static void AddUser(UserRepository userRepository)
         {
             string roleAdd = "";
             string ssnAdd = "";
-            string passwordAdd ="";
+            string passwordAdd = "";
             Menu.WriteCentered("What role of user do you wish to add?");
             Menu.WriteCentered("1. Admin");
             Menu.WriteCentered("2. Participant");
@@ -178,7 +178,7 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
-            if (roleAdd =="1")
+            if (roleAdd == "1")
             {
                 Menu.WriteCentered("Enter password you wish to use:");
                 Console.CursorLeft = (Console.WindowWidth / 2) - 5;
@@ -194,7 +194,7 @@ namespace ConsoleUI
             }
             if (roleAdd == "1")
             {
-                Admin addAdmin = new Admin(ssnAdd, passwordAdd);                
+                Admin addAdmin = new Admin(ssnAdd, passwordAdd);
                 userRepository.AddNewUser(addAdmin);
                 userRepository.SaveUser(addAdmin);
                 Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
