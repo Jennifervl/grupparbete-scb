@@ -175,12 +175,14 @@ namespace ConsoleUI
             {
                 User addUser = new User(ssnAdd, UserRoles.Admin);
                 userRepository.AddNewUser(addUser);
+                userRepository.SaveUser(addUser);
                 Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
                 User addUser = new User(ssnAdd, UserRoles.Participant);
                 userRepository.AddNewUser(addUser);
+                userRepository.SaveUser(addUser);
                 Menu.WriteCentered("Added a Participant with the SSN: " + ssnAdd);
             }
         }

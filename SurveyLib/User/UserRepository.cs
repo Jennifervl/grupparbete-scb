@@ -31,7 +31,7 @@ namespace SurveyLib
             }
         }
 
-        public void SaveUsers(User user)
+        public void SaveUser(User user)
         {
             saveDataManager.SaveUser(user);
         }
