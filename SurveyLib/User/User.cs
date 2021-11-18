@@ -16,6 +16,14 @@ namespace SurveyLib
             }
         }
 
+        public string Password
+        {
+            get
+            {
+                return ssn;
+            }
+        }
+
         public User(string assn, UserRoles auserRoles)
         {
             this.ssn = assn;
