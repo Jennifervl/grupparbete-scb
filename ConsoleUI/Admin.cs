@@ -143,8 +143,8 @@ namespace ConsoleUI
 
         public static void ListAllUsers(UserRepository userRepository)
         {
-            Dictionary<string, UserRoles> users = userRepository.ListUsers();
-            foreach (KeyValuePair<string, UserRoles> u in users)
+            Dictionary<string, Type> users = userRepository.ListUsers();
+            foreach (KeyValuePair<string, Type> u in users)
             {
                 Menu.WriteCentered(u.Key + " " + u.Value.ToString());
             }
@@ -156,21 +156,21 @@ namespace ConsoleUI
             Menu.WriteCentered("What role of user do you wish to add?");
             Menu.WriteCentered("1. Admin");
             Menu.WriteCentered("2. Participant");
-                        Console.CursorLeft=(Console.WindowWidth/2);
+            Console.CursorLeft = (Console.WindowWidth / 2);
             roleAdd = Console.ReadLine();
             while (roleAdd != "1" && roleAdd != "2")
             {
                 Menu.WriteCentered("Enter a valid role");
-                            Console.CursorLeft=(Console.WindowWidth/2);
+                Console.CursorLeft = (Console.WindowWidth / 2);
                 roleAdd = Console.ReadLine();
             }
             Menu.WriteCentered("Enter the SSN of the user (example : 199001015555");
-                        Console.CursorLeft=(Console.WindowWidth/2)-5;
+            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
             ssnAdd = Console.ReadLine();
             while (ssnAdd.Length != 12)
             {
                 Menu.WriteCentered("Invalid SSN, 12 digits.");
-                            Console.CursorLeft=(Console.WindowWidth/2)-5;
+                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                 ssnAdd = Console.ReadLine();
                 if (IsDigitsOnly(ssnAdd) == false)
                 {

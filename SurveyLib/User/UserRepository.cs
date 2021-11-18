@@ -36,12 +36,13 @@ namespace SurveyLib
             saveDataManager.SaveUser(user);
         }
 
-        public Dictionary<string, UserRoles> ListUsers()
+        public Dictionary<string, Type> ListUsers()
         {
-            Dictionary<string, UserRoles> users = new();
+            Dictionary<string, Type> users = new();
             foreach (User u in userRepository)
             {
-                users.Add(u.Ssn, u.GetUserRole());
+
+                users.Add(u.Ssn, u.GetType());
             }
             return users;
         }

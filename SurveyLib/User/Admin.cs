@@ -17,6 +17,7 @@ namespace SurveyLib
 
         public Admin(string assn, string apassword) : base(assn)
         {
+            this.password = apassword;
         }
     }
 }
