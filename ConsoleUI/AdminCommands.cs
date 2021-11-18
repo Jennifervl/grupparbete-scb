@@ -4,7 +4,7 @@ using SurveyLib;
 
 namespace ConsoleUI
 {
-    class Admin
+    class AdminCommands
     {
         public static void ListAllSurveys(SurveyRepository surveyRepository)
         {

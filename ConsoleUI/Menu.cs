@@ -70,7 +70,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Create Survey
-                            Survey newSurvey = Admin.BuildSurvey();
+                            Survey newSurvey = AdminCommands.BuildSurvey();
                             surveyRepository.AddSurvey(newSurvey);
                             surveyRepository.SaveSurvey(newSurvey);
 
@@ -81,7 +81,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List all surveys
-                            Admin.ListAllSurveys(surveyRepository);
+                            AdminCommands.ListAllSurveys(surveyRepository);
 
                             ReturnToAdminMenu();
                             break;
@@ -90,7 +90,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Distribute Survey
-                            Admin.DistributeSurvey(userRepository, surveyRepository, usr);
+                            AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
 
                             ReturnToAdminMenu();
                             break;
@@ -99,7 +99,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List distributions
-                            Admin.ListDistributions(usr);
+                            AdminCommands.ListDistributions(usr);
 
                             ReturnToAdminMenu();
                             break;
@@ -108,7 +108,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List users
-                            Admin.ListAllUsers(userRepository);
+                            AdminCommands.ListAllUsers(userRepository);
 
                             ReturnToAdminMenu();
                             break;
@@ -117,7 +117,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Add user
-                            Admin.AddUser(userRepository);
+                            AdminCommands.AddUser(userRepository);
 
                             ReturnToAdminMenu();
                             break;
