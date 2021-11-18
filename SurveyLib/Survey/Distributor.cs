@@ -12,11 +12,7 @@ namespace SurveyLib
                 if (user.getAge() >= minAge && user.getAge() <= maxAge)
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
-                    // survey.AddUserSurvey(user_survey);
-                    // user.AddUserSurvey(user_survey);
                     usr.AddUserSurvey(user_survey);
-
-
                 }
             }
         }
@@ -29,8 +25,6 @@ namespace SurveyLib
                 if (random.Next(0, 2) == 0)
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
-                    // survey.AddUserSurvey(user_survey);
-                    // user.AddUserSurvey(user_survey);
                     usr.AddUserSurvey(user_survey);
                 }
             }
@@ -41,21 +35,8 @@ namespace SurveyLib
             foreach (User user in userList.GetUsers())
             {
                 User_Survey user_survey = new User_Survey(user, survey);
-                // survey.AddUserSurvey(user_survey);
-                // user.AddUserSurvey(user_survey);
                 usr.AddUserSurvey(user_survey);
             }
-        }
-
-        public static Dictionary<string, string> GetAllDistributions(User_Survey_Repository usr)
-        {
-            Dictionary<string, string> distributions = new();
-
-            foreach (User_Survey us in usr.GetUser_Surveys())
-            {
-                distributions.Add(us.GetUserCode(), us.GetUserSsn());
-            }
-            return distributions;
         }
     }
 }

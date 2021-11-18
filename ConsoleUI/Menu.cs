@@ -166,10 +166,9 @@ namespace ConsoleUI
 
                     case "s":
                         {
-                            Dictionary<string, string> distributions = Distributor.GetAllDistributions(usr);
-                            foreach (KeyValuePair<string, string> entry in distributions)
+                            foreach (User_Survey us in usr.GetUser_Surveys())
                             {
-                                Console.WriteLine(entry.Key + " " + entry.Value);
+                                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
                             }
                             Console.ReadLine();
                             break;
