@@ -31,6 +31,7 @@ namespace ConsoleUI
                 if (_1_to_10_question != null)
                 {
                     Menu.WriteCentered("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
+                    Console.CursorLeft = (Console.WindowWidth / 2);
                     _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
                 }
 
@@ -45,6 +46,7 @@ namespace ConsoleUI
                     while (true)
                     {
                         Menu.WriteCentered("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
+                        Console.CursorLeft = (Console.WindowWidth / 2);
                         string input = Console.ReadLine();
                         if (input == "") break;
 
@@ -69,7 +71,7 @@ namespace ConsoleUI
 
                 if (_1_to_10_question != null)
                 {
-                    
+
                     Menu.WriteCentered(_1_to_10_question.Answer.ToString());
                 }
 

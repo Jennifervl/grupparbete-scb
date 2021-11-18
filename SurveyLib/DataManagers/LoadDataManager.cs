@@ -117,17 +117,23 @@ namespace SurveyLib
             {
                 string ssn;
                 int role;
-                List<User_Survey> userSurveyList = new();
 
                 using (SqlConnection connection = new(sqlConnection))
                 {
                     ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
                     role = connection.QueryFirstOrDefault<int>("SELECT Role FROM [User] WHERE ID = @ID;", new { ID = key });
+                    string pw = "";
+
+                    if (role == 1)
+                    {
+                        pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] WHERE ID = @ID;", new { ID = key });
+                    }
+
+                    User user = new(ssn, (UserRoles)role, pw);
+                    userList.Add(user);
                 }
 
-                User user = new(ssn, (UserRoles)role);
 
-                userList.Add(user);
             }
 
             return userList;
