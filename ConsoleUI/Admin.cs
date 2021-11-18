@@ -27,6 +27,7 @@ namespace ConsoleUI
         public static Survey BuildSurvey()
         {
             Menu.WriteCentered("Enter the title of the survey");
+            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
             string title = Console.ReadLine();
             Survey survey1 = new(title);
             while (true)
@@ -37,19 +38,23 @@ namespace ConsoleUI
                 Menu.WriteCentered("3. Yes or no question");
                 Menu.WriteCentered("4. Multiple choise question");
                 Menu.WriteCentered("5. No more questions");
+                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                 string input = Console.ReadLine();
                 if (input == "5") break;
 
                 else
                 {
                     Menu.WriteCentered("Enter the title of the question");
+                    Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                     string qtitle = Console.ReadLine();
 
                     if (input == "1")
                     {
                         Menu.WriteCentered("Enter the label of number 1");
+                        Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                         string label1 = Console.ReadLine();
                         Menu.WriteCentered("Enter the label of value 10");
+                        Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                         string label10 = Console.ReadLine();
                         _1_to_10 _1_To_10question = new(qtitle, label1, label10);
                         survey1.AddQuestion(_1_To_10question);
@@ -72,8 +77,10 @@ namespace ConsoleUI
                         while (true)
                         {
                             Menu.WriteCentered("Enter an option");
+                            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                             options.Add(Console.ReadLine());
                             Menu.WriteCentered("Add another option? (y/n)");
+                            Console.CursorLeft = (Console.WindowWidth / 2);
                             string choise = Console.ReadLine();
                             if (choise.ToLower() == "n")
                             {
@@ -99,18 +106,21 @@ namespace ConsoleUI
                 Menu.WriteCentered(survey.Title);
                 counter++;
             }
+            Console.CursorLeft = (Console.WindowWidth / 2);
             int index = Convert.ToInt32(Console.ReadLine());
             Menu.WriteCentered("How would you like to distribute it?");
             Menu.WriteCentered("1. By age");
             Menu.WriteCentered("2. CoinFlip");
             Menu.WriteCentered("3. To everyone");
-
+            Console.CursorLeft = (Console.WindowWidth / 2);
             string distributeChoice = Console.ReadLine();
             if (distributeChoice == "1")
             {
                 Menu.WriteCentered("Minumum age: ");
+                Console.CursorLeft = (Console.WindowWidth / 2);
                 int minAge = Convert.ToInt32(Console.ReadLine());
                 Menu.WriteCentered("Maximum age: ");
+                Console.CursorLeft = (Console.WindowWidth / 2);
                 int maxAge = Convert.ToInt32(Console.ReadLine());
                 Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
             }
@@ -146,17 +156,21 @@ namespace ConsoleUI
             Menu.WriteCentered("What role of user do you wish to add?");
             Menu.WriteCentered("1. Admin");
             Menu.WriteCentered("2. Participant");
+                        Console.CursorLeft=(Console.WindowWidth/2);
             roleAdd = Console.ReadLine();
             while (roleAdd != "1" && roleAdd != "2")
             {
                 Menu.WriteCentered("Enter a valid role");
+                            Console.CursorLeft=(Console.WindowWidth/2);
                 roleAdd = Console.ReadLine();
             }
             Menu.WriteCentered("Enter the SSN of the user (example : 199001015555");
+                        Console.CursorLeft=(Console.WindowWidth/2)-5;
             ssnAdd = Console.ReadLine();
             while (ssnAdd.Length != 12)
             {
                 Menu.WriteCentered("Invalid SSN, 12 digits.");
+                            Console.CursorLeft=(Console.WindowWidth/2)-5;
                 ssnAdd = Console.ReadLine();
                 if (IsDigitsOnly(ssnAdd) == false)
                 {
