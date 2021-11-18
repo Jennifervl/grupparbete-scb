@@ -165,7 +165,7 @@ namespace ConsoleUI
             WriteCentered("╚════██║██║     ██╔══██╗");
             WriteCentered("███████║╚██████╗██████╔╝");
             WriteCentered("╚══════╝ ╚═════╝╚═════╝ ");
-            WriteCentered("The Swedish statistical CentralBureau\n\n");
+            WriteCentered("The Swedish Statistical CentralBureau\n\n");
             WriteCentered("Press ENTER to start.");
         }
 
