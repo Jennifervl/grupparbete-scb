@@ -90,6 +90,11 @@ namespace SurveyLib
             using (SqlConnection connection = new(sqlConnection))
             {
                 connection.Execute("INSERT INTO [User](SSN, Role) VALUES (@SSN, @Role)", new { SSN = user.GetUserSsn(), Role = user.GetUserRole() });
+                if (user.GetUserRole() == (UserRoles)1)
+                {
+                    int primaryKey = connection.QueryFirstOrDefault<int>("SELECT IDENT_CURRENT('[User]');");
+                    connection.Execute("UPDATE [User] SET PW = @PW WHERE ID = @ID;", new { PW = user.Password, ID = primaryKey });
+                }
             }
         }
     }

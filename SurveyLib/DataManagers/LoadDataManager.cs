@@ -149,7 +149,14 @@ namespace SurveyLib
                 {
                     string ssn = connection.QueryFirstOrDefault<string>("SELECT [User].Ssn FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
                     int role = connection.QueryFirstOrDefault<int>("SELECT [User].Role FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
-                    User user = new(ssn, (UserRoles)role);
+                    string pw = "";
+
+                    if (role == 1)
+                    {
+                        pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
+                    }
+
+                    User user = new(ssn, (UserRoles)role, pw);
                     int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
                     Survey survey = LoadSurvey(surveyKey);
                     bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
