@@ -22,7 +22,7 @@ namespace ConsoleUI
                     Console.ReadLine();
                 }
             }
-            
+
         }
 
         public static void AnswerSurvey(Survey survey)
@@ -90,6 +90,8 @@ namespace ConsoleUI
             }
             txtfileDataManager.SaveResult(survey);
         }
+ 
+
 
     }
 }

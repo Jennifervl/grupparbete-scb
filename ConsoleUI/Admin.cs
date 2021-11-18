@@ -89,5 +89,46 @@ namespace ConsoleUI
 
 
         }
+        public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
+        {
+            Console.WriteLine("Which survey do you want to distribute?");
+            int counter = 1;
+            foreach (Survey survey in surveyRepository.GetAllSurveys())
+            {
+                Console.Write(counter);
+                Console.WriteLine(survey.Title);
+                counter++;
+            }
+            int index = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("How would you like to distribute it?");
+            Console.WriteLine("1. By age");
+            Console.WriteLine("2. CoinFlip");
+            Console.WriteLine("3. To everyone");
+
+            string distributeChoice = Console.ReadLine();
+            if (distributeChoice == "1")
+            {
+                Console.WriteLine("Minumum age: ");
+                int minAge = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Maximum age: ");
+                int maxAge = Convert.ToInt32(Console.ReadLine());
+                Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+            else if (distributeChoice == "2")
+            {
+                Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+            else if (distributeChoice == "3")
+            {
+                Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+        }
+        public static void ListDistributions(User_Survey_Repository usr)
+        {
+            foreach (User_Survey us in usr.GetUser_Surveys())
+            {
+                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
+            }
+        }
     }
 }
