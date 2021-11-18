@@ -6,8 +6,17 @@ namespace SurveyLib
     {
         private UserRoles userRoles;
         private string ssn;
+        private string password;
 
         public string Ssn
+        {
+            get
+            {
+                return ssn;
+            }
+        }
+
+        public string Password
         {
             get
             {
@@ -19,6 +28,12 @@ namespace SurveyLib
         {
             this.ssn = assn;
             this.userRoles = auserRoles;
+        }
+        public User(string assn, UserRoles auserRoles, string apassword)
+        {
+            this.ssn = assn;
+            this.userRoles = auserRoles;
+            this.password = apassword;
         }
 
         //TODO: Remove this method

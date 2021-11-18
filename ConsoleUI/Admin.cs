@@ -89,5 +89,110 @@ namespace ConsoleUI
 
 
         }
+        public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
+        {
+            Menu.WriteCentered("Which survey do you want to distribute?");
+            int counter = 1;
+            foreach (Survey survey in surveyRepository.GetAllSurveys())
+            {
+                Console.Write(counter);
+                Menu.WriteCentered(survey.Title);
+                counter++;
+            }
+            int index = Convert.ToInt32(Console.ReadLine());
+            Menu.WriteCentered("How would you like to distribute it?");
+            Menu.WriteCentered("1. By age");
+            Menu.WriteCentered("2. CoinFlip");
+            Menu.WriteCentered("3. To everyone");
+
+            string distributeChoice = Console.ReadLine();
+            if (distributeChoice == "1")
+            {
+                Menu.WriteCentered("Minumum age: ");
+                int minAge = Convert.ToInt32(Console.ReadLine());
+                Menu.WriteCentered("Maximum age: ");
+                int maxAge = Convert.ToInt32(Console.ReadLine());
+                Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+            else if (distributeChoice == "2")
+            {
+                Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+            else if (distributeChoice == "3")
+            {
+                Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+            }
+        }
+        public static void ListDistributions(User_Survey_Repository usr)
+        {
+            foreach (User_Survey us in usr.GetUser_Surveys())
+            {
+                Menu.WriteCentered(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
+            }
+        }
+
+        public static void ListAllUsers(UserRepository userRepository)
+        {
+            Dictionary<string, UserRoles> users = userRepository.ListUsers();
+            foreach (KeyValuePair<string, UserRoles> u in users)
+            {
+                Menu.WriteCentered(u.Key + " " + u.Value.ToString());
+            }
+        }
+        public static void AddUser(UserRepository userRepository)
+        {
+            string roleAdd = "";
+            string ssnAdd = "";
+            Menu.WriteCentered("What role of user do you wish to add?");
+            Menu.WriteCentered("1. Admin");
+            Menu.WriteCentered("2. Participant");
+            roleAdd = Console.ReadLine();
+            while (roleAdd != "1" && roleAdd != "2")
+            {
+                Menu.WriteCentered("Enter a valid role");
+                roleAdd = Console.ReadLine();
+            }
+            Menu.WriteCentered("Enter the SSN of the user (example : 199001015555");
+            ssnAdd = Console.ReadLine();
+            while (ssnAdd.Length != 12)
+            {
+                Menu.WriteCentered("Invalid SSN, 12 digits.");
+                ssnAdd = Console.ReadLine();
+                if (IsDigitsOnly(ssnAdd) == false)
+                {
+                    ssnAdd = "";
+                }
+            }
+            foreach (User u in userRepository.GetUsers())
+            {
+                if (ssnAdd == u.Ssn)
+                {
+                    Menu.WriteCentered("A user with this SSN already exists, aborting...");
+                    roleAdd = "0";
+                }
+            }
+            if (roleAdd == "1")
+            {
+                User addUser = new User(ssnAdd, UserRoles.Admin);
+                userRepository.AddNewUser(addUser);
+                Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
+            }
+            else if (roleAdd == "2")
+            {
+                User addUser = new User(ssnAdd, UserRoles.Participant);
+                userRepository.AddNewUser(addUser);
+                Menu.WriteCentered("Added a Participant with the SSN: " + ssnAdd);
+            }
+        }
+        static bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

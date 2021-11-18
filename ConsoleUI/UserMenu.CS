@@ -22,22 +22,22 @@ namespace ConsoleUI
                     Console.ReadLine();
                 }
             }
-            
+
         }
 
         public static void AnswerSurvey(Survey survey)
         {
             Console.Clear();
-            Console.WriteLine(survey.Title);
-            Console.WriteLine("");
+            Menu.WriteCentered(survey.Title);
+            Menu.WriteCentered("");
 
             int questionCounter = 0;
 
             foreach (Question q in survey.GetQuestions())
             {
                 questionCounter++;
-                Console.WriteLine("Question " + questionCounter);
-                Console.WriteLine(q.Title);
+                Menu.WriteCentered("Question " + questionCounter);
+                Menu.WriteCentered(q.Title);
 
                 _1_to_10 _1_to_10_question = q as _1_to_10;
                 MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
@@ -46,21 +46,21 @@ namespace ConsoleUI
 
                 if (_1_to_10_question != null)
                 {
-                    Console.WriteLine("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
+                    Menu.WriteCentered("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
                     _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
                 }
 
                 else if (mcq != null)
                 {
-                    Console.WriteLine("Options: ");
+                    Menu.WriteCentered("Options: ");
                     foreach (string option in mcq.GetOptions())
                     {
-                        Console.WriteLine(option);
+                        Menu.WriteCentered(option);
                     }
                     List<int> answers = new();
                     while (true)
                     {
-                        Console.WriteLine("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
+                        Menu.WriteCentered("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
                         string input = Console.ReadLine();
                         if (input == "") break;
 
@@ -68,13 +68,13 @@ namespace ConsoleUI
                         {
                             answers.Add(answerInt);
                         }
-                        else Console.WriteLine("You must enter a digit");
+                        else Menu.WriteCentered("You must enter a digit");
                     }
                     mcq.SetAnswer(answers);
                 }
                 else if (ynq != null)
                 {
-                    Console.WriteLine("Y/N ?");
+                    Menu.WriteCentered("Y/N ?");
                     string answer = Console.ReadLine();
                     if (answer.ToLower() == "y")
                     {
@@ -90,6 +90,8 @@ namespace ConsoleUI
             }
             txtfileDataManager.SaveResult(survey);
         }
+ 
+
 
     }
 }

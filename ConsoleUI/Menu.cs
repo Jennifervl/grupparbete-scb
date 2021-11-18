@@ -82,6 +82,7 @@ namespace ConsoleUI
                             Console.Clear();
                             // List all surveys
                             Admin.ListAllSurveys(surveyRepository);
+
                             ReturnToAdminMenu();
                             break;
                         }
@@ -89,38 +90,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Distribute Survey
-                            Console.WriteLine("Which survey do you want to distribute?");
-                            int counter = 1;
-                            foreach (Survey survey in surveyRepository.GetAllSurveys())
-                            {
-                                Console.Write(counter);
-                                Console.WriteLine(survey.Title);
-                                counter++;
-                            }
-                            int index = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("How would you like to distribute it?");
-                            Console.WriteLine("1. By age");
-                            Console.WriteLine("2. CoinFlip");
-                            Console.WriteLine("3. To everyone");
-
-                            string distributeChoice = Console.ReadLine();
-                            if (distributeChoice == "1")
-                            {
-                                Console.WriteLine("Minumum age: ");
-                                int minAge = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Maximum age: ");
-                                int maxAge = Convert.ToInt32(Console.ReadLine());
-                                Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-                            }
-                            else if (distributeChoice == "2")
-                            {
-                                Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-                            }
-                            else if (distributeChoice == "3")
-                            {
-                                Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-                            }
-                            Console.ReadLine();
+                            Admin.DistributeSurvey(userRepository, surveyRepository, usr);
 
                             ReturnToAdminMenu();
                             break;
@@ -129,10 +99,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List distributions
-                            foreach (User_Survey us in usr.GetUser_Surveys())
-                            {
-                                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
-                            }
+                            Admin.ListDistributions(usr);
 
                             ReturnToAdminMenu();
                             break;
@@ -141,11 +108,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List users
-                            Dictionary<string, UserRoles> users = userRepository.ListUsers();
-                            foreach (KeyValuePair<string, UserRoles> u in users)
-                            {
-                                Console.WriteLine(u.Key + " " + u.Value.ToString());
-                            }
+                            Admin.ListAllUsers(userRepository);
 
                             ReturnToAdminMenu();
                             break;
@@ -154,7 +117,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Add user
-                            AddUser(userRepository);
+                            Admin.AddUser(userRepository);
 
                             ReturnToAdminMenu();
                             break;
@@ -170,6 +133,7 @@ namespace ConsoleUI
                 }
             }
         }
+
 
         private static void DrawAdminMenu()
         {
@@ -214,63 +178,7 @@ namespace ConsoleUI
         {
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (s.Length / 2)) + "}", s));
         }
-        private static void AddUser(UserRepository userRepository)
-        {
-            string roleAdd = "";
-            string ssnAdd = "";
-            System.Console.WriteLine("What role of user do you wish to add?");
-            System.Console.WriteLine("1. Admin");
-            System.Console.WriteLine("2. Participant");
-            roleAdd = Console.ReadLine();
-            while (roleAdd != "1" && roleAdd != "2")
-            {
-                System.Console.WriteLine("Enter a valid role");
-                roleAdd = Console.ReadLine();
-            }
-            System.Console.WriteLine("Enter the SSN of the user (example : 199001015555");
-            ssnAdd = Console.ReadLine();
-            while (ssnAdd.Length != 12)
-            {
-                System.Console.WriteLine("Invalid SSN, 12 digits.");
-                ssnAdd = Console.ReadLine();
-                if (IsDigitsOnly(ssnAdd) == false)
-                {
-                    ssnAdd = "";
-                }
-            }
-            foreach (User u in userRepository.GetUsers())
-            {
-                if (ssnAdd == u.Ssn)
-                {
-                    System.Console.WriteLine("A user with this SSN already exists, aborting...");
-                    roleAdd = "0";
-                }
-            }
-            if (roleAdd == "1")
-            {
-                User addUser = new User(ssnAdd, UserRoles.Admin);
-                userRepository.AddNewUser(addUser);
-                userRepository.SaveUsers(addUser);
-                System.Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
-            }
-            else if (roleAdd == "2")
-            {
-                User addUser = new User(ssnAdd, UserRoles.Participant);
-                userRepository.AddNewUser(addUser);
-                userRepository.SaveUsers(addUser);
-                System.Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
-            }
-        }
-        static bool IsDigitsOnly(string str)
-        {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9')
-                    return false;
-            }
 
-            return true;
-        }
 
     }
 }
