@@ -70,7 +70,9 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Create Survey
-                            surveyRepository.AddSurvey(Admin.BuildSurvey());
+                            Survey newSurvey = Admin.BuildSurvey();
+                            surveyRepository.AddSurvey(newSurvey);
+                            surveyRepository.SaveSurvey(newSurvey);
 
                             ReturnToAdminMenu();
                             break;
@@ -79,7 +81,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // List all surveys
-                            Admin.ListAllSurveys(surveyRepository);     
+                            Admin.ListAllSurveys(surveyRepository);
 
                             ReturnToAdminMenu();
                             break;
