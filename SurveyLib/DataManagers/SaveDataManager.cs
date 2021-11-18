@@ -108,5 +108,17 @@ namespace SurveyLib
             }
 
         }
+
+        public void SaveUser_Survey(User_Survey us)
+        {
+
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                int userKey = connection.QueryFirstOrDefault<int>("SELECT ID FROM [User] WHERE Ssn = @Ssn;", new { Ssn = us.GetUserSsn() });
+                int surveyKey = connection.QueryFirstOrDefault<int>("SELECT ID FROM Survey WHERE Title = @Title;", new { Title = us.GetSurvey().Title });
+
+                connection.Execute("INSERT INTO User_Survey(Survey_ID, User_ID, IsSubmitted, User_Specific_Code) VALUES (@Survey_ID, @User_ID, @IsSubmitted, @User_Specific_Code);", new { Survey_ID = surveyKey, User_ID = userKey, IsSubmitted = us.IsSubmitted, User_Specific_Code = us.GetUserCode() });
+            }
+        }
     }
 }
