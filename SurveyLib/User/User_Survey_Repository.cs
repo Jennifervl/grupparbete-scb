@@ -21,14 +21,5 @@ namespace SurveyLib
         {
             return User_Surveys;
         }
-
-
-
-
-
-
-
-
     }
-
 }

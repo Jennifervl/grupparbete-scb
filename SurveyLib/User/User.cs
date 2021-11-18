@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace SurveyLib
 {
-    public class User
+    public abstract class User
     {
-        private UserRoles userRoles;
+        // private UserRoles userRoles;
         private string ssn;
-        private string password;
+        // private string password;
 
         public string Ssn
         {
@@ -16,25 +16,25 @@ namespace SurveyLib
             }
         }
 
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-        }
+        // public string Password
+        // {
+        //     get
+        //     {
+        //         return password;
+        //     }
+        // }
 
-        public User(string assn, UserRoles auserRoles)
+        public User(string assn)
         {
             this.ssn = assn;
-            this.userRoles = auserRoles;
+            // this.userRoles = auserRoles;
         }
-        public User(string assn, UserRoles auserRoles, string apassword)
-        {
-            this.ssn = assn;
-            this.userRoles = auserRoles;
-            this.password = apassword;
-        }
+        // public User(string assn, UserRoles auserRoles, string apassword)
+        // {
+        //     this.ssn = assn;
+        //     this.userRoles = auserRoles;
+        //     this.password = apassword;
+        // }
 
         //TODO: Remove this method
         public string GetUserSsn()
@@ -42,10 +42,10 @@ namespace SurveyLib
             return ssn;
         }
 
-        public UserRoles GetUserRole()
-        {
-            return userRoles;
-        }
+        // public UserRoles GetUserRole()
+        // {
+        //     return userRoles;
+        // }
 
 
         public int getAge()
