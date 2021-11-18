@@ -110,7 +110,7 @@ namespace SurveyLib
 
             using (SqlConnection connection = new(sqlConnection))
             {
-                userKeyList = connection.Query<int>("SELECT ID FROM USER;").ToList();
+                userKeyList = connection.Query<int>("SELECT ID FROM [User];").ToList();
             }
 
             foreach (int key in userKeyList)
@@ -147,7 +147,9 @@ namespace SurveyLib
             {
                 using (SqlConnection connection = new(sqlConnection))
                 {
-                    User user = connection.QuerySingleOrDefault<User>("SELECT Ssn, Role FROM [User] INNER JOIN User_Survey ON User.ID = User_Survey.User_ID WHERE User_Survey.ID = @ID;", new { ID = key });
+                    string ssn = connection.QueryFirstOrDefault<string>("SELECT [User].Ssn FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
+                    int role = connection.QueryFirstOrDefault<int>("SELECT [User].Role FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
+                    User user = new(ssn, (UserRoles)role);
                     int surveyKey = connection.QuerySingleOrDefault<int>("SELECT Survey_ID FROM User_Survey WHERE ID = @ID", new { ID = key });
                     Survey survey = LoadSurvey(surveyKey);
                     bool isSubmitted = connection.QuerySingleOrDefault<bool>("SELECT IsSubmitted FROM User_Survey WHERE ID = @ID", new { ID = key });
