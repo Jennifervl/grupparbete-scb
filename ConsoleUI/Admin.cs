@@ -38,7 +38,7 @@ namespace ConsoleUI
                 Menu.WriteCentered("3. Yes or no question");
                 Menu.WriteCentered("4. Multiple choise question");
                 Menu.WriteCentered("5. No more questions");
-                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                Console.CursorLeft = (Console.WindowWidth / 2);
                 string input = Console.ReadLine();
                 if (input == "5") break;
 
