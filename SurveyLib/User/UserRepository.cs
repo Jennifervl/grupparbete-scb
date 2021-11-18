@@ -18,7 +18,7 @@ namespace SurveyLib
 
         public void LoadUsers()
         {
-            User testAdminUser = new User("199001014444", UserRoles.Admin);
+            User testAdminUser = new User("199001014444", UserRoles.Admin, "admin");
             User testUserUser = new User("198002025555", UserRoles.Participant);
             this.AddNewUser(testAdminUser);
             this.AddNewUser(testUserUser);
