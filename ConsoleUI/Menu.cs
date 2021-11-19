@@ -19,21 +19,19 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             UserMenu.Questionaire(userRepository, surveyRepository, usr);
-                            Console.ReadLine();
                             break;
                         }
                     case ConsoleKey.D2:
                         {
-                            Console.Clear(); 
+                            Console.Clear();
                             AdminMenu(userRepository, surveyRepository, usr);
-                           
+
                             break;
                         }
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            WriteCentered("Press ENTER to exit program.");
-                            Console.ReadLine();
+                            WriteCentered("Shutting down");
                             Environment.Exit(0);
                             break;
                         }
@@ -57,83 +55,77 @@ namespace ConsoleUI
             }
         }
         public static void AdminMenu(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
-        {      
+        {
             // TODO:Enabla när vi slutar testa!!!!!!!!!!
             // if (AdminCommands.ConfirmAdmin(userRepository))  
             // {
-                bool adminMenuLoop = true;
-                while (adminMenuLoop == true)
+            bool adminMenuLoop = true;
+            while (adminMenuLoop == true)
+            {
+                Console.Clear();
+                DrawAdminMenu();
+                var choice = Console.ReadKey(true).Key;
+                switch (choice)
                 {
-                    Console.Clear();
-                    DrawAdminMenu();
-                    var choice = Console.ReadKey(true).Key;
-                    switch (choice)
-                    {
-                        case ConsoleKey.D1:
-                            {
-                                Console.Clear();
-                                // Create Survey
-                                Survey newSurvey = AdminCommands.BuildSurvey();
-                                surveyRepository.AddSurvey(newSurvey);
-                                surveyRepository.SaveSurvey(newSurvey);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.D2:
-                            {
-                                Console.Clear();
-                                // List all surveys
-                                AdminCommands.ListAllSurveys(surveyRepository);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.D3:
-                            {
-                                Console.Clear();
-                                // Distribute Survey
-                                AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.D4:
-                            {
-                                Console.Clear();
-                                // List distributions
-                                AdminCommands.ListDistributions(usr);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.D5:
-                            {
-                                Console.Clear();
-                                // List users
-                                AdminCommands.ListAllUsers(userRepository);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.D6:
-                            {
-                                Console.Clear();
-                                // Add user
-                                AdminCommands.AddUser(userRepository);
-
-                                ReturnToAdminMenu();
-                                break;
-                            }
-                        case ConsoleKey.Escape:
-                            {
-                                Console.Clear();
-                                WriteCentered("Press ENTER to return to main menu.");
-                                Console.ReadLine();
-                                adminMenuLoop = false;
-                                break;
-                            }
-                    }
+                    case ConsoleKey.D1:
+                        {
+                            Console.Clear();
+                            // Create Survey
+                            Survey newSurvey = AdminCommands.BuildSurvey();
+                            surveyRepository.AddSurvey(newSurvey);
+                            surveyRepository.SaveSurvey(newSurvey);
+                            break;
+                        }
+                    case ConsoleKey.D2:
+                        {
+                            Console.Clear();
+                            // List all surveys
+                            AdminCommands.ListAllSurveys(surveyRepository);
+                            break;
+                        }
+                    case ConsoleKey.D3:
+                        {
+                            Console.Clear();
+                            // Distribute Survey
+                            AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
+                            break;
+                        }
+                    case ConsoleKey.D4:
+                        {
+                            Console.Clear();
+                            // List distributions
+                            AdminCommands.ListDistributions(usr);
+                            break;
+                        }
+                    case ConsoleKey.D5:
+                        {
+                            Console.Clear();
+                            // List users
+                            AdminCommands.ListAllUsers(userRepository);
+                            break;
+                        }
+                    case ConsoleKey.D6:
+                        {
+                            Console.Clear();
+                            // Add user
+                            AdminCommands.AddUser(userRepository);
+                            break;
+                        }
+                    case ConsoleKey.D7:
+                        {
+                            
+                            break;
+                        }
+                    case ConsoleKey.Escape:
+                        {
+                            adminMenuLoop = false;
+                            break;
+                        }
+                }
+                if (adminMenuLoop == true)
+                {
+                    ReturnToAdminMenu();
+                }
                 // }
             }
         }
@@ -171,11 +163,12 @@ namespace ConsoleUI
             WriteCentered("╚══════╝ ╚═════╝╚═════╝ ");
             WriteCentered("The Swedish Statistical CentralBureau\n\n");
             WriteCentered("Press ENTER to start.");
+            Console.ReadLine();
         }
 
         public static void ReturnToAdminMenu()
         {
-            WriteCentered("Press ENTER to return to admin menu...");
+            Console.WriteLine("\nPress ENTER to return to admin menu...");
             Console.ReadLine();
         }
         public static void WriteCentered(string s)
