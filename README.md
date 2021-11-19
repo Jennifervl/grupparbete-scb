@@ -21,19 +21,6 @@ Ett program för att administrera/skapa samt besvara undersökningar.
 * Görgen - User/Roll och User-survey
 
 
-**User**
-- [x] Enum för vilken roll användaren har, admin eller user.
-- [x] String för personnummer
-* User constructor måste ha en Enum och ett personnummer in!
-
-- [ ] Spara i user vilka undersökningar som gjorts som en lista.
-
-**User-Survey**
-- [ ] String för kod till undersökning - 
-- [ ] Bool för isFInished
-- [ ] Metod för att Generera en unik kod för varje user till en undersökning.
-
-
 **Att Ändra**
 Datamanager - Dela i två delar, Load/Save Data
 Question - Kanske byta titel till något annat?
