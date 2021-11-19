@@ -51,3 +51,4 @@ Ta en titt på Interfaces, använd till datamangers
 - Multiplechoice option kan ha tomma alternativ *FIXED*
 - Programmet crashar om man vill distrubera en survey som inte fins 
 - en admin kan skapas med ett tomt lösenord 
+- AdminCommands rad 197 behöver try catch om användare mata string program crushar.
