@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using SurveyLib;
+using System.Linq;
 
 namespace ConsoleUI
 {
@@ -8,10 +9,10 @@ namespace ConsoleUI
     {
         public static void ListAllSurveys(SurveyRepository surveyRepository)
         {
-
             foreach (Survey s in surveyRepository.GetAllSurveys())
             {
                 Console.WriteLine(s.Title);
+                
             }
         }
         public static void TestSurvey(Survey testSurvey)
