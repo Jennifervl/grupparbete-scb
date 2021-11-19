@@ -113,7 +113,17 @@ namespace ConsoleUI
                         }
                     case ConsoleKey.D7:
                         {
+                            Console.Clear();
                             // Skriv ut lista av alla surveys, välj en survey att visa statistik på
+                            int index=1;
+                            foreach (Survey s in surveyRepository.GetAllSurveys())
+                            {
+                                Console.WriteLine(index + ": " + s.Title);
+                                index++;
+                            }
+                            Console.WriteLine("Which survey do you want to view statistics on? ");
+                            string chosenSurvey = Console.ReadLine();
+                            PrintData.Print(surveyRepository.GetAllSurveys(), usr); // Hur gör vi detta? :3
                             break;
                         }
                     case ConsoleKey.Escape:
