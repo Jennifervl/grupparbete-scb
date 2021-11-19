@@ -61,7 +61,7 @@ namespace SurveyLib
 
                 else if (questionType == 3) //YesOrNoQuestion
                 {
-                    YesOrNoQuestion yesOrNoQuestion = new(title);
+                    YesOrNoQuestion yesOrNoQuestion = new(questionText);
 
                     loadedSurvey.AddQuestion(yesOrNoQuestion);
                 }
@@ -188,6 +188,25 @@ namespace SurveyLib
             }
 
             return loadedUser_SurveyList;
+        }
+
+        public Survey LoadSurveyAnswers(Survey survey)
+        {
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                int surveyKey = connection.QueryFirstOrDefault<int>("SELECT ID FROM Survey WHERE Title = @Title;", new { Title = survey.Title });
+                string surveyTitle = connection.QueryFirstOrDefault<string>("SELECT Title FROM Survey WHERE ID = @ID;", new { ID = surveyKey });
+
+                Survey loadedSurvey = new(surveyTitle);
+
+                List<int> questionKeys = connection.Query<int>("SELECT ID FROM Question WHERE Survey_ID = @Survey_ID", new { Survey_ID = surveyKey }).ToList();
+
+                foreach (int key in questionKeys)
+                {
+                    int type = connection.QueryFirstOrDefault<int>("SELECT ID FROM Question WHERE Survey_ID = @Survey_ID", new { Survey_ID = surveyKey });
+                }
+                return loadedSurvey;
+            }
         }
     }
 }

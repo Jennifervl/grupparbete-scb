@@ -97,7 +97,7 @@ namespace ConsoleUI
             int counter = 1;
             foreach (Survey survey in surveyRepository.GetAllSurveys())
             {
-                Console.Write(counter);
+                Console.Write(counter +": ");
                 Console.WriteLine(survey.Title);
                 counter++;
             }
