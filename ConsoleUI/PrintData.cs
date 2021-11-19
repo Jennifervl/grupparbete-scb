@@ -23,17 +23,16 @@ namespace ConsoleUI
                 }
             }
 
-
-            Menu.WriteCentered("Survey: " + survey.Title);
-            Menu.WriteCentered("Amount of participants: " + participants);
-            Menu.WriteCentered("Amount of questions: " + survey.GetQuestions().Count);
-            Menu.WriteCentered("");
+            Console.WriteLine("Survey: " + survey.Title);
+            Console.WriteLine("Amount of participants: " + participants);
+            Console.WriteLine("Amount of questions: " + survey.GetQuestions().Count);
+            Console.WriteLine("");
 
             int questionCounter = 1;
             foreach (Question q in survey.GetQuestions())
             {
-                Menu.WriteCentered("Question: " + questionCounter);
-                Menu.WriteCentered(q.Title);
+                Console.WriteLine("Question: " + questionCounter);
+                Console.WriteLine(q.Title);
 
                 if (q is _1_to_10 oneToTen)
                 {
@@ -60,13 +59,13 @@ namespace ConsoleUI
                     }
                     average = average / participants;
 
-                    Menu.WriteCentered("One means: " + oneToTen.Value1);
-                    Menu.WriteCentered("Ten means: " + oneToTen.Value10);
-                    Menu.WriteCentered("Average vote: " + average);
+                    Console.WriteLine("One means: " + oneToTen.Value1);
+                    Console.WriteLine("Ten means: " + oneToTen.Value10);
+                    Console.WriteLine("Average vote: " + average);
 
                     for (int i = 0; i < intResults.Length; i++)
                     {
-                        Menu.WriteCentered((i + 1) + " Got " + intResults[i] + " Votes");
+                        Console.WriteLine((i + 1) + " Got " + intResults[i] + " Votes");
                     }
 
                 }
@@ -83,7 +82,7 @@ namespace ConsoleUI
 
                     foreach (string result in results)
                     {
-                        Menu.WriteCentered(result);
+                        Console.WriteLine(result);
                     }
 
 
@@ -116,7 +115,7 @@ namespace ConsoleUI
 
                     for (int i = 0; i < intResult.Length; i++)
                     {
-                        Menu.WriteCentered(mcq.GetOptions()[i] + " Got " + intResult[i] + " Votes");
+                        Console.WriteLine(mcq.GetOptions()[i] + " Got " + intResult[i] + " Votes");
                     }
 
                     questionCounter++;
@@ -139,14 +138,14 @@ namespace ConsoleUI
                     {
                         if (result == "True") fTrue++;
                         else if (result == "False") fFalse++;
-                        Menu.WriteCentered(result);
+                        Console.WriteLine(result);
                     }
                     percentTrue = Convert.ToInt32((fTrue / (fTrue + fFalse)) * 100);
-                    Menu.WriteCentered(percentTrue + "% answered yes");
+                    Console.WriteLine(percentTrue + "% answered yes");
 
 
                 }
-                Menu.WriteCentered("");
+                Console.WriteLine("");
                 questionCounter++;
             }
         }
