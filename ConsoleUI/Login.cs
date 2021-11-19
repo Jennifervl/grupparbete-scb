@@ -56,7 +56,9 @@ namespace ConsoleUI
                     case false:
                         {
                             Menu.WriteCentered("Enter the questionaire code: ");
-                                        Console.CursorLeft=(Console.WindowWidth/2);
+                            Menu.WriteCentered("If you don't have a code , Ask Admin!"); 
+                            Menu.WriteCentered("Press ENTER 2 times to return to main menu.");
+                           Console.CursorLeft=(Console.WindowWidth/2);
                             string code = Console.ReadLine();
 
                             foreach (User user in userRepository.GetUsers())
