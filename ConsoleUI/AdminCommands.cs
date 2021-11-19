@@ -53,16 +53,53 @@ namespace ConsoleUI
                 if (input == "5") break;
                 else if (input == "1" || input == "2" || input == "3" || input == "4")
                 {
-                    Console.WriteLine("Enter the title of the question");
+                    string qtitle = "";
 
-                    string qtitle = Console.ReadLine();
+                    while (true)
+                    {
+                        Console.WriteLine("Enter the title of the question");
+                        qtitle = Console.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(qtitle))
+                        {
+                            Console.WriteLine("Title cannot be empty, press any key to try again.");
+                            Console.ReadKey(true);
+                            continue;
+                        }
+                        break;
+                    }
 
                     if (input == "1")
                     {
-                        Console.WriteLine("Enter the label of number 1");
-                        string label1 = Console.ReadLine();
-                        Console.WriteLine("Enter the label of value 10");
-                        string label10 = Console.ReadLine();
+                        string label1 = "";
+                        string label10 = "";
+
+                        while (true)
+                        {
+                            Console.WriteLine("Enter the label of number 1");
+                            label1 = Console.ReadLine();
+
+                            if (string.IsNullOrWhiteSpace(label1))
+                            {
+                                Console.WriteLine("Label cannot be empty, press any key to try again.");
+                                Console.ReadKey(true);
+                                continue;
+                            }
+                            break;
+                        }
+                        while (true)
+                        {
+                            Console.WriteLine("Enter the label of value 10");
+                            label10 = Console.ReadLine();
+
+                            if (string.IsNullOrWhiteSpace(label10))
+                            {
+                                Console.WriteLine("Label cannot be empty, press any key to try again.");
+                                Console.ReadKey(true);
+                                continue;
+                            }
+                            break;
+                        }
                         _1_to_10 _1_To_10question = new(qtitle, label1, label10);
                         survey1.AddQuestion(_1_To_10question);
                     }
@@ -83,8 +120,22 @@ namespace ConsoleUI
                         List<string> options = new();
                         while (true)
                         {
-                            Console.WriteLine("Enter an option");
-                            options.Add(Console.ReadLine());
+                            string option = "";
+                            while (true)
+                            {
+                                Console.WriteLine("Enter an option");
+                                option = Console.ReadLine();
+
+                                if (string.IsNullOrWhiteSpace(option))
+                                {
+                                    Console.WriteLine("Option cannot be empty, press any key to try again.");
+                                    Console.ReadKey(true);
+                                    continue;
+                                }
+
+                                options.Add(option);
+                                break;
+                            }
                             Console.WriteLine("Add another option? (y/n)");
                             string choise = Console.ReadLine();
                             if (choise.ToLower() == "n")

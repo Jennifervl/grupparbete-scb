@@ -46,7 +46,8 @@ Ta en titt på Interfaces, använd till datamangers
 - Felmedelenade när en questionär kod skrivs in som inte matchar någon survey *FIXED*
 - En Survey får inte ha tomt namn *FIXED*
 - När du väljer vilken fråga du vill lägga till i en survey kan du välva alternativ som inte existerar *FIXED*
-- Kan lägga till tomt frågetitel
-- Multiplechoice option kan ha tomma alternativ
+- Kan lägga till tomt frågetitel   *FIXED*
+- Kan lägga till tomma 1 till 10 labels *FIXED*
+- Multiplechoice option kan ha tomma alternativ *FIXED*
 - Programmet crashar om man vill distrubera en survey som inte fins 
-- en admin kan skapas med ett tomt lösenord
+- en admin kan skapas med ett tomt lösenord 
