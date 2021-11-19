@@ -24,8 +24,9 @@ namespace ConsoleUI
                         }
                     case ConsoleKey.D2:
                         {
-                            Console.Clear();
+                            Console.Clear(); 
                             AdminMenu(userRepository, surveyRepository, usr);
+                           
                             break;
                         }
                     case ConsoleKey.Escape:
