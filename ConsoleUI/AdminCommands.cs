@@ -45,6 +45,7 @@ namespace ConsoleUI
                 else
                 {
                     Menu.WriteCentered("Enter the title of the question");
+               
                     Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                     string qtitle = Console.ReadLine();
 
