@@ -115,7 +115,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Skriv ut lista av alla surveys, välj en survey att visa statistik på
-                            int index=1;
+                            int index = 1;
                             foreach (Survey s in surveyRepository.GetAllSurveys())
                             {
                                 Console.WriteLine(index + ": " + s.Title);
@@ -123,7 +123,17 @@ namespace ConsoleUI
                             }
                             Console.WriteLine("Which survey do you want to view statistics on? ");
                             string chosenSurvey = Console.ReadLine();
-                            PrintData.Print(surveyRepository.GetAllSurveys(), usr); // Hur gör vi detta? :3
+                            int surveyIndex = int.Parse(chosenSurvey);
+
+                            try
+                            {
+                                PrintData.Print(surveyRepository.GetSurveyAtIndex(surveyIndex), usr); // Hur gör vi detta? :3
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Data not found");
+                            }
+
                             break;
                         }
                     case ConsoleKey.Escape:
