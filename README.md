@@ -44,8 +44,8 @@ Ta en titt på Interfaces, använd till datamangers
 
 **FELHANTERING**
 - Felmedelenade när en questionär kod skrivs in som inte matchar någon survey *FIXED*
-- En Survey får inte ha tomt namn 
-- När du väljer vilken fråga du vill lägga till i en survey kan du välva alternativ som inte existerar
+- En Survey får inte ha tomt namn *FIXED*
+- När du väljer vilken fråga du vill lägga till i en survey kan du välva alternativ som inte existerar *FIXED*
 - Kan lägga till tomt frågetitel
 - Multiplechoice option kan ha tomma alternativ
 - Programmet crashar om man vill distrubera en survey som inte fins 

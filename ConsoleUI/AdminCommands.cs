@@ -27,9 +27,20 @@ namespace ConsoleUI
 
         public static Survey BuildSurvey()
         {
-            Console.WriteLine("Enter the title of the survey");
+            string title = "";
+            while (true)
+            {
+                Console.WriteLine("Enter the title of the survey");
+                title = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(title))
+                {
+                    Console.WriteLine("Title cannot be empty, press any key to try again.");
+                    Console.ReadKey(true);
+                    continue;
+                }
+                break;
+            }
 
-            string title = Console.ReadLine();
             Survey survey1 = new(title);
             while (true)
             {
@@ -41,11 +52,10 @@ namespace ConsoleUI
                 Console.WriteLine("5. No more questions");
                 string input = Console.ReadLine();
                 if (input == "5") break;
-
-                else
+                else if (input == "1" || input == "2" || input == "3" || input == "4")
                 {
                     Console.WriteLine("Enter the title of the question");
-               
+
                     string qtitle = Console.ReadLine();
 
                     if (input == "1")
@@ -87,6 +97,11 @@ namespace ConsoleUI
                         survey1.AddQuestion(mcq);
                     }
                 }
+                else
+                {
+                    Console.WriteLine("Invalid option.");
+                    continue;
+                }
             }
             return survey1;
 
@@ -98,7 +113,7 @@ namespace ConsoleUI
             int counter = 1;
             foreach (Survey survey in surveyRepository.GetAllSurveys())
             {
-                Console.Write(counter +": ");
+                Console.Write(counter + ": ");
                 Console.WriteLine(survey.Title);
                 counter++;
             }
@@ -231,7 +246,7 @@ namespace ConsoleUI
             foreach (User u in userRepository.GetUsers())
             {
                 if (u is Admin a)
-                {                    
+                {
                     if (ssn == a.GetUserSsn())
                     {
                         Console.WriteLine("Enter your password:");
