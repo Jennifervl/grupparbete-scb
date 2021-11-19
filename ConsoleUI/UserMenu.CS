@@ -92,6 +92,7 @@ namespace ConsoleUI
                     string answer = Console.ReadLine();
                     ftq.SetAnswer(answer);
                 }
+                Console.WriteLine("");
             }
             txtfileDataManager.SaveResult(survey);
         }
