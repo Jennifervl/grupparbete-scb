@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SurveyLib
 {
@@ -7,6 +8,7 @@ namespace SurveyLib
         string value1;
         string value10;
         int answer;
+        List<int> answers = new();
 
         public _1_to_10(string title, string value1, string value10) : base(title)
         {

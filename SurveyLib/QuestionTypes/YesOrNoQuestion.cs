@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 namespace SurveyLib
 {
     public class YesOrNoQuestion : Question
     {
         bool answer;
+        List<bool> answers = new();
         public YesOrNoQuestion(string title) : base(title)
         {
         }

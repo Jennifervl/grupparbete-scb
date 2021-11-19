@@ -23,7 +23,7 @@ namespace SurveyLib
             return Guid.NewGuid().ToString().Replace("-", "");
         }
 
-        private string HashPassword(string password, string salt, int nIterations, int nHash)
+        public string HashPassword(string password, string salt, int nIterations, int nHash)
         {
             var saltBytes = Convert.FromBase64String(salt);
             using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, nIterations))
