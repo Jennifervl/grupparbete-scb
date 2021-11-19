@@ -11,17 +11,22 @@ namespace ConsoleUI
             Console.WriteLine("Enter the questionaire code");
             string code = Console.ReadLine();
 
+            bool foundmatch = false;
             foreach (User_Survey US in usr.GetUser_Surveys())
             {
                 if (US.FindMatch(code) != null)
                 {
+                    foundmatch = true;
                     AnswerSurvey(US.FindMatch(code));
                     US.IsSubmitted = true;
                     Console.WriteLine("Thanks for taking the survey!");
                     PrintData.Print(US.FindMatch(code), usr);
                 }
             }
-
+            if (!foundmatch)
+            {
+                Console.WriteLine("No survey matched your code, press any key to return.");
+            }
             Console.ReadLine();
         }
 
@@ -54,10 +59,10 @@ namespace ConsoleUI
                 else if (mcq != null)
                 {
                     Console.WriteLine("Options: ");
-                    int optiondigit =1;
+                    int optiondigit = 1;
                     foreach (string option in mcq.GetOptions())
                     {
-                        Console.Write(optiondigit +": ");
+                        Console.Write(optiondigit + ": ");
                         Console.WriteLine(option);
                         optiondigit++;
                     }
