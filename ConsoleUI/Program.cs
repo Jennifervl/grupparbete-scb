@@ -16,7 +16,7 @@ namespace ConsoleUI
             UserRepository userRepository = new();
             SurveyRepository surveyRepository = new();
             User_Survey_Repository usr = new();
-            // Menu.MainMenu();
+           
             userRepository.LoadUsers();
             surveyRepository.LoadSurveys();
 
@@ -24,9 +24,6 @@ namespace ConsoleUI
             Menu.WelcomeScreen();
             Menu.MainMenu(userRepository, surveyRepository, usr); // <-- Med argument in för statiska listor
 
-            // menu.MyMenu(userRepository, surveyRepository, usr);
-            // Survey survey = Admin.BuildSurvey();
-            // AnswerSurvey(survey);
         }
     }
 }
