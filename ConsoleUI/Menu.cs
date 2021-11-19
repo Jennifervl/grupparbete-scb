@@ -56,81 +56,84 @@ namespace ConsoleUI
             }
         }
         public static void AdminMenu(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
-        {
-            // ConfirmAdmin(); <-- kolla utifall riktig admin här med lösen osv.
-            bool adminMenuLoop = true;
-            while (adminMenuLoop == true)
-            {
-                Console.Clear();
-                DrawAdminMenu();
-                var choice = Console.ReadKey(true).Key;
-                switch (choice)
+        {      
+            // TODO:Enabla när vi slutar testa!!!!!!!!!!
+            // if (AdminCommands.ConfirmAdmin(userRepository))  
+            // {
+                bool adminMenuLoop = true;
+                while (adminMenuLoop == true)
                 {
-                    case ConsoleKey.D1:
-                        {
-                            Console.Clear();
-                            // Create Survey
-                            Survey newSurvey = AdminCommands.BuildSurvey();
-                            surveyRepository.AddSurvey(newSurvey);
-                            surveyRepository.SaveSurvey(newSurvey);
+                    Console.Clear();
+                    DrawAdminMenu();
+                    var choice = Console.ReadKey(true).Key;
+                    switch (choice)
+                    {
+                        case ConsoleKey.D1:
+                            {
+                                Console.Clear();
+                                // Create Survey
+                                Survey newSurvey = AdminCommands.BuildSurvey();
+                                surveyRepository.AddSurvey(newSurvey);
+                                surveyRepository.SaveSurvey(newSurvey);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.D2:
-                        {
-                            Console.Clear();
-                            // List all surveys
-                            AdminCommands.ListAllSurveys(surveyRepository);
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.D2:
+                            {
+                                Console.Clear();
+                                // List all surveys
+                                AdminCommands.ListAllSurveys(surveyRepository);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.D3:
-                        {
-                            Console.Clear();
-                            // Distribute Survey
-                            AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.D3:
+                            {
+                                Console.Clear();
+                                // Distribute Survey
+                                AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.D4:
-                        {
-                            Console.Clear();
-                            // List distributions
-                            AdminCommands.ListDistributions(usr);
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.D4:
+                            {
+                                Console.Clear();
+                                // List distributions
+                                AdminCommands.ListDistributions(usr);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.D5:
-                        {
-                            Console.Clear();
-                            // List users
-                            AdminCommands.ListAllUsers(userRepository);
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.D5:
+                            {
+                                Console.Clear();
+                                // List users
+                                AdminCommands.ListAllUsers(userRepository);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.D6:
-                        {
-                            Console.Clear();
-                            // Add user
-                            AdminCommands.AddUser(userRepository);
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.D6:
+                            {
+                                Console.Clear();
+                                // Add user
+                                AdminCommands.AddUser(userRepository);
 
-                            ReturnToAdminMenu();
-                            break;
-                        }
-                    case ConsoleKey.Escape:
-                        {
-                            Console.Clear();
-                            WriteCentered("Press ENTER to return to main menu.");
-                            Console.ReadLine();
-                            adminMenuLoop = false;
-                            break;
-                        }
-                }
+                                ReturnToAdminMenu();
+                                break;
+                            }
+                        case ConsoleKey.Escape:
+                            {
+                                Console.Clear();
+                                WriteCentered("Press ENTER to return to main menu.");
+                                Console.ReadLine();
+                                adminMenuLoop = false;
+                                break;
+                            }
+                    }
+                // }
             }
         }
 
@@ -169,7 +172,7 @@ namespace ConsoleUI
             WriteCentered("Press ENTER to start.");
         }
 
-        private static void ReturnToAdminMenu()
+        public static void ReturnToAdminMenu()
         {
             WriteCentered("Press ENTER to return to admin menu...");
             Console.ReadLine();
@@ -178,6 +181,7 @@ namespace ConsoleUI
         {
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (s.Length / 2)) + "}", s));
         }
+
 
 
     }

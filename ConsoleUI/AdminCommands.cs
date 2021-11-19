@@ -217,5 +217,72 @@ namespace ConsoleUI
 
             return true;
         }
+        public static bool ConfirmAdmin(UserRepository userRepository)
+        {
+            int failedAttempts = 0;
+            bool confirmed = false;
+            bool passwordLoop = true;
+            string ssn = "";
+            string password = "";
+            Console.Clear();
+            Menu.WriteCentered("Admin Login");
+            Menu.WriteCentered("Enter your SSN (12 digits)");
+            Console.CursorLeft = (Console.WindowWidth / 2) - 6;
+            ssn = Console.ReadLine();
+            if (IsDigitsOnly(ssn) == false)
+            {
+                ssn = "";
+            }
+            while (ssn.Length != 12)
+            {
+                Menu.WriteCentered("Invalid SSN, 12 digits.");
+                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                ssn = Console.ReadLine();
+                if (IsDigitsOnly(ssn) == false)
+                {
+                    ssn = "";
+                }
+            }
+            foreach (User u in userRepository.GetUsers())
+            {
+                if (u is Admin a)
+                {                    
+                    if (ssn == a.GetUserSsn())
+                    {
+                        Menu.WriteCentered("Enter your password:");
+                        while (passwordLoop == true)
+                        {
+                            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                            password = Console.ReadLine();
+                            if (password == a.Password)
+                            {
+                                confirmed = true;
+                                passwordLoop = false;
+                            }
+                            else
+                            {
+                                Menu.WriteCentered("Wrong password, try again");
+                                failedAttempts++;
+                                if (failedAttempts == 3)
+                                {
+                                    Menu.WriteCentered("Too many failed attempts");
+                                    passwordLoop = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (confirmed == true)
+            {
+
+            }
+            else
+            {
+                Menu.WriteCentered("No admin with that SSN exists");
+            }
+            Menu.ReturnToAdminMenu();
+            return confirmed;
+        }
     }
 }
