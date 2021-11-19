@@ -1,0 +1,4 @@
+:SCB interface:
+[5,5,]
+[True,True,]
+[False,False,True,;True,True,False,;]

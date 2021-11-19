@@ -18,35 +18,33 @@ namespace ConsoleUI
 
             survey.AddQuestion(mcqtest);
 
-            Menu.WriteCentered("Your survey is: " + survey.Title);
-            Menu.WriteCentered("Your survey has " + survey.GetQuestions().Count + " questions");
+            Console.WriteLine("Your survey is: " + survey.Title);
+            Console.WriteLine("Your survey has " + survey.GetQuestions().Count + " questions");
 
             foreach (Question q in survey.GetQuestions())
             {
-                Menu.WriteCentered(q.Title);
+                Console.WriteLine(q.Title);
 
                 _1_to_10 _1_to_10_question = q as _1_to_10;
                 MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
 
                 if (_1_to_10_question != null)
                 {
-                    Menu.WriteCentered("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
-                    Console.CursorLeft = (Console.WindowWidth / 2);
+                    Console.WriteLine("1 means: " + _1_to_10_question.Value1 + " 10 means: " + _1_to_10_question.Value10);
                     _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
                 }
 
                 else if (mcq != null)
                 {
-                    Menu.WriteCentered("Options: ");
+                    Console.WriteLine("Options: ");
                     foreach (string option in mcq.GetOptions())
                     {
-                        Menu.WriteCentered(option);
+                        Console.WriteLine(option);
                     }
                     List<int> answers = new();
                     while (true)
                     {
-                        Menu.WriteCentered("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
-                        Console.CursorLeft = (Console.WindowWidth / 2);
+                        Console.WriteLine("Enter a number and press enter to add more answers. Press enter without writing anything to stop adding answers.");
                         string input = Console.ReadLine();
                         if (input == "") break;
 
@@ -54,32 +52,31 @@ namespace ConsoleUI
                         {
                             answers.Add(answerInt);
                         }
-                        else Menu.WriteCentered("You must enter a digit");
+                        else Console.WriteLine("You must enter a digit");
                     }
                     mcq.SetAnswer(answers);
                 }
             }
 
-            Menu.WriteCentered("ANSWERS:");
+            Console.WriteLine("ANSWERS:");
             int qcounter = 1;
             foreach (Question q in survey.GetQuestions())
             {
-                Menu.WriteCentered("Question " + qcounter);
+                Console.WriteLine("Question " + qcounter);
                 qcounter++;
                 _1_to_10 _1_to_10_question = q as _1_to_10;
                 MultipleChoiseQuestion mcq = q as MultipleChoiseQuestion;
 
                 if (_1_to_10_question != null)
                 {
-
-                    Menu.WriteCentered(_1_to_10_question.Answer.ToString());
+                    Console.WriteLine(_1_to_10_question.Answer.ToString());
                 }
 
                 else if (mcq != null)
                 {
                     foreach (bool a in mcq.GetAnswer())
                     {
-                        Menu.WriteCentered(a.ToString());
+                        Console.WriteLine(a.ToString());
                     }
 
                 }

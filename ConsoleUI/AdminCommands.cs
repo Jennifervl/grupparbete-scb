@@ -11,51 +11,47 @@ namespace ConsoleUI
 
             foreach (Survey s in surveyRepository.GetAllSurveys())
             {
-                Menu.WriteCentered(s.Title);
+                Console.WriteLine(s.Title);
             }
         }
         public static void TestSurvey(Survey testSurvey)
         {
-            Menu.WriteCentered(testSurvey.Title);
+            Console.WriteLine(testSurvey.Title);
             IList<Question> questions = testSurvey.GetQuestions();
             foreach (Question q in questions)
             {
-                Menu.WriteCentered(q.Title);
+                Console.WriteLine(q.Title);
             }
         }
 
         public static Survey BuildSurvey()
         {
-            Menu.WriteCentered("Enter the title of the survey");
-            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+            Console.WriteLine("Enter the title of the survey");
+
             string title = Console.ReadLine();
             Survey survey1 = new(title);
             while (true)
             {
-                Menu.WriteCentered("What type of question do you want to add?");
-                Menu.WriteCentered("1. 1-to-10-question");
-                Menu.WriteCentered("2. Freetext question");
-                Menu.WriteCentered("3. Yes or no question");
-                Menu.WriteCentered("4. Multiple choise question");
-                Menu.WriteCentered("5. No more questions");
-                Console.CursorLeft = (Console.WindowWidth / 2);
+                Console.WriteLine("What type of question do you want to add?");
+                Console.WriteLine("1. 1-to-10-question");
+                Console.WriteLine("2. Freetext question");
+                Console.WriteLine("3. Yes or no question");
+                Console.WriteLine("4. Multiple choise question");
+                Console.WriteLine("5. No more questions");
                 string input = Console.ReadLine();
                 if (input == "5") break;
 
                 else
                 {
-                    Menu.WriteCentered("Enter the title of the question");
+                    Console.WriteLine("Enter the title of the question");
                
-                    Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                     string qtitle = Console.ReadLine();
 
                     if (input == "1")
                     {
-                        Menu.WriteCentered("Enter the label of number 1");
-                        Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                        Console.WriteLine("Enter the label of number 1");
                         string label1 = Console.ReadLine();
-                        Menu.WriteCentered("Enter the label of value 10");
-                        Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                        Console.WriteLine("Enter the label of value 10");
                         string label10 = Console.ReadLine();
                         _1_to_10 _1_To_10question = new(qtitle, label1, label10);
                         survey1.AddQuestion(_1_To_10question);
@@ -77,11 +73,9 @@ namespace ConsoleUI
                         List<string> options = new();
                         while (true)
                         {
-                            Menu.WriteCentered("Enter an option");
-                            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                            Console.WriteLine("Enter an option");
                             options.Add(Console.ReadLine());
-                            Menu.WriteCentered("Add another option? (y/n)");
-                            Console.CursorLeft = (Console.WindowWidth / 2);
+                            Console.WriteLine("Add another option? (y/n)");
                             string choise = Console.ReadLine();
                             if (choise.ToLower() == "n")
                             {
@@ -99,29 +93,25 @@ namespace ConsoleUI
         }
         public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
-            Menu.WriteCentered("Which survey do you want to distribute?");
+            Console.WriteLine("Which survey do you want to distribute?");
             int counter = 1;
             foreach (Survey survey in surveyRepository.GetAllSurveys())
             {
-                Console.Write(counter);
-                Menu.WriteCentered(survey.Title);
+                Console.Write(counter +": ");
+                Console.WriteLine(survey.Title);
                 counter++;
             }
-            Console.CursorLeft = (Console.WindowWidth / 2);
             int index = Convert.ToInt32(Console.ReadLine());
-            Menu.WriteCentered("How would you like to distribute it?");
-            Menu.WriteCentered("1. By age");
-            Menu.WriteCentered("2. CoinFlip");
-            Menu.WriteCentered("3. To everyone");
-            Console.CursorLeft = (Console.WindowWidth / 2);
+            Console.WriteLine("How would you like to distribute it?");
+            Console.WriteLine("1. By age");
+            Console.WriteLine("2. CoinFlip");
+            Console.WriteLine("3. To everyone");
             string distributeChoice = Console.ReadLine();
             if (distributeChoice == "1")
             {
-                Menu.WriteCentered("Minumum age: ");
-                Console.CursorLeft = (Console.WindowWidth / 2);
+                Console.WriteLine("Minumum age: ");
                 int minAge = Convert.ToInt32(Console.ReadLine());
-                Menu.WriteCentered("Maximum age: ");
-                Console.CursorLeft = (Console.WindowWidth / 2);
+                Console.WriteLine("Maximum age: ");
                 int maxAge = Convert.ToInt32(Console.ReadLine());
                 Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
             }
@@ -138,7 +128,7 @@ namespace ConsoleUI
         {
             foreach (User_Survey us in usr.GetUser_Surveys())
             {
-                Menu.WriteCentered(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
+                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
             }
         }
 
@@ -147,7 +137,7 @@ namespace ConsoleUI
             Dictionary<string, string> users = userRepository.ListUsers();
             foreach (KeyValuePair<string, string> u in users)
             {
-                Menu.WriteCentered(u.Key + " " + u.Value);
+                Console.WriteLine(u.Key + " " + u.Value);
             }
         }
         public static void AddUser(UserRepository userRepository)
@@ -155,24 +145,20 @@ namespace ConsoleUI
             string roleAdd = "";
             string ssnAdd = "";
             string passwordAdd = "";
-            Menu.WriteCentered("What role of user do you wish to add?");
-            Menu.WriteCentered("1. Admin");
-            Menu.WriteCentered("2. Participant");
-            Console.CursorLeft = (Console.WindowWidth / 2);
+            Console.WriteLine("What role of user do you wish to add?");
+            Console.WriteLine("1. Admin");
+            Console.WriteLine("2. Participant");
             roleAdd = Console.ReadLine();
             while (roleAdd != "1" && roleAdd != "2")
             {
-                Menu.WriteCentered("Enter a valid role");
-                Console.CursorLeft = (Console.WindowWidth / 2);
+                Console.WriteLine("Enter a valid role");
                 roleAdd = Console.ReadLine();
             }
-            Menu.WriteCentered("Enter the SSN of the user (example : 199001015555");
-            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+            Console.WriteLine("Enter the SSN of the user (example : 199001015555");
             ssnAdd = Console.ReadLine();
             while (ssnAdd.Length != 12)
             {
-                Menu.WriteCentered("Invalid SSN, 12 digits.");
-                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                Console.WriteLine("Invalid SSN, 12 digits.");
                 ssnAdd = Console.ReadLine();
                 if (IsDigitsOnly(ssnAdd) == false)
                 {
@@ -181,15 +167,14 @@ namespace ConsoleUI
             }
             if (roleAdd == "1")
             {
-                Menu.WriteCentered("Enter password you wish to use:");
-                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                Console.WriteLine("Enter password you wish to use:");
                 passwordAdd = Console.ReadLine();
             }
             foreach (User u in userRepository.GetUsers())
             {
                 if (ssnAdd == u.Ssn)
                 {
-                    Menu.WriteCentered("A user with this SSN already exists, aborting...");
+                    Console.WriteLine("A user with this SSN already exists, aborting...");
                     roleAdd = "0";
                 }
             }
@@ -198,14 +183,14 @@ namespace ConsoleUI
                 Admin addAdmin = new Admin(ssnAdd, passwordAdd);
                 userRepository.AddNewUser(addAdmin);
                 userRepository.SaveUser(addAdmin);
-                Menu.WriteCentered("Added an Admin with the SSN: " + ssnAdd);
+                Console.WriteLine("Added an Admin with the SSN: " + ssnAdd);
             }
             else if (roleAdd == "2")
             {
                 Participant addParticipant = new Participant(ssnAdd);
                 userRepository.AddNewUser(addParticipant);
                 userRepository.SaveUser(addParticipant);
-                Menu.WriteCentered("Added a Participant with the SSN: " + ssnAdd);
+                Console.WriteLine("Added a Participant with the SSN: " + ssnAdd);
             }
         }
         static bool IsDigitsOnly(string str)
@@ -226,9 +211,8 @@ namespace ConsoleUI
             string ssn = "";
             string password = "";
             Console.Clear();
-            Menu.WriteCentered("Admin Login");
-            Menu.WriteCentered("Enter your SSN (12 digits)");
-            Console.CursorLeft = (Console.WindowWidth / 2) - 6;
+            Console.WriteLine("Admin Login");
+            Console.WriteLine("Enter your SSN (12 digits)");
             ssn = Console.ReadLine();
             if (IsDigitsOnly(ssn) == false)
             {
@@ -236,8 +220,7 @@ namespace ConsoleUI
             }
             while (ssn.Length != 12)
             {
-                Menu.WriteCentered("Invalid SSN, 12 digits.");
-                Console.CursorLeft = (Console.WindowWidth / 2) - 5;
+                Console.WriteLine("Invalid SSN, 12 digits.");
                 ssn = Console.ReadLine();
                 if (IsDigitsOnly(ssn) == false)
                 {
@@ -250,10 +233,9 @@ namespace ConsoleUI
                 {                    
                     if (ssn == a.GetUserSsn())
                     {
-                        Menu.WriteCentered("Enter your password:");
+                        Console.WriteLine("Enter your password:");
                         while (passwordLoop == true)
                         {
-                            Console.CursorLeft = (Console.WindowWidth / 2) - 5;
                             password = Console.ReadLine();
                             if (password == a.Password)
                             {
@@ -262,11 +244,11 @@ namespace ConsoleUI
                             }
                             else
                             {
-                                Menu.WriteCentered("Wrong password, try again");
+                                Console.WriteLine("Wrong password, try again");
                                 failedAttempts++;
                                 if (failedAttempts == 3)
                                 {
-                                    Menu.WriteCentered("Too many failed attempts");
+                                    Console.WriteLine("Too many failed attempts");
                                     passwordLoop = false;
                                 }
                             }
@@ -280,7 +262,7 @@ namespace ConsoleUI
             }
             else
             {
-                Menu.WriteCentered("No admin with that SSN exists");
+                Console.WriteLine("No admin with that SSN exists");
             }
             Menu.ReturnToAdminMenu();
             return confirmed;

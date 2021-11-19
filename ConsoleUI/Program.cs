@@ -22,7 +22,6 @@ namespace ConsoleUI
 
             Console.Clear();
             Menu.WelcomeScreen();
-            Console.ReadLine();
             Menu.MainMenu(userRepository, surveyRepository, usr); // <-- Med argument in för statiska listor
 
             // menu.MyMenu(userRepository, surveyRepository, usr);
