@@ -1,5 +1,5 @@
 :Testing all functions:
-[9,]
-[I demand pictures of spiderman!£]
-[True,]
-[True,True,True,;]
+[9,10,9,]
+[Dags£Pictures of cats£I demand pictures of spiderman!£]
+[False,False,True,]
+[False,False,True,;True,True,True,;True,True,True,;]

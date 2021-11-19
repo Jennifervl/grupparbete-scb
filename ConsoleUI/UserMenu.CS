@@ -54,9 +54,12 @@ namespace ConsoleUI
                 else if (mcq != null)
                 {
                     Console.WriteLine("Options: ");
+                    int optiondigit =1;
                     foreach (string option in mcq.GetOptions())
                     {
+                        Console.Write(optiondigit +": ");
                         Console.WriteLine(option);
+                        optiondigit++;
                     }
                     List<int> answers = new();
                     while (true)
