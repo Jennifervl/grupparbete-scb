@@ -207,6 +207,7 @@ namespace ConsoleUI
                 Console.WriteLine("2. CoinFlip");
                 Console.WriteLine("3. To everyone");
                 string distributeChoice = Console.ReadLine();
+                int distributedTo = 0;
                 if (distributeChoice == "1")
                 {
                     Console.WriteLine("Minumum age: ");
@@ -233,18 +234,20 @@ namespace ConsoleUI
                         Console.ReadKey(true);
                         continue;
                     }
-                    Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    distributedTo = Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                     break;
                 }
                 else if (distributeChoice == "2")
                 {
-                    Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    distributedTo = Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                 }
                 else if (distributeChoice == "3")
                 {
-                    Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    distributedTo = Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                 }
                 else Console.WriteLine("Invalid input, press any key to try again.");
+
+                Console.WriteLine("Distributed to " + distributedTo + " users.");
                 Console.ReadKey(true);
                 continue;
             }
