@@ -176,5 +176,16 @@ namespace SurveyLib
                 }
             }
         }
+
+        public void UpdateUser_Survey(User_Survey user_Survey)
+        {
+            using (SqlConnection connection = new(sqlConnection))
+            {
+                int surveyKey = connection.QueryFirstOrDefault<int>("SELECT ID FROM Survey WHERE Title = @Title;", new { Title = user_Survey.GetSurvey().Title });
+                int userKey = connection.QueryFirstOrDefault<int>("SELECT ID FROM User WHERE SSN = @SSN;", new { SSN = user_Survey.GetUserSsn() });
+
+                connection.Execute("UPDATE User_Survey SET IsSubmitted = 1 WHERE User_ID = @User_ID AND Survey_ID = @Survey_ID;", new { User_ID = userKey, Survey_ID = surveyKey });
+            }
+        }
     }
 }
