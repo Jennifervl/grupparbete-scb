@@ -176,5 +176,10 @@ namespace ConsoleUI
         {
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (s.Length / 2)) + "}", s));
         }
+        public static void PressToContinue()
+        {
+            Console.WriteLine("Press any key to continue. . .");
+            Console.ReadKey(true);
+        }
     }
 }
