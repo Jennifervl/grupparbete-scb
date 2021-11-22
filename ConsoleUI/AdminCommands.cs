@@ -474,7 +474,7 @@ namespace ConsoleUI
             {
                 if (u is Admin a)
                 {
-                    if (ssn == a.GetUserSsn())
+                    if (ssn == a.Ssn)
                     {
                         Console.WriteLine("Enter your password:");
                         while (passwordLoop == true)

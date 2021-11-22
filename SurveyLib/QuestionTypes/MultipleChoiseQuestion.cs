@@ -32,23 +32,6 @@ namespace SurveyLib
 
 
         }
-        // public void SetAnswer(string answer)
-        // {
-        //     foreach (char i in answer)
-        //     {
-        //         if (Int32.TryParse(i.ToString(), out int iInt) == true)
-        //         {
-        //             iInt--;
-        //             if (iInt < options.Count() && iInt >= 0)
-        //             {
-        //                 if (!(this.answer.Contains(iInt)))
-        //                 {
-        //                     this.answer.Add(iInt);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
 
         public IList<string> GetOptions()
         {

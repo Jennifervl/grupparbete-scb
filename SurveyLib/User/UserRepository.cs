@@ -46,6 +46,7 @@ namespace SurveyLib
             }
             return users;
         }
+
         public IList<User> GetUsers()
         {
             return userRepository.AsReadOnly();
