@@ -164,7 +164,7 @@ namespace ConsoleUI
             WriteCentered("███████║╚██████╗██████╔╝");
             WriteCentered("╚══════╝ ╚═════╝╚═════╝ ");
             WriteCentered("The Swedish Statistical CentralBureau\n\n");
-            WriteCentered("Press ENTER to start.");
+            Console.ResetColor();
             Console.ReadLine();
         }
         public static void ReturnToAdminMenu()
@@ -175,6 +175,11 @@ namespace ConsoleUI
         public static void WriteCentered(string s)
         {
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (s.Length / 2)) + "}", s));
+        }
+        public static void PressToContinue()
+        {
+            Console.WriteLine("Press any key to continue. . .");
+            Console.ReadKey(true);
         }
     }
 }

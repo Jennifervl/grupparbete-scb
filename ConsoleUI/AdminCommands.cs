@@ -176,6 +176,7 @@ namespace ConsoleUI
 
         internal static void ShowSurveyStatistics(SurveyRepository surveyRepository)
         {
+            Console.Clear();
             int counter = 1;
             foreach (Survey s in surveyRepository.GetAllSurveys())
             {
@@ -191,10 +192,13 @@ namespace ConsoleUI
             Console.WriteLine("Survey: " + survey.Title);
             Console.WriteLine("Amount of questions: " + survey.GetQuestions().Count);
             Console.WriteLine("");
+            Menu.PressToContinue();
+
 
             int questionCounter = 1;
             foreach (Question q in survey.GetQuestions())
             {
+                Console.Clear();
                 Console.WriteLine("Question: " + questionCounter);
                 Console.WriteLine(q.Title);
 
@@ -269,6 +273,7 @@ namespace ConsoleUI
                     Console.WriteLine(percentTrue + "% answered yes");
                 }
                 Console.WriteLine("");
+                Menu.PressToContinue();
                 questionCounter++;
             }
         }
