@@ -227,16 +227,17 @@ namespace ConsoleUI
                 else if (q is MultipleChoiseQuestion mcq)
                 {
                     int[] intResult = new int[mcq.GetOptions().Count];
-
-                    foreach (List<bool> result in mcq.Answers)
+                    int aCounter = 0;
+                    foreach (List<bool> answers in mcq.Answers)
                     {
-                        foreach (bool answer in result)
+                        foreach (bool answer in answers)
                         {
                             if (answer)
                             {
-                                intResult[result.IndexOf(answer)]++;
+                                intResult[aCounter]++;
                             }
                         }
+                        aCounter++;
                     }
 
                     for (int i = 0; i < intResult.Length; i++)
