@@ -485,7 +485,7 @@ namespace ConsoleUI
                         while (passwordLoop == true)
                         {
                             password = Console.ReadLine();
-                            if (a.ValidateAdmin(password) == true)
+                            if (a.Pw.ValidatePassword(password) == true)
                             {
                                 confirmed = true;
                                 passwordLoop = false;

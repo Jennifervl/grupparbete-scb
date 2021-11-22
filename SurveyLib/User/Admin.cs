@@ -30,12 +30,5 @@ namespace SurveyLib
             // this.password = apassword;
             this.pw = new(apassword);
         }
-        public bool ValidateAdmin(string password)
-        {
-            if (this.Pw.HashPassword(password, this.Pw.Salt) == this.Pw.HashedPassword)
-                return true;
-            else return false;
-
-        }
     }
 }

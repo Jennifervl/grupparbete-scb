@@ -8,8 +8,8 @@ namespace SurveyLib
         string salt;
         string hashedPassword;
 
-        public string Salt { get => salt; }
-        public string HashedPassword { get => hashedPassword; }
+        public string Salt { get => salt; set => salt = value; }
+        public string HashedPassword { get => hashedPassword; set => hashedPassword = value; }
 
         public Password(string password)
         {
@@ -30,6 +30,14 @@ namespace SurveyLib
             {
                 return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(70));
             }
+        }
+
+        public bool ValidatePassword(string password)
+        {
+            if (this.HashPassword(password, this.Salt) == this.HashedPassword)
+                return true;
+            else return false;
+
         }
     }
 }
