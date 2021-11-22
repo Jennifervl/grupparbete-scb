@@ -180,6 +180,7 @@ namespace ConsoleUI
             foreach (Survey s in surveyRepository.GetAllSurveys())
             {
                 Console.WriteLine(counter + ": " + s.Title);
+                counter++;
             }
             Console.WriteLine("Enter the number of the survey you want to see the statistics for");
             string input = Console.ReadLine();
