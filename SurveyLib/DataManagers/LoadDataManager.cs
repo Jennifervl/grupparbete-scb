@@ -20,69 +20,56 @@ namespace SurveyLib
             using (SqlConnection connection = new(sqlConnection))
             {
                 title = connection.QueryFirstOrDefault<string>("SELECT Title FROM Survey WHERE ID = @ID", new { ID = primaryKey });
-            }
-
-            Survey loadedSurvey = new(title);
-
-            using (SqlConnection connection = new(sqlConnection))
-            {
+                Survey loadedSurvey = new(title);
                 questionKeys = connection.Query<int>("SELECT ID FROM Question WHERE Survey_ID = @Survey_ID;", new { Survey_ID = primaryKey }).ToList();
-            }
 
-            foreach (int key in questionKeys)
-            {
-                int questionType;
-
-                using (SqlConnection connection = new(sqlConnection))
+                foreach (int key in questionKeys)
                 {
+                    int questionType;
+
+
                     questionType = connection.QueryFirstOrDefault<int>("SELECT Type FROM Question WHERE ID = @ID;", new { ID = key });
                     questionText = connection.QueryFirstOrDefault<string>("SELECT QuestionText FROM QUESTION WHERE ID = @ID;", new { ID = key });
-                }
 
-                if (questionType == 1) //Multiple Choice
-                {
-                    List<string> alternatives = new();
 
-                    using (SqlConnection connection = new(sqlConnection))
+                    if (questionType == 1) //Multiple Choice
                     {
+                        List<string> alternatives = new();
+
+
                         alternatives = connection.Query<string>("SELECT Alternative FROM Multiple_Choice_Question WHERE Question_ID = @Question_ID", new { Question_ID = key }).ToList();
+
+
+                        MultipleChoiseQuestion multipleChoiseQuestion = new(questionText, alternatives);
+
+                        loadedSurvey.AddQuestion(multipleChoiseQuestion);
                     }
-
-                    MultipleChoiseQuestion multipleChoiseQuestion = new(questionText, alternatives);
-
-                    loadedSurvey.AddQuestion(multipleChoiseQuestion);
-                }
-                else if (questionType == 2) //FreeTextQuestion
-                {
-                    FreetextQuestion freetextQuestion = new(questionText);
-
-                    loadedSurvey.AddQuestion(freetextQuestion);
-                }
-
-                else if (questionType == 3) //YesOrNoQuestion
-                {
-                    YesOrNoQuestion yesOrNoQuestion = new(questionText);
-
-                    loadedSurvey.AddQuestion(yesOrNoQuestion);
-                }
-
-                else if (questionType == 4)//ScaleQuestion
-                {
-                    string value1;
-                    string value10;
-
-                    using (SqlConnection connection = new(sqlConnection))
+                    else if (questionType == 2) //FreeTextQuestion
                     {
-                        value1 = connection.QueryFirstOrDefault<string>("SELECT Value_1 FROM Scale_Question WHERE Question_ID = @Question_ID;", new { Question_ID = key });
-                        value10 = connection.QueryFirstOrDefault<string>("SELECT Value_10 FROM Scale_Question WHERE Question_ID = @Question_ID;", new { Question_ID = key });
+                        FreetextQuestion freetextQuestion = new(questionText);
+
+                        loadedSurvey.AddQuestion(freetextQuestion);
                     }
 
-                    _1_to_10 scaleQuestion = new(questionText, value1, value10);
+                    else if (questionType == 3) //YesOrNoQuestion
+                    {
+                        YesOrNoQuestion yesOrNoQuestion = new(questionText);
 
-                    loadedSurvey.AddQuestion(scaleQuestion);
+                        loadedSurvey.AddQuestion(yesOrNoQuestion);
+                    }
+
+                    else if (questionType == 4)//ScaleQuestion
+                    {
+                        string value1 = connection.QueryFirstOrDefault<string>("SELECT Value_1 FROM Scale_Question WHERE Question_ID = @Question_ID;", new { Question_ID = key });
+                        string value10 = connection.QueryFirstOrDefault<string>("SELECT Value_10 FROM Scale_Question WHERE Question_ID = @Question_ID;", new { Question_ID = key });
+
+                        _1_to_10 scaleQuestion = new(questionText, value1, value10);
+
+                        loadedSurvey.AddQuestion(scaleQuestion);
+                    }
                 }
+                return loadedSurvey;
             }
-            return loadedSurvey;
         }
 
         public List<Survey> LoadAllSurveys()
@@ -111,14 +98,12 @@ namespace SurveyLib
             using (SqlConnection connection = new(sqlConnection))
             {
                 userKeyList = connection.Query<int>("SELECT ID FROM [User];").ToList();
-            }
 
-            foreach (int key in userKeyList)
-            {
-                string ssn;
 
-                using (SqlConnection connection = new(sqlConnection))
+                foreach (int key in userKeyList)
                 {
+                    string ssn;
+
                     ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
                     string pw = "";
                     pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] WHERE ID = @ID;", new { ID = key });
@@ -134,10 +119,7 @@ namespace SurveyLib
                         Admin a = new(ssn, pw);
                         userList.Add(a);
                     }
-
                 }
-
-
             }
 
             return userList;
@@ -145,18 +127,17 @@ namespace SurveyLib
 
         public List<User_Survey> LoadAllUser_Surveys()
         {
-            List<User_Survey> loadedUser_SurveyList = new();
-            List<int> User_SurveyKeys = new();
-
             using (SqlConnection connection = new(sqlConnection))
             {
-                User_SurveyKeys = connection.Query<int>("SELECT ID FROM User_Survey;").ToList();
-            }
+                List<User_Survey> loadedUser_SurveyList = new();
+                List<int> User_SurveyKeys = new();
 
-            foreach (int key in User_SurveyKeys)
-            {
-                using (SqlConnection connection = new(sqlConnection))
+                User_SurveyKeys = connection.Query<int>("SELECT ID FROM User_Survey;").ToList();
+
+
+                foreach (int key in User_SurveyKeys)
                 {
+
                     string ssn = connection.QueryFirstOrDefault<string>("SELECT [User].Ssn FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
                     string pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] INNER JOIN User_Survey ON [User].ID = User_Survey.User_ID WHERE User_Survey.ID = @ID", new { ID = key });
 
@@ -184,10 +165,11 @@ namespace SurveyLib
                         loadedUser_SurveyList.Add(user_Survey);
                     }
 
-                }
-            }
 
-            return loadedUser_SurveyList;
+                }
+
+                return loadedUser_SurveyList;
+            }
         }
 
         public Survey LoadSurveyAnswers(Survey survey)
