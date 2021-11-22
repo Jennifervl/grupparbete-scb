@@ -18,5 +18,10 @@ namespace SurveyLib
         {
             return answer;
         }
+
+        public void SetAnswerFromDB(bool answer)
+        {
+            answers.Add(answer);
+        }
     }
 }
