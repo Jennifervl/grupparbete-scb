@@ -25,21 +25,36 @@ namespace ConsoleUI
             }
         }
 
-        public static Survey BuildSurvey()
+        public static Survey BuildSurvey(SurveyRepository surveyRepository)
         {
             string title = "";
             while (true)
             {
-                Console.WriteLine("Enter the title of the survey");
-                title = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(title))
+                while (true)
                 {
-                    Console.WriteLine("Title cannot be empty, press any key to try again.");
+                    Console.WriteLine("Enter the title of the survey");
+                    title = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(title))
+                    {
+                        Console.WriteLine("Title cannot be empty, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    break;
+                }
+                try
+                {
+                    surveyRepository.IsUniqueTitle(title);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Title already exists, press any key to try again.");
                     Console.ReadKey(true);
                     continue;
                 }
                 break;
             }
+
 
             Survey survey1 = new(title);
             while (true)
