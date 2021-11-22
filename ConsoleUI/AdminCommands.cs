@@ -189,6 +189,7 @@ namespace ConsoleUI
             Survey survey = surveyRepository.GetSurveyAtIndex(surveyNumber);
             survey = surveyRepository.loadDataManager.LoadSurveyAnswers(survey);
 
+            Console.Clear();
             Console.WriteLine("Survey: " + survey.Title);
             Console.WriteLine("Amount of questions: " + survey.GetQuestions().Count);
             Console.WriteLine("");
