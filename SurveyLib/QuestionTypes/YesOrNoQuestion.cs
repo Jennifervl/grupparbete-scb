@@ -5,6 +5,15 @@ namespace SurveyLib
     {
         bool answer;
         List<bool> answers = new();
+
+        public List<bool> Answers
+        {
+            get
+            {
+                return answers;
+            }
+        }
+
         public YesOrNoQuestion(string title) : base(title)
         {
         }

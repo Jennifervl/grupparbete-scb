@@ -16,6 +16,11 @@ namespace SurveyLib
             this.value10 = value10;
         }
 
+        public List<int> Answers
+        {
+            get => answers;
+        }
+
         public string Value1
         {
             get => value1;

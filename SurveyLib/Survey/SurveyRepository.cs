@@ -7,7 +7,7 @@ namespace SurveyLib
     {
         List<Survey> surveys;
         SaveDataManager saveDataManager = new();
-        LoadDataManager loadDataManager = new();
+        public LoadDataManager loadDataManager = new();
 
         public SurveyRepository()
         {

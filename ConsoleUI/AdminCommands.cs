@@ -173,6 +173,104 @@ namespace ConsoleUI
 
 
         }
+
+        internal static void ShowSurveyStatistics(SurveyRepository surveyRepository)
+        {
+            int counter = 1;
+            foreach (Survey s in surveyRepository.GetAllSurveys())
+            {
+                Console.WriteLine(counter + ": " + s.Title);
+            }
+            Console.WriteLine("Enter the number of the survey you want to see the statistics for");
+            string input = Console.ReadLine();
+            int surveyNumber = int.Parse(input);
+            Survey survey = surveyRepository.GetSurveyAtIndex(surveyNumber);
+            survey = surveyRepository.loadDataManager.LoadSurveyAnswers(survey);
+
+            Console.WriteLine("Survey: " + survey.Title);
+            Console.WriteLine("Amount of questions: " + survey.GetQuestions().Count);
+            Console.WriteLine("");
+
+            int questionCounter = 1;
+            foreach (Question q in survey.GetQuestions())
+            {
+                Console.WriteLine("Question: " + questionCounter);
+                Console.WriteLine(q.Title);
+
+                if (q is _1_to_10 oneToTen)
+                {
+                    int[] intResults = new int[10];
+
+                    foreach (int answer in oneToTen.Answers)
+                    {
+                        intResults[answer - 1]++;
+                    }
+
+                    Console.WriteLine("One means: " + oneToTen.Value1);
+                    Console.WriteLine("Ten means: " + oneToTen.Value10);
+
+                    for (int i = 0; i < intResults.Length; i++)
+                    {
+                        Console.WriteLine((i + 1) + " Got " + intResults[i] + " Votes");
+                    }
+
+                }
+                else if (q is FreetextQuestion ftq)
+                {
+                    foreach (string result in ftq.Answers)
+                    {
+                        Console.WriteLine(result);
+                    }
+                }
+
+                else if (q is MultipleChoiseQuestion mcq)
+                {
+                    int[] intResult = new int[mcq.GetOptions().Count];
+
+                    foreach (List<bool> result in mcq.Answers)
+                    {
+                        foreach (bool answer in result)
+                        {
+                            if (answer)
+                            {
+                                intResult[result.IndexOf(answer)]++;
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < intResult.Length; i++)
+                    {
+                        Console.WriteLine(mcq.GetOptions()[i] + " Got " + intResult[i] + " Votes");
+                    }
+
+                    questionCounter++;
+                }
+                else if (q is YesOrNoQuestion yOrNo)
+                {
+                    float fTrue = 0;
+                    float fFalse = 0;
+                    int percentTrue = 0;
+
+                    foreach (bool result in yOrNo.Answers)
+                    {
+                        if (result)
+                        {
+                            fTrue++;
+                        }
+                        else
+                        {
+                            fFalse++;
+                        }
+                    }
+
+                    percentTrue = Convert.ToInt32((fTrue / (fTrue + fFalse)) * 100);
+                    Console.WriteLine(percentTrue + "% answered yes");
+                }
+                Console.WriteLine("");
+                questionCounter++;
+            }
+        }
+
         public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
             int index;
