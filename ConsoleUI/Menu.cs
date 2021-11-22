@@ -164,7 +164,7 @@ namespace ConsoleUI
             WriteCentered("███████║╚██████╗██████╔╝");
             WriteCentered("╚══════╝ ╚═════╝╚═════╝ ");
             WriteCentered("The Swedish Statistical CentralBureau\n\n");
-            WriteCentered("Press ENTER to start.");
+            Console.ResetColor();
             Console.ReadLine();
         }
         public static void ReturnToAdminMenu()
