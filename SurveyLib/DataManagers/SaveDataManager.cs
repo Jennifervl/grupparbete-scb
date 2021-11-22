@@ -92,7 +92,7 @@ namespace SurveyLib
 
                 using (SqlConnection connection = new(sqlConnection))
                 {
-                    connection.Execute("INSERT INTO [User](SSN, PW) VALUES (@SSN, @PW)", new { SSN = admin.Ssn, PW = admin.Password });
+                    connection.Execute("INSERT INTO [User](SSN, PW, Salt) VALUES (@SSN, @PW, @Salt)", new { SSN = admin.Ssn, PW = admin.Pw.HashedPassword, Salt = admin.Pw.Salt });
                 }
             }
 

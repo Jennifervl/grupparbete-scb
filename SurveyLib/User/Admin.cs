@@ -23,6 +23,10 @@ namespace SurveyLib
             {
                 return pw;
             }
+            set
+            {
+                pw = value;
+            }
         }
 
         public Admin(string assn, string apassword) : base(assn)
