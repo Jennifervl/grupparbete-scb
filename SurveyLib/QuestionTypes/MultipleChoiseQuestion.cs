@@ -9,6 +9,14 @@ namespace SurveyLib
         List<List<bool>> answers = new();
         List<string> options = new();
 
+        public List<List<bool>> Answers
+        {
+            get
+            {
+                return answers;
+            }
+        }
+
         public MultipleChoiseQuestion(string title, List<string> options) : base(title)
         {
             this.options = options;

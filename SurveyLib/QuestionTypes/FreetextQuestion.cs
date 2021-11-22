@@ -11,6 +11,14 @@ namespace SurveyLib
         {
         }
 
+        public List<string> Answers
+        {
+            get
+            {
+                return answers;
+            }
+        }
+
         public void SetAnswer(string answer)
         {
             this.answer = answer;
