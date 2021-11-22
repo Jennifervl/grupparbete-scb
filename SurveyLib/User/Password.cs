@@ -17,6 +17,9 @@ namespace SurveyLib
 
             this.hashedPassword = HashPassword(password, this.salt);
         }
+        public Password()
+        {
+        }
 
         private string CreateRandomSalt()
         {

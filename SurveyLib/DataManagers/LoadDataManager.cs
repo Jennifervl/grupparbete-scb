@@ -27,21 +27,16 @@ namespace SurveyLib
                 {
                     int questionType;
 
-
                     questionType = connection.QueryFirstOrDefault<int>("SELECT Type FROM Question WHERE ID = @ID;", new { ID = key });
                     questionText = connection.QueryFirstOrDefault<string>("SELECT QuestionText FROM QUESTION WHERE ID = @ID;", new { ID = key });
-
 
                     if (questionType == 1) //Multiple Choice
                     {
                         List<string> alternatives = new();
 
-
                         alternatives = connection.Query<string>("SELECT Alternative FROM Multiple_Choice_Question WHERE Question_ID = @Question_ID", new { Question_ID = key }).ToList();
 
-
                         MultipleChoiseQuestion multipleChoiseQuestion = new(questionText, alternatives);
-
                         loadedSurvey.AddQuestion(multipleChoiseQuestion);
                     }
                     else if (questionType == 2) //FreeTextQuestion
@@ -102,12 +97,11 @@ namespace SurveyLib
 
                 foreach (int key in userKeyList)
                 {
-                    string ssn;
 
-                    ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
+                    string ssn = connection.QueryFirstOrDefault<string>("SELECT SSN FROM [User] WHERE ID = @ID;", new { ID = key });
                     string pw = "";
                     pw = connection.QueryFirstOrDefault<string>("SELECT [User].PW FROM [User] WHERE ID = @ID;", new { ID = key });
-
+                    string salt = connection.QueryFirstOrDefault<string>("SELECT [User].Salt FROM [User] WHERE ID = @ID;", new { ID = key });
                     if (pw is null)
                     {
                         Participant p = new(ssn);
@@ -116,7 +110,11 @@ namespace SurveyLib
 
                     else if (pw is not null)
                     {
-                        Admin a = new(ssn, pw);
+                        Password hashedPass = new();
+                        hashedPass.HashedPassword = pw;
+                        hashedPass.Salt = salt;
+                        Admin a = new(ssn, "p");
+                        a.Pw = hashedPass;
                         userList.Add(a);
                     }
                 }
