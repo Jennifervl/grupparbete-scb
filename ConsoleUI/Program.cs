@@ -15,11 +15,18 @@ namespace ConsoleUI
             User_Survey_Repository usr = new();
 
             userRepository.LoadUsers();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Users Loaded");
+            Console.ResetColor();
             surveyRepository.LoadSurveys();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Surveys Loaded");
+            Console.ResetColor();
             usr.LoadAllUser_Surveys();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("User_Surveys Loaded");
+            Console.ResetColor();
+
 
             Console.Clear();
             Menu.WelcomeScreen();

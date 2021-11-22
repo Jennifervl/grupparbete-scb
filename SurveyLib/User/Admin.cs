@@ -6,7 +6,7 @@ namespace SurveyLib
     {
         //TODO: Remove old password
 
-        private string password;
+        // private string password;
 
         Password pw;
 
@@ -14,14 +14,28 @@ namespace SurveyLib
         {
             get
             {
-                return password;
+                return pw.HashedPassword;
+            }
+        }
+        public Password Pw
+        {
+            get
+            {
+                return pw;
             }
         }
 
         public Admin(string assn, string apassword) : base(assn)
         {
-            this.password = apassword;
+            // this.password = apassword;
             this.pw = new(apassword);
+        }
+        public bool ValidateAdmin(string password)
+        {
+            if (this.Pw.HashPassword(password, this.Pw.Salt) == this.Pw.HashedPassword)
+                return true;
+            else return false;
+
         }
     }
 }
