@@ -15,7 +15,7 @@ namespace SurveyLib
         {
             this.salt = CreateRandomSalt();
 
-            this.hashedPassword = HashPassword(password, this.salt, 10101, 70);
+            this.hashedPassword = HashPassword(password, this.salt);
         }
 
         private string CreateRandomSalt()
@@ -23,12 +23,12 @@ namespace SurveyLib
             return Guid.NewGuid().ToString().Replace("-", "");
         }
 
-        public string HashPassword(string password, string salt, int nIterations, int nHash)
+        public string HashPassword(string password, string salt)
         {
             var saltBytes = Convert.FromBase64String(salt);
-            using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, nIterations))
+            using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, 10101))
             {
-                return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(nHash));
+                return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(70));
             }
         }
     }

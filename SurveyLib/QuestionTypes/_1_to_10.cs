@@ -37,5 +37,9 @@ namespace SurveyLib
             }
             else throw new ArgumentOutOfRangeException();
         }
+        public void SetAnswerFromDB(int answer)
+        {
+            answers.Add(answer);
+        }
     }
 }

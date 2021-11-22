@@ -293,11 +293,7 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
-            if (roleAdd == "1")
-            {
-                Console.WriteLine("Enter password you wish to use:");
-                passwordAdd = Console.ReadLine();
-            }
+
             foreach (User u in userRepository.GetUsers())
             {
                 if (ssnAdd == u.Ssn)
@@ -308,6 +304,14 @@ namespace ConsoleUI
             }
             if (roleAdd == "1")
             {
+                while (true)
+                {
+                    Console.WriteLine("Enter password you wish to use:");
+                    passwordAdd = Console.ReadLine();
+                    if (passwordAdd != "") break;
+                    else Console.WriteLine("You can not add an empty password");
+                }
+
                 Admin addAdmin = new Admin(ssnAdd, passwordAdd);
                 userRepository.AddNewUser(addAdmin);
                 userRepository.SaveUser(addAdmin);
