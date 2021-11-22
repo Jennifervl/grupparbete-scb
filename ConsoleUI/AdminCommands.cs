@@ -183,6 +183,7 @@ namespace ConsoleUI
                 Console.WriteLine(counter + ": " + s.Title);
                 counter++;
             }
+
             Console.WriteLine("Enter the number of the survey you want to see the statistics for");
             string input = Console.ReadLine();
             int surveyNumber = int.Parse(input);

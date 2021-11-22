@@ -115,8 +115,15 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Skriv ut lista av alla surveys, välj en survey att visa statistik på
-                            AdminCommands.ShowSurveyStatistics(surveyRepository);
-
+                            try
+                            {
+                                AdminCommands.ShowSurveyStatistics(surveyRepository);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("There was a problem reading data from database. No data found");
+                                Menu.PressToContinue();
+                            }
                             break;
                         }
                     case ConsoleKey.Escape:
