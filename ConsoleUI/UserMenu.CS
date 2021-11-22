@@ -14,13 +14,18 @@ namespace ConsoleUI
             bool foundmatch = false;
             foreach (User_Survey US in usr.GetUser_Surveys())
             {
-                if (US.FindMatch(code) != null)
+                if (US.FindMatch(code) != null && US.IsSubmitted == false)
                 {
                     foundmatch = true;
                     AnswerSurvey(US.FindMatch(code));
-                    US.IsSubmitted = true;
+                    usr.SetSubmittedTrue(US);
                     Console.WriteLine("Thanks for taking the survey!");
                     // PrintData.Print(US.FindMatch(code), usr);
+                }
+                else if (US.FindMatch(code) != null && US.IsSubmitted == true)
+                {
+                    Console.WriteLine("This survey has already been answered.");
+                    Menu.PressToContinue();
                 }
             }
             if (!foundmatch)
