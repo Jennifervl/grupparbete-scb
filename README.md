@@ -39,3 +39,5 @@ Ta en titt på Interfaces, använd till datamangers
 - Programmet crashar om man vill distrubera en survey som inte finns *FIXED*
 - en admin kan skapas med ett tomt lösenord 
 - AdminCommands rad 179 behöver try catch om användare mata string program crushar. *FIXED*
+- Gå tillbaka ur distribute menyerna
+- Medelande när man lyckats göra distribution
