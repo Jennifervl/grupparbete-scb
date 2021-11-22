@@ -507,7 +507,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine("No admin with that SSN exists");
             }
-            Menu.ReturnToAdminMenu();
             return confirmed;
         }
     }
