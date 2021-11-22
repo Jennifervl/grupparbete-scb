@@ -214,7 +214,7 @@ namespace SurveyLib
 
                         foreach (int altKey in alternativeKeys)
                         {
-                            List<bool> mcqAnswer = connection.Query<bool>("SELECT Answer FROM Mutiple_Choice_Answer WHERE Multiple_Choice_Question_ID = @Multiple_Choice_Question_ID;", new { Multiple_Choice_Question_ID = altKey }).ToList();
+                            List<bool> mcqAnswer = connection.Query<bool>("SELECT Answer FROM Multiple_Choice_Answer WHERE Multiple_Choice_Question_ID = @Multiple_Choice_Question_ID;", new { Multiple_Choice_Question_ID = altKey }).ToList();
                             mcqAnswerList.Add(mcqAnswer);
                         }
 
