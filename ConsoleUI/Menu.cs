@@ -57,86 +57,86 @@ namespace ConsoleUI
         public static void AdminMenu(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
             // TODO:Enabla när vi slutar testa!!!!!!!!!!
-            // if (AdminCommands.ConfirmAdmin(userRepository))  
-            // {
-            bool adminMenuLoop = true;
-            while (adminMenuLoop == true)
+            if (AdminCommands.ConfirmAdmin(userRepository))
             {
-                Console.Clear();
-                DrawAdminMenu();
-                var choice = Console.ReadKey(true).Key;
-                switch (choice)
+                bool adminMenuLoop = true;
+                while (adminMenuLoop == true)
                 {
-                    case ConsoleKey.D1:
-                        {
-                            Console.Clear();
-                            // Create Survey
-                            Survey newSurvey = AdminCommands.BuildSurvey(surveyRepository);
-                            surveyRepository.AddSurvey(newSurvey);
-                            surveyRepository.SaveSurvey(newSurvey);
-                            break;
-                        }
-                    case ConsoleKey.D2:
-                        {
-                            Console.Clear();
-                            // List all surveys
-                            AdminCommands.ListAllSurveys(surveyRepository);
-                            break;
-                        }
-                    case ConsoleKey.D3:
-                        {
-                            Console.Clear();
-                            // Distribute Survey
-                            AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
-                            break;
-                        }
-                    case ConsoleKey.D4:
-                        {
-                            Console.Clear();
-                            // List distributions
-                            AdminCommands.ListDistributions(usr);
-                            break;
-                        }
-                    case ConsoleKey.D5:
-                        {
-                            Console.Clear();
-                            // List users
-                            AdminCommands.ListAllUsers(userRepository);
-                            break;
-                        }
-                    case ConsoleKey.D6:
-                        {
-                            Console.Clear();
-                            // Add user
-                            AdminCommands.AddUser(userRepository);
-                            break;
-                        }
-                    case ConsoleKey.D7:
-                        {
-                            Console.Clear();
-                            // Skriv ut lista av alla surveys, välj en survey att visa statistik på
-                            try
+                    Console.Clear();
+                    DrawAdminMenu();
+                    var choice = Console.ReadKey(true).Key;
+                    switch (choice)
+                    {
+                        case ConsoleKey.D1:
                             {
-                                AdminCommands.ShowSurveyStatistics(surveyRepository);
+                                Console.Clear();
+                                // Create Survey
+                                Survey newSurvey = AdminCommands.BuildSurvey(surveyRepository);
+                                surveyRepository.AddSurvey(newSurvey);
+                                surveyRepository.SaveSurvey(newSurvey);
+                                break;
                             }
-                            catch (Exception)
+                        case ConsoleKey.D2:
                             {
-                                Console.WriteLine("There was a problem reading data from database. No data found");
-                                Menu.PressToContinue();
+                                Console.Clear();
+                                // List all surveys
+                                AdminCommands.ListAllSurveys(surveyRepository);
+                                break;
                             }
-                            break;
-                        }
-                    case ConsoleKey.Escape:
-                        {
-                            adminMenuLoop = false;
-                            break;
-                        }
+                        case ConsoleKey.D3:
+                            {
+                                Console.Clear();
+                                // Distribute Survey
+                                AdminCommands.DistributeSurvey(userRepository, surveyRepository, usr);
+                                break;
+                            }
+                        case ConsoleKey.D4:
+                            {
+                                Console.Clear();
+                                // List distributions
+                                AdminCommands.ListDistributions(usr);
+                                break;
+                            }
+                        case ConsoleKey.D5:
+                            {
+                                Console.Clear();
+                                // List users
+                                AdminCommands.ListAllUsers(userRepository);
+                                break;
+                            }
+                        case ConsoleKey.D6:
+                            {
+                                Console.Clear();
+                                // Add user
+                                AdminCommands.AddUser(userRepository);
+                                break;
+                            }
+                        case ConsoleKey.D7:
+                            {
+                                Console.Clear();
+                                // Skriv ut lista av alla surveys, välj en survey att visa statistik på
+                                try
+                                {
+                                    AdminCommands.ShowSurveyStatistics(surveyRepository);
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("There was a problem reading data from database. No data found");
+                                    Menu.PressToContinue();
+                                }
+                                break;
+                            }
+                        case ConsoleKey.Escape:
+                            {
+                                adminMenuLoop = false;
+                                break;
+                            }
+                    }
+                    if (adminMenuLoop == true)
+                    {
+                        ReturnToAdminMenu();
+                    }
                 }
-                if (adminMenuLoop == true)
-                {
-                    ReturnToAdminMenu();
-                }
-                // }
             }
         }
         private static void DrawAdminMenu()
