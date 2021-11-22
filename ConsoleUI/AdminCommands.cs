@@ -337,14 +337,13 @@ namespace ConsoleUI
                 }
                 else if (distributeChoice == "2")
                 {
-<<<<<<< HEAD
                     Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                     Console.WriteLine("Form was submitted successfully.");
                     Console.WriteLine("Press Any key to return to Adminmenu.");
                     Console.ReadKey(true);
-                    Menu.AdminMenu(userRepository,surveyRepository,usr);
-                     
-                    
+                    Menu.AdminMenu(userRepository, surveyRepository, usr);
+
+
                 }
                 else if (distributeChoice == "3")
                 {
@@ -352,15 +351,8 @@ namespace ConsoleUI
                     Console.WriteLine("Form was submitted successfully.");
                     Console.WriteLine("Press Any key to return to Adminmenu.");
                     Console.ReadKey(true);
-                    Menu.AdminMenu(userRepository,surveyRepository,usr);
-                     
-=======
-                    distributedTo = Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-                }
-                else if (distributeChoice == "3")
-                {
-                    distributedTo = Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
->>>>>>> 48bf6052557db7a4788c806334cc0a8fd4cb32e1
+                    Menu.AdminMenu(userRepository, surveyRepository, usr);
+
                 }
                 else Console.WriteLine("Invalid input, press any key to try again.");
 
