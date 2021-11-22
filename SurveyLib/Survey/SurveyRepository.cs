@@ -41,5 +41,16 @@ namespace SurveyLib
         {
             saveDataManager.SaveSurvey(survey);
         }
+
+        public void IsUniqueTitle(string title)
+        {
+            foreach (Survey survey in surveys)
+            {
+                if (survey.Title == title)
+                {
+                    throw new Exception("Title already exists");
+                }
+            }
+        }
     }
 }

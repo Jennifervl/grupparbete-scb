@@ -9,16 +9,14 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            SaveDataManager saveDataManager = new();
-            LoadDataManager loadDataManager = new();
-
             Menu menu = new();
             UserRepository userRepository = new();
             SurveyRepository surveyRepository = new();
             User_Survey_Repository usr = new();
-           
+
             userRepository.LoadUsers();
             surveyRepository.LoadSurveys();
+            usr.LoadAllUser_Surveys();
 
             Console.Clear();
             Menu.WelcomeScreen();

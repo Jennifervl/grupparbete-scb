@@ -5,6 +5,7 @@ namespace SurveyLib
 {
     public static class Distributor
     {
+
         public static void DistributeByAge(Survey survey, UserRepository userRepository, User_Survey_Repository usr, int minAge = 18, int maxAge = 999)
         {
             foreach (User user in userRepository.GetUsers())
@@ -13,6 +14,7 @@ namespace SurveyLib
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
                     usr.AddUserSurvey(user_survey);
+                    usr.SaveUser_Survey(user_survey);
                 }
             }
         }
@@ -26,6 +28,7 @@ namespace SurveyLib
                 {
                     User_Survey user_survey = new User_Survey(user, survey);
                     usr.AddUserSurvey(user_survey);
+                    usr.SaveUser_Survey(user_survey);
                 }
             }
         }
@@ -36,6 +39,7 @@ namespace SurveyLib
             {
                 User_Survey user_survey = new User_Survey(user, survey);
                 usr.AddUserSurvey(user_survey);
+                usr.SaveUser_Survey(user_survey);
             }
         }
     }
