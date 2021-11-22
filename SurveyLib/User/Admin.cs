@@ -10,13 +10,13 @@ namespace SurveyLib
 
         Password pw;
 
-        public string Password
-        {
-            get
-            {
-                return pw.HashedPassword;
-            }
-        }
+        // public string Password
+        // {
+        //     get
+        //     {
+        //         return pw.HashedPassword;
+        //     }
+        // }
         public Password Pw
         {
             get
