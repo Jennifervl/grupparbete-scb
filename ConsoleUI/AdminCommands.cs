@@ -374,7 +374,7 @@ namespace ConsoleUI
         {
             foreach (User_Survey us in usr.GetUser_Surveys())
             {
-                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title);
+                Console.WriteLine(us.GetUserSsn() + " | " + us.GetUserCode() + " | " + us.GetSurvey().Title + " | " + "Is submitted: " + (us.IsSubmitted == true ? "Submitted" : "Pending"));
             }
         }
 

@@ -36,5 +36,24 @@ namespace SurveyLib
                 User_Surveys.Add(us);
             }
         }
+
+        public void SetSubmittedTrue(User_Survey us)
+        {
+            us.IsSubmitted = true;
+            saveDataManager.UpdateUser_Survey(us);
+        }
+
+        public User_Survey GetUser_SurveyByCode(string code)
+        {
+            foreach (User_Survey us in User_Surveys)
+            {
+                if (us.GetUserCode() == code)
+                {
+                    return us;
+                }
+            }
+
+            return null;
+        }
     }
 }
