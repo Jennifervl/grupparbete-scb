@@ -24,10 +24,11 @@ namespace SurveyLib
             return User_Surveys;
         }
 
-        public void SaveUser_Survey()
+        public void SaveUser_Survey(User_Survey us)
         {
-
+            saveDataManager.SaveUser_Survey(us);
         }
+
         public void LoadAllUser_Surveys()
         {
             foreach (User_Survey us in loadDataManager.LoadAllUser_Surveys())

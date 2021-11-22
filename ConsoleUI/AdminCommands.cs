@@ -25,21 +25,36 @@ namespace ConsoleUI
             }
         }
 
-        public static Survey BuildSurvey()
+        public static Survey BuildSurvey(SurveyRepository surveyRepository)
         {
             string title = "";
             while (true)
             {
-                Console.WriteLine("Enter the title of the survey");
-                title = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(title))
+                while (true)
                 {
-                    Console.WriteLine("Title cannot be empty, press any key to try again.");
+                    Console.WriteLine("Enter the title of the survey");
+                    title = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(title))
+                    {
+                        Console.WriteLine("Title cannot be empty, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    break;
+                }
+                try
+                {
+                    surveyRepository.IsUniqueTitle(title);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Title already exists, press any key to try again.");
                     Console.ReadKey(true);
                     continue;
                 }
                 break;
             }
+
 
             Survey survey1 = new(title);
             while (true)
@@ -160,35 +175,78 @@ namespace ConsoleUI
         }
         public static void DistributeSurvey(UserRepository userRepository, SurveyRepository surveyRepository, User_Survey_Repository usr)
         {
-            Console.WriteLine("Which survey do you want to distribute?");
-            int counter = 1;
-            foreach (Survey survey in surveyRepository.GetAllSurveys())
+            int index;
+            while (true)
             {
-                Console.Write(counter + ": ");
-                Console.WriteLine(survey.Title);
-                counter++;
+                Console.Clear();
+                Console.WriteLine("Which survey do you want to distribute?");
+                int counter = 1;
+                foreach (Survey survey in surveyRepository.GetAllSurveys())
+                {
+                    Console.Write(counter + ": ");
+                    Console.WriteLine(survey.Title);
+                    counter++;
+                }
+                if (int.TryParse(Console.ReadLine(), out index))
+                {
+                    if (index < 1 || index > surveyRepository.GetAllSurveys().Count)
+                    {
+                        Console.WriteLine("Invalid index, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    break;
+                }
+                Console.WriteLine("Faulty input, press any key to try again.");
+                Console.ReadKey(true);
             }
-            int index = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("How would you like to distribute it?");
-            Console.WriteLine("1. By age");
-            Console.WriteLine("2. CoinFlip");
-            Console.WriteLine("3. To everyone");
-            string distributeChoice = Console.ReadLine();
-            if (distributeChoice == "1")
+            while (true)
             {
-                Console.WriteLine("Minumum age: ");
-                int minAge = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Maximum age: ");
-                int maxAge = Convert.ToInt32(Console.ReadLine());
-                Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-            }
-            else if (distributeChoice == "2")
-            {
-                Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
-            }
-            else if (distributeChoice == "3")
-            {
-                Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                Console.WriteLine("How would you like to distribute it?");
+                Console.WriteLine("1. By age");
+                Console.WriteLine("2. CoinFlip");
+                Console.WriteLine("3. To everyone");
+                string distributeChoice = Console.ReadLine();
+                if (distributeChoice == "1")
+                {
+                    Console.WriteLine("Minumum age: ");
+                    int minAge;
+                    if (int.TryParse(Console.ReadLine(), out minAge))
+                    {
+                        Console.WriteLine("Minimum age set to: " + minAge);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Faulty input, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    Console.WriteLine("Maximum age: ");
+                    int maxAge;
+                    if (int.TryParse(Console.ReadLine(), out maxAge))
+                    {
+                        Console.WriteLine("Maximum age set to: " + maxAge);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Faulty input, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    break;
+                }
+                else if (distributeChoice == "2")
+                {
+                    Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                }
+                else if (distributeChoice == "3")
+                {
+                    Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                }
+                else Console.WriteLine("Invalid input, press any key to try again.");
+                Console.ReadKey(true);
+                continue;
             }
         }
         public static void ListDistributions(User_Survey_Repository usr)
