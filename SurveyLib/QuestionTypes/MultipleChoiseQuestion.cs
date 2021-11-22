@@ -6,7 +6,6 @@ namespace SurveyLib
     public class MultipleChoiseQuestion : Question
     {
         List<bool> answer = new();
-
         List<List<bool>> answers = new();
         List<string> options = new();
 
