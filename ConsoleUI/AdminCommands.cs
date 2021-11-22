@@ -224,10 +224,21 @@ namespace ConsoleUI
                 else if (distributeChoice == "2")
                 {
                     Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    Console.WriteLine("Form was submitted successfully.");
+                    Console.WriteLine("Press Any key to return to Adminmenu.");
+                    Console.ReadKey(true);
+                    Menu.AdminMenu(userRepository,surveyRepository,usr);
+                     
+                    
                 }
                 else if (distributeChoice == "3")
                 {
                     Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    Console.WriteLine("Form was submitted successfully.");
+                    Console.WriteLine("Press Any key to return to Adminmenu.");
+                    Console.ReadKey(true);
+                    Menu.AdminMenu(userRepository,surveyRepository,usr);
+                     
                 }
                 else Console.WriteLine("Invalid input, press any key to try again.");
                 Console.ReadKey(true);
