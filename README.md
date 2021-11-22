@@ -40,5 +40,5 @@ Ta en titt på Interfaces, använd till datamangers
 - en admin kan skapas med ett tomt lösenord 
 - AdminCommands rad 179 behöver try catch om användare mata string program crushar. *FIXED*
 - Gå tillbaka ur distribute menyerna
-- Medelande när man lyckats göra distribution
-- Felmeddelande om man skriver in ogiltigt svar
+- Medelande när man lyckats göra distribution *FIXED*
+- Felmeddelande om man skriver in ogiltigt svar 
