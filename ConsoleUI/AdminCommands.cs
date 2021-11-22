@@ -313,8 +313,6 @@ namespace ConsoleUI
                 Console.WriteLine("1. By age");
                 Console.WriteLine("2. CoinFlip");
                 Console.WriteLine("3. To everyone");
-                Console.WriteLine("");
-                Console.WriteLine("4. Return to admin menu");
                 string distributeChoice = Console.ReadLine();
                 int distributedTo = 0;
                 if (distributeChoice == "1")
@@ -354,7 +352,6 @@ namespace ConsoleUI
                 {
                     distributedTo = Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                 }
-                else if (distributeChoice == "4") return;
                 else
                 {
                     Console.WriteLine("Invalid input, press any key to try again.");
@@ -363,7 +360,7 @@ namespace ConsoleUI
 
                 Console.WriteLine("Distributed to " + distributedTo + " users.");
                 Console.ReadKey(true);
-                continue;
+                break;
             }
         }
         public static void ListDistributions(User_Survey_Repository usr)
