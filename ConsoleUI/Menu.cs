@@ -71,7 +71,7 @@ namespace ConsoleUI
                         {
                             Console.Clear();
                             // Create Survey
-                            Survey newSurvey = AdminCommands.BuildSurvey();
+                            Survey newSurvey = AdminCommands.BuildSurvey(surveyRepository);
                             surveyRepository.AddSurvey(newSurvey);
                             surveyRepository.SaveSurvey(newSurvey);
                             break;

@@ -36,6 +36,8 @@ Ta en titt på Interfaces, använd till datamangers
 - Kan lägga till tomt frågetitel   *FIXED*
 - Kan lägga till tomma 1 till 10 labels *FIXED*
 - Multiplechoice option kan ha tomma alternativ *FIXED*
-- Programmet crashar om man vill distrubera en survey som inte fins 
+- Programmet crashar om man vill distrubera en survey som inte finns *FIXED*
 - en admin kan skapas med ett tomt lösenord 
-- AdminCommands rad 179 behöver try catch om användare mata string program crushar.
+- AdminCommands rad 179 behöver try catch om användare mata string program crushar. *FIXED*
+- Gå tillbaka ur distribute menyerna
+- Medelande när man lyckats göra distribution

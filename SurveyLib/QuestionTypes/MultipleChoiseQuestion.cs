@@ -52,5 +52,10 @@ namespace SurveyLib
         {
             return answer.AsReadOnly();
         }
+
+        public void SetAnswerFromDB(List<bool> answer)
+        {
+            answers.Add(answer);
+        }
     }
 }

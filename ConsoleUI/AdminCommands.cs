@@ -25,21 +25,36 @@ namespace ConsoleUI
             }
         }
 
-        public static Survey BuildSurvey()
+        public static Survey BuildSurvey(SurveyRepository surveyRepository)
         {
             string title = "";
             while (true)
             {
-                Console.WriteLine("Enter the title of the survey");
-                title = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(title))
+                while (true)
                 {
-                    Console.WriteLine("Title cannot be empty, press any key to try again.");
+                    Console.WriteLine("Enter the title of the survey");
+                    title = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(title))
+                    {
+                        Console.WriteLine("Title cannot be empty, press any key to try again.");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    break;
+                }
+                try
+                {
+                    surveyRepository.IsUniqueTitle(title);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Title already exists, press any key to try again.");
                     Console.ReadKey(true);
                     continue;
                 }
                 break;
             }
+
 
             Survey survey1 = new(title);
             while (true)
@@ -192,6 +207,7 @@ namespace ConsoleUI
                 Console.WriteLine("2. CoinFlip");
                 Console.WriteLine("3. To everyone");
                 string distributeChoice = Console.ReadLine();
+                int distributedTo = 0;
                 if (distributeChoice == "1")
                 {
                     Console.WriteLine("Minumum age: ");
@@ -218,11 +234,12 @@ namespace ConsoleUI
                         Console.ReadKey(true);
                         continue;
                     }
-                    Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                    distributedTo = Distributor.DistributeByAge(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                     break;
                 }
                 else if (distributeChoice == "2")
                 {
+<<<<<<< HEAD
                     Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
                     Console.WriteLine("Form was submitted successfully.");
                     Console.WriteLine("Press Any key to return to Adminmenu.");
@@ -239,8 +256,17 @@ namespace ConsoleUI
                     Console.ReadKey(true);
                     Menu.AdminMenu(userRepository,surveyRepository,usr);
                      
+=======
+                    distributedTo = Distributor.CoinFlipDistribution(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+                }
+                else if (distributeChoice == "3")
+                {
+                    distributedTo = Distributor.DistributeToAll(surveyRepository.GetSurveyAtIndex(index), userRepository, usr);
+>>>>>>> 48bf6052557db7a4788c806334cc0a8fd4cb32e1
                 }
                 else Console.WriteLine("Invalid input, press any key to try again.");
+
+                Console.WriteLine("Distributed to " + distributedTo + " users.");
                 Console.ReadKey(true);
                 continue;
             }
@@ -286,11 +312,7 @@ namespace ConsoleUI
                     ssnAdd = "";
                 }
             }
-            if (roleAdd == "1")
-            {
-                Console.WriteLine("Enter password you wish to use:");
-                passwordAdd = Console.ReadLine();
-            }
+
             foreach (User u in userRepository.GetUsers())
             {
                 if (ssnAdd == u.Ssn)
@@ -301,6 +323,14 @@ namespace ConsoleUI
             }
             if (roleAdd == "1")
             {
+                while (true)
+                {
+                    Console.WriteLine("Enter password you wish to use:");
+                    passwordAdd = Console.ReadLine();
+                    if (passwordAdd != "") break;
+                    else Console.WriteLine("You can not add an empty password");
+                }
+
                 Admin addAdmin = new Admin(ssnAdd, passwordAdd);
                 userRepository.AddNewUser(addAdmin);
                 userRepository.SaveUser(addAdmin);
