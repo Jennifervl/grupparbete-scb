@@ -37,6 +37,7 @@ namespace SurveyLib
                 AddSurvey(survey);
             }
         }
+
         public void SaveSurvey(Survey survey)
         {
             saveDataManager.SaveSurvey(survey);

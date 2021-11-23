@@ -19,12 +19,6 @@ namespace SurveyLib
             this.ssn = assn;
         }
 
-
-        //TODO: Remove this method
-        public string GetUserSsn()
-        {
-            return ssn;
-        }
         public int getAge()
         {
             int yearBorn = System.Convert.ToInt32(Ssn.Substring(0, 4));

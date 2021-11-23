@@ -56,9 +56,18 @@ namespace ConsoleUI
 
                 if (_1_to_10_question != null)
                 {
-                    Console.WriteLine("1 means: " + _1_to_10_question.Value1);
-                    Console.WriteLine("10 means: " + _1_to_10_question.Value10);
-                    _1_to_10_question.SetAnswer(Convert.ToInt32(Console.ReadLine()));
+                    while (true)
+                    {
+                        Console.WriteLine("1 means: " + _1_to_10_question.Value1);
+                        Console.WriteLine("10 means: " + _1_to_10_question.Value10);
+                        string input = Console.ReadLine();
+                        if (Int32.TryParse(input, out int inputInt) == true)
+                        {
+                            _1_to_10_question.SetAnswer(inputInt);
+                            break;
+                        }
+                        else Console.WriteLine("You must enter a number");
+                    }
                 }
 
                 else if (mcq != null)
@@ -98,7 +107,6 @@ namespace ConsoleUI
                 }
                 else if (ftq != null)
                 {
-                    // Console.CursorLeft = (Console.WindowWidth / 2) -15;
                     string answer = Console.ReadLine();
                     ftq.SetAnswer(answer);
                 }

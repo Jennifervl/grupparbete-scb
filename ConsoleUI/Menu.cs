@@ -170,7 +170,7 @@ namespace ConsoleUI
             WriteCentered("╚════██║██║     ██╔══██╗");
             WriteCentered("███████║╚██████╗██████╔╝");
             WriteCentered("╚══════╝ ╚═════╝╚═════╝ ");
-            WriteCentered("The Swedish Statistical CentralBureau\n\n");
+            WriteCentered("The Statistical Central Bureau\n\n");
             WriteCentered("Press ENTER to start.");
             Console.ReadLine();
         }
