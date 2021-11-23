@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SurveyLib
 {
@@ -8,47 +9,91 @@ namespace SurveyLib
 
         public static int DistributeByAge(Survey survey, UserRepository userRepository, User_Survey_Repository usr, int minAge = 18, int maxAge = 999)
         {
+
             int count = 0;
-            foreach (User user in userRepository.GetUsers())
+            List<User> users = new();
+            foreach (User_Survey us in usr.GetUser_Surveys())
             {
-                if (user.getAge() >= minAge && user.getAge() <= maxAge)
+                foreach (User u in userRepository.GetUsers())
                 {
-                    User_Survey user_survey = new User_Survey(user, survey);
-                    usr.AddUserSurvey(user_survey);
-                    usr.SaveUser_Survey(user_survey);
-                    count++;
+                    if (us.GetUserSsn() == u.Ssn && (us.GetSurvey() == survey))
+                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
                 }
             }
+            foreach (User user in userRepository.GetUsers())
+            {
+                foreach (User_Survey us in usr.GetUser_Surveys())
+                {
+                    if (!(users.Contains(user)))
+                    {
+                        if (user.getAge() >= minAge && user.getAge() <= maxAge)
+                        {
+                            User_Survey user_survey = new User_Survey(user, survey);
+                            usr.AddUserSurvey(user_survey);
+                            usr.SaveUser_Survey(user_survey);
+                            count++;
+                        }
+                    }
+                }
+            }
+            users.Clear();
             return count;
         }
 
         public static int CoinFlipDistribution(Survey survey, UserRepository userRepository, User_Survey_Repository usr)
         {
-            int count = 0;
             Random random = new();
-            foreach (User user in userRepository.GetUsers())
+            int count = 0;
+            List<User> users = new();
+            foreach (User_Survey us in usr.GetUser_Surveys())
             {
-                if (random.Next(0, 2) == 0)
+                foreach (User u in userRepository.GetUsers())
                 {
-                    User_Survey user_survey = new User_Survey(user, survey);
-                    usr.AddUserSurvey(user_survey);
-                    usr.SaveUser_Survey(user_survey);
-                    count++;
+                    if (us.GetUserSsn() == u.Ssn)
+                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
                 }
             }
+            foreach (User user in userRepository.GetUsers())
+            {
+                if (!(users.Contains(user)))
+                {
+                    if (random.Next(0, 2) == 0)
+                    {
+                        User_Survey user_survey = new User_Survey(user, survey);
+                        usr.AddUserSurvey(user_survey);
+                        usr.SaveUser_Survey(user_survey);
+                        count++;
+                    }
+                }
+            }
+            users.Clear();
             return count;
         }
 
         public static int DistributeToAll(Survey survey, UserRepository userRepository, User_Survey_Repository usr)
         {
             int count = 0;
+            List<User> users = new();
+            foreach (User_Survey us in usr.GetUser_Surveys())
+            {
+                foreach (User u in userRepository.GetUsers())
+                {
+                    if ((us.GetUserSsn() == u.Ssn))
+                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
+                }
+            }
+
             foreach (User user in userRepository.GetUsers())
             {
-                User_Survey user_survey = new User_Survey(user, survey);
-                usr.AddUserSurvey(user_survey);
-                usr.SaveUser_Survey(user_survey);
-                count++;
+                if (!(users.Contains(user)))
+                {
+                    User_Survey user_survey = new User_Survey(user, survey);
+                    usr.AddUserSurvey(user_survey);
+                    usr.SaveUser_Survey(user_survey);
+                    count++;
+                }
             }
+            users.Clear();
             return count;
         }
     }
