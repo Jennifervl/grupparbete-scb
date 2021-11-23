@@ -7,7 +7,7 @@ namespace SurveyLib
     {
         List<Survey> surveys;
         SaveDataManager saveDataManager = new();
-        public LoadDataManager loadDataManager = new();
+        LoadDataManager loadDataManager = new();
 
         public SurveyRepository()
         {
@@ -52,6 +52,11 @@ namespace SurveyLib
                     throw new Exception("Title already exists");
                 }
             }
+        }
+
+        public Survey LoadSurveyAnswers(Survey survey)
+        {
+            return loadDataManager.LoadSurveyAnswers(survey);
         }
     }
 }

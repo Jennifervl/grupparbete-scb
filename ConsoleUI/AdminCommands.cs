@@ -187,8 +187,9 @@ namespace ConsoleUI
             Console.WriteLine("Enter the number of the survey you want to see the statistics for");
             string input = Console.ReadLine();
             int surveyNumber = int.Parse(input);
+
             Survey survey = surveyRepository.GetSurveyAtIndex(surveyNumber);
-            survey = surveyRepository.loadDataManager.LoadSurveyAnswers(survey);
+            survey = surveyRepository.LoadSurveyAnswers(survey);
 
             Console.Clear();
             Console.WriteLine("Survey: " + survey.Title);
