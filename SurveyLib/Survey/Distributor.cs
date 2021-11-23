@@ -11,15 +11,8 @@ namespace SurveyLib
         {
 
             int count = 0;
-            List<User> users = new();
-            foreach (User_Survey us in usr.GetUser_Surveys())
-            {
-                foreach (User u in userRepository.GetUsers())
-                {
-                    if (us.GetUserSsn() == u.Ssn && (us.GetSurvey() == survey))
-                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
-                }
-            }
+            List<User> users = CheckIfDistributed(usr, userRepository, survey);
+
             foreach (User user in userRepository.GetUsers())
             {
                 foreach (User_Survey us in usr.GetUser_Surveys())
@@ -44,15 +37,7 @@ namespace SurveyLib
         {
             Random random = new();
             int count = 0;
-            List<User> users = new();
-            foreach (User_Survey us in usr.GetUser_Surveys())
-            {
-                foreach (User u in userRepository.GetUsers())
-                {
-                    if (us.GetUserSsn() == u.Ssn)
-                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
-                }
-            }
+            List<User> users = CheckIfDistributed(usr, userRepository, survey);
             foreach (User user in userRepository.GetUsers())
             {
                 if (!(users.Contains(user)))
@@ -73,15 +58,7 @@ namespace SurveyLib
         public static int DistributeToAll(Survey survey, UserRepository userRepository, User_Survey_Repository usr)
         {
             int count = 0;
-            List<User> users = new();
-            foreach (User_Survey us in usr.GetUser_Surveys())
-            {
-                foreach (User u in userRepository.GetUsers())
-                {
-                    if ((us.GetUserSsn() == u.Ssn))
-                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
-                }
-            }
+            List<User> users = CheckIfDistributed(usr, userRepository, survey);
 
             foreach (User user in userRepository.GetUsers())
             {
@@ -93,8 +70,21 @@ namespace SurveyLib
                     count++;
                 }
             }
-            users.Clear();
             return count;
+        }
+
+        public static List<User> CheckIfDistributed(User_Survey_Repository usr, UserRepository userRepository, Survey survey)
+        {
+            List<User> users = new();
+            foreach (User_Survey us in usr.GetUser_Surveys())
+            {
+                foreach (User u in userRepository.GetUsers())
+                {
+                    if ((us.GetUserSsn() == u.Ssn))
+                        if (us.GetSurvey().Title == survey.Title) users.Add(u);
+                }
+            }
+            return users;
         }
     }
 }
