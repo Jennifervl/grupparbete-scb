@@ -393,7 +393,7 @@ namespace ConsoleUI
                 Console.WriteLine("Enter a valid role");
                 roleAdd = Console.ReadLine();
             }
-            Console.WriteLine("Enter the SSN of the user (example : 199001015555");
+            Console.WriteLine("Enter the SSN of the user (example : 199001015555)");
             ssnAdd = Console.ReadLine();
             while (ssnAdd.Length != 12)
             {
