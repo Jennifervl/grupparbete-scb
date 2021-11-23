@@ -73,7 +73,7 @@ namespace SurveyLib
             return count;
         }
 
-        public static List<User> CheckIfDistributed(User_Survey_Repository usr, UserRepository userRepository, Survey survey)
+        private static List<User> CheckIfDistributed(User_Survey_Repository usr, UserRepository userRepository, Survey survey)
         {
             List<User> users = new();
             foreach (User_Survey us in usr.GetUser_Surveys())
