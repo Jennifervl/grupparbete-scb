@@ -21,10 +21,9 @@ namespace SurveyLib
 
         public void LoadUsers()
         {
-            // User testAdminUser = new User("199001014444", UserRoles.Admin);
-            // User testUserUser = new User("198002025555", UserRoles.Participant);
-            // this.AddNewUser(testAdminUser);
-            // this.AddNewUser(testUserUser);
+            // Admin SuperAdmin = new Admin("123123123123", "admin");
+            // userRepository.Add(SuperAdmin);
+
             foreach (User u in loadDataManager.LoadAllUsers())
             {
                 userRepository.Add(u);
